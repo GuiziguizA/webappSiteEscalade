@@ -3,23 +3,33 @@ package sig.org.classe;
 import java.io.Serializable;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
 
 
 @Entity
 public class Utilisateur implements Serializable{
 @Id @GeneratedValue
 private Long codeUtilisateur;
+@NotBlank
 	private String nom;
-	
+@NotBlank
 	private String passeword;
 	@Column(unique =true )
+	@NotBlank
 	private String mail;
+
+
+
+	
 	
 	@OneToMany(mappedBy="utilisateur",fetch=FetchType.LAZY)
 private Collection<Commentaires> commentaires;
@@ -59,8 +69,27 @@ private Collection<Commentaires> commentaires;
 	public void setPasseword(String passeword) {
 		this.passeword = passeword;
 	}
-	public Long getCodeUtilisateur() {
+	public Long getCodeUtilisateur(long id) {
 		return codeUtilisateur;
 	}
+
 	
+
+	public boolean isPresent() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	
+
+
+
+	public Collection<Commentaires> getCommentaires() {
+		return commentaires;
+	}
+
+	public void setCommentaires(Collection<Commentaires> commentaires) {
+		this.commentaires = commentaires;
+	}
+
 }

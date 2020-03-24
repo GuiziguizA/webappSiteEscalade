@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+	<title>adduser</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+ 
+<body>
+
+
+<form action="#" th:action="@{/adduser}" th:object="${user}" method="post">
+    <label for="name">Name</label>
+    <input type="text" th:field="** {nom}" id="nom" placeholder="Name">
+    <span th:if="${#fields.hasErrors('nom')}" th:errors="** {nom}"></span>
+    <label for="email">Email</label>
+    <input type="text" th:field="** {mail}" id="mail" placeholder="mail">
+    <span th:if="${#fields.hasErrors('mail')}" th:errors="** {mail}"></span>
+     <input type="text" th:field="** {passeword}" id="passeword" placeholder="passeword">
+    <span th:if="${#fields.hasErrors('passeword')}" th:errors="** {passeword}"></span>
+    <input type="submit" value="Add User">
+</form>
+
+
+
+</body>
+</html>

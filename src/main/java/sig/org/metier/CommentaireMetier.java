@@ -5,17 +5,17 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import javax.management.relation.RelationNotFoundException;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jca.cci.RecordTypeNotSupportedException;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sig.org.classe.Commentaires;
 import sig.org.classe.SiteEscalade;
 import sig.org.classe.Utilisateur;
-import sig.org.classe.Voie;
+
 import sig.org.dao.CommentaireRepository;
 import sig.org.dao.SiteEscaladeRepository;
 import sig.org.dao.UtilisateurRepository;

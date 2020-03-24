@@ -18,7 +18,7 @@ private Long codeVoie;
 	private String longueur;
 	private String cotation;
 	@ManyToOne
-	@JoinColumn(name="ID_SITE")
+	@JoinColumn(name="code_site")
 	private SiteEscalade site;
 	
 	

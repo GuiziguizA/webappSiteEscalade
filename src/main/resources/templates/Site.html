@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+	<title>Login</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+ 
+<body>
+	<div>
+
+			<form th:action="@{/consulterVoie}" class="form-signin"  method="post"style="width:30%;margin:auto">
+				<div th:objet="${site}">
+		<select  class="form-control" >
+		<option value="">Choisie un site</option>
+    <option  th:each="o : ${listSite}" th:text="${o.nom}" th:value="${o.codeSiteEscalade}" ></option>
+</select>
+</div>
+			
+			</form>
+		
+
+			
+			
+<!-- 			
+				<div class="pane panel-primary" th:if="${Site}" >
+			<div class="panel heading">Liste des Voie</div>
+			<div class = "panel body">
+			<table class="table table-stripped">
+			<tr>
+			<th>Nom</th><th>longueur</th><th>Cotation</th>
+			</tr>
+			<tr th:each="o:${listVoie}">
+			<td th:text="${o:nom}" ></td>
+			<td th:text="${o:longueur}"></td>
+			<td th:text="${o:cotation}"></td>
+			
+			</tr>
+			
+			</table>
+			<div>
+			
+			</div>
+			
+			</div>
+			</div>
+			
+			 -->
+		
+	
+	</div>
+			
+	
+	
+	
+</body>
+</html>
+
+

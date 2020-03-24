@@ -5,22 +5,15 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.management.relation.RelationNotFoundException;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
 
-
-import javax.persistence.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-
-import org.springframework.jca.cci.RecordTypeNotSupportedException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javassist.expr.NewArray;
+
 import sig.org.classe.SiteEscalade;
 import sig.org.classe.Voie;
 import sig.org.dao.SiteEscaladeRepository;
@@ -90,9 +83,9 @@ private SiteEscaladeRepository siteRepository;
 	}
 
 	@Override
-    public List<Voie> getAllVoie()
+    public ArrayList<Voie> getAllVoie()
     {
-        List<Voie> toposList = (List<Voie>) voieRepository.findAll();
+        ArrayList<Voie> toposList = (ArrayList<Voie>) voieRepository.findAll();
          
         if(toposList.size() > 0) {
             return toposList;
@@ -103,8 +96,8 @@ private SiteEscaladeRepository siteRepository;
 
 	
 	@Override
-	public List<Voie> getVoieCritere(String name, String cotation,String longueur) throws Exception {
-		List<Voie> listVoieCritere = voieRepository.findVoieByNomAndCotationAndLongueur(name, cotation, longueur);
+	public ArrayList<Voie> getVoieCritere(String name, String cotation,String longueur) throws Exception {
+		ArrayList<Voie> listVoieCritere = voieRepository.findVoieByNomAndCotationAndLongueur(name, cotation, longueur);
 		
 		if (listVoieCritere.isEmpty()) {
 			 throw new Exception("Saisissez au moins un critere de selection");
@@ -118,13 +111,13 @@ private SiteEscaladeRepository siteRepository;
 	
 	
 @Override
-	public List<Voie> getSiteEscalade(Long codeSiteEscalade)throws Exception{
-		Optional<SiteEscalade> site = siteRepository.findById(codeSiteEscalade);
+	public Page<Voie> getSiteEscalade(Long codeSite, int page,int size)throws Exception{
+		Optional<SiteEscalade> site = siteRepository.findById(codeSite);
 		if(!site.isPresent()) {
 			throw new Exception("Le site n'existe pas");
 		}
 		
-	List<Voie> listVoieSite = voieRepository.findBySite(site.get());
+		Page<Voie> listVoieSite = voieRepository.findBySite(codeSite,PageRequest.of(page,size));
 		
 		return listVoieSite;
 	}

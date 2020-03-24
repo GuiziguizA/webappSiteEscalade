@@ -7,14 +7,13 @@ import java.util.Optional;
 import javax.management.relation.RelationNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.jca.cci.RecordTypeNotSupportedException;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import sig.org.classe.Commentaires;
+
 import sig.org.classe.Region;
-import sig.org.classe.SiteEscalade;
+
 import sig.org.classe.Topos;
 import sig.org.classe.Utilisateur;
 import sig.org.dao.RegionRepository;
