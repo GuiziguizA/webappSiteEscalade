@@ -43,9 +43,10 @@ private VoieMetier voieMetier;
 public String consulterVoie(Model model, @ModelAttribute("site") SiteEscalade site){
 		List<SiteEscalade> listSite=siteMetier.getSiteEscalade();
 		
+		   
 		model.addAttribute(" listSite", listSite);
 		
-		
+	
 		
 		/*
 		 * try {

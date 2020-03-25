@@ -87,10 +87,11 @@ public class SiteEscaladeApplication implements CommandLineRunner {
 		Voie v4 = voieRepository.save(new Voie("dddhh","4hhh5","6h5",s1));
 		Voie v5 = voieRepository.save(new Voie("dgfdgdd","4d5","6hh5",s1));
 		Voie v6 = voieRepository.save(new Voie("dgfdgdd","45ggf","6fgdg5",s1));
-		List<SiteEscalade>listedessite=siteMetier.getSiteEscalade();
-		System.out.println(listedessite);
-		System.out.println("hellllllllllllllllllllooooooooooooooooooooooooooo");
-		
+		List<SiteEscalade>listSite=siteMetier.getSiteEscalade();
+		System.out.println(listSite);
+	if(listSite == null || listSite.isEmpty()) {
+		System.out.println("yo les man");
+		}else {System.out.println("bibibibibibibi");}
 		
 		// TODO Auto-generated method stub
 		/*utilisateurMetier.createUtilisateur("guillaume","gualisse@gmail.com", "tarot");
