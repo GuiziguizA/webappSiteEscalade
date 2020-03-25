@@ -93,66 +93,12 @@ public class SiteEscaladeApplication implements CommandLineRunner {
 		System.out.println("yo les man");
 		}else {System.out.println("bibibibibibibi");}
 		
-		// TODO Auto-generated method stub
-		/*utilisateurMetier.createUtilisateur("guillaume","gualisse@gmail.com", "tarot");
-		 * utilisateurMetier.createUtilisateur("bob","Bob@gmail.com", "bozo");
-		 * utilisateurRepository.save(new Utilisateur("pijocsdci", "Bobby",
-		 * "guiejisc@gmail.com")); Region lyon=regionRepository.save(new
-		 * Region("lyon")); siteEscaladeRepository.save(new
-		 * SiteEscalade("bob","bob","92330","yoyooy",lyon,"RAS"));
-		 * 
-		 */
+	
 		
 	}
 }
 
-		/*
-		 utilisateurMetier.createUtilisateur("bob","Bob@gmail.com", "bozo");
-		 * utilisateurMetier.createUtilisateur("boba","Boba@gmail.com", "bozou");
-		 * utilisateurMetier.createUtilisateur("bobu","Bobu@gmail.com", "bozto");
-		 * utilisateurMetier.createUtilisateur("bobs","Bobsa@gmail.com", "bohhzo");
-		 * utilisateurMetier.createUtilisateur("boba","Bobsad@gmail.com", "bddozo");
-		 * 
-		 * 
-		 * 
-		 * Region lyon=regionRepository.save(new Region("lyon")); Region
-		 * paris=regionRepository.save(new Region("paris")); Region
-		 * marseille=regionRepository.save(new Region("marseille")); Region
-		 * biarritz=regionRepository.save(new Region("saint etienne")); Region
-		 * nice=regionRepository.save(new Region("biarritz"));
-		 * 
-		 * SiteEscalade s1 = siteEscaladeRepository.save(new
-		 * SiteEscalade("les site des truff","45 rue du facon"
-		 * ,"65230","Site eclaté au sol",lyon,"RAS")); SiteEscalade s2 =
-		 * siteEscaladeRepository.save(new
-		 * SiteEscalade("les site des truffad","45 rue du fackjjjjon"
-		 * ,"6541230","Site eclaté au sol",paris,"RAS")); SiteEscalade s3 =
-		 * siteEscaladeRepository.save(new
-		 * SiteEscalade("les site des truffadda","45 rue dunxfghnq facon"
-		 * ,"6125230","Site eclaté au sol",biarritz,"RAS")); SiteEscalade s4 =
-		 * siteEscaladeRepository.save(new
-		 * SiteEscalade("les site des trufadadaf","45 rue du facon"
-		 * ,"65kiu230","S5472ite eclaté au sol",marseille,"RAS")); SiteEscalade s5 =
-		 * siteEscaladeRepository.save(new
-		 * SiteEscalade("les site des truadzdff","45 rue du facon"
-		 * ,"65kik230","Siteikuk eclaté au sol",nice,"RAS"));
-		 * 
-		 * Utilisateur u1 = utilisateurRepository.save(new Utilisateur("pijocsdci",
-		 * "Bobby", "guiejisc@gmail.com"));
-		 * 
-		 * Commentaires c1 = commentaireRepository.save(new Commentaires(u1, new Date(),
-		 * "yo ma gueule")); Commentaires c4
-		 * =commentaireMetier.createCommentaire(s3.getCodeSiteEscalade(),
-		 * u1.getCodeUtilisateur(), "damso");
-		 * 
-		 * Topos t1=toposRepository.save(new
-		 * Topos("dortiyi","dokfoperjoijgidfgj","454545",u1,"hdfdsiohf",lyon));
-		 * 
-		 * 
-		 * commentaireMetier.createCommentaire(s1.getCodeSiteEscalade(),
-		 * u1.getCodeUtilisateur(), "yo ma caille");
-		 * 
-		 */
+		
 		
 		
 		

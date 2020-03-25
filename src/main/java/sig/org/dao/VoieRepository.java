@@ -18,14 +18,14 @@ public interface VoieRepository extends CrudRepository<Voie, Long> {
 	
 	
 	@Query("SELECT c FROM Voie c WHERE (:nom is null or c.nom = :nom)and(:site is null or c.site = :site)")
-	Optional<Voie> findVoieByNomAndSite(@Param("nom")String nom,@Param("site")SiteEscalade site);
+	public Optional<Voie> findVoieByNomAndSite(@Param("nom")String nom,@Param("site")SiteEscalade site);
 	
 	@Query("SELECT c FROM Voie c WHERE (:nom is null or c.nom = :nom) and (:cotation is null"
 			  + " or c.cotation = :cotation)"+ "and (:longueur is null"
 					  + " or c.longueur = :longueur)")
-	ArrayList<Voie> findVoieByNomAndCotationAndLongueur(@Param("nom")String nom,@Param("cotation")String cotation, @Param("longueur")String longueur );
+	public ArrayList<Voie> findVoieByNomAndCotationAndLongueur(@Param("nom")String nom,@Param("cotation")String cotation, @Param("longueur")String longueur );
 	
 	
-	Page<Voie> findBySite(Long codeSite,Pageable pageable);
+	public Page<Voie> findBySite(Long codeSite,Pageable pageable);
 	
 }

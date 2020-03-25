@@ -13,35 +13,27 @@
 <body>
 	<div>
 
-			<form th:action="@{/consulterVoie}" class="form-signin"  method="post"style="width:30%;margin:auto">
-				<div th:object="${site}" >
-		<select  class="form-control"   name="listSite">
+			<form th:action="@{/consulterVoie}" class="form-signin"  method="get"style="width:30%;margin:auto">
+				<div >
+		<select  class="form-control"   name="listSite" th:field="model">
 		<option value="">Site d'escalade</option>
     <option  th:each="site : ${listSite}"  th:value="${site.codeSiteEscalade}"th:text="${site.nom}" ></option>
+    </select>
     
-    
-</select>
-</div>
-			
-			
-			
-       <div th:if="${listSite == null or lists.isEmpty(listSite)}">
-           <div>"pas de site d'escalade"</div>
-       </div>
-			
-			</form>
-		
+   
+            
 
-			
+</div>
+					
 		
-				<div class="pane panel-primary"  >
-			<div class="panel heading">Liste des Voie</div>
-			<div class = "panel body">
+				
+			
+			<div class = "panel body" >
 			<table class="table table-stripped">
 			<tr>
 			<th>Nom</th><th>longueur</th><th>Cotation</th>
 			</tr>
-			<tr th:each="o:${listVoie}">
+			<tr th:each="o:${listVoie}"  th:field="*{codeSite}">
 			<td th:text="${o:nom}" ></td>
 			<td th:text="${o:longueur}"></td>
 			<td th:text="${o:cotation}"></td>
@@ -50,13 +42,13 @@
 			<div>
 			</div>
 			</div>
-			</div>
 			
+		</form>	
 	
 	</div>
-			
 	
 	
+            
 	
 </body>
 </html>
