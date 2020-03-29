@@ -27,7 +27,9 @@ public interface Ivoie {
 
 	
 
-	public Page<Voie> getSiteEscalade(Long codeSiteEscalade, int page, int size) throws Exception;
+	public List<Voie> getSiteEscalade(Long codeSite) throws Exception;
 
+
+	
 	
 }

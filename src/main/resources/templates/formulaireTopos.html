@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://ultraq.net.nz/thymleaf/layout"
+	layout:decorator="template1">
+ 
+ 
+<head>
+<meta charset="utf-8"/>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+ 
+<body>
+
+<div layout:fragment="content">
+<form action="#" th:action="@{/ajouterTopos}" th:object="${topos}" method="get">
+    <label for="nom">Nom</label>
+    <input type="text" th:field="*{nom}" id="nom" placeholder="Nom">
+    <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+    <label for="mail">description</label>
+    <input type="text" th:field="*{description}" id="description" placeholder="description">
+    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+      <label for="">date de paruption</label>
+    <input type="text" th:field="*{dateDeParuption}" id="dateDeParuption" placeholder="dateDeParuption">
+    <span th:if="${#fields.hasErrors('dateDeParuption')}" th:errors="*{dateDeParuption}"></span>
+   	<select >
+   		<option th:each="o:${listUtilisateur}"  th:text="${o.nom}" th:value= "${o}">Utilisateur</option>
+   	</select>
+     	<select >
+   		<option th:each="o:${listRegion}"  th:text="${o.nom}" th:value= "${o}">Utilisateur</option>
+   	</select>
+    <input type="submit" value="Ajouter">   
+    
+</form>
+	</div>
+	
+</body>
+</html>

@@ -69,7 +69,7 @@ private Collection<Commentaires> commentaires;
 	public void setPasseword(String passeword) {
 		this.passeword = passeword;
 	}
-	public Long getCodeUtilisateur(long id) {
+	public Long getCodeUtilisateur() {
 		return codeUtilisateur;
 	}
 

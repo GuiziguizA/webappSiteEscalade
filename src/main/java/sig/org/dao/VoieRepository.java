@@ -26,6 +26,9 @@ public interface VoieRepository extends CrudRepository<Voie, Long> {
 	public ArrayList<Voie> findVoieByNomAndCotationAndLongueur(@Param("nom")String nom,@Param("cotation")String cotation, @Param("longueur")String longueur );
 	
 	
-	public Page<Voie> findBySite(Long codeSite,Pageable pageable);
+	public List<Voie> findBySite(Optional<SiteEscalade> site);
+	
+
+	
 	
 }

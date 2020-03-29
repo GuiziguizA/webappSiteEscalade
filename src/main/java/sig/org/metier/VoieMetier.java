@@ -38,8 +38,8 @@ private SiteEscaladeRepository siteRepository;
 			throw new Exception("Le site n'existe pas");
 		}
 		
-		
-		Optional<Voie> voie =voieRepository.findVoieByNomAndSite(nom, site.get()); 
+	
+		 Optional<Voie> voie =voieRepository.findVoieByNomAndSite(nom, site.get()); 
 		 if( voie.isPresent()) { 	
 			 throw new Exception("La voie  existe deja");
 			}
@@ -111,13 +111,13 @@ private SiteEscaladeRepository siteRepository;
 	
 	
 @Override
-	public Page<Voie> getSiteEscalade(Long codeSite, int page,int size)throws Exception{
+	public List<Voie> getSiteEscalade(Long codeSite)throws Exception{
 		Optional<SiteEscalade> site = siteRepository.findById(codeSite);
 		if(!site.isPresent()) {
 			throw new Exception("Le site n'existe pas");
 		}
 		
-		Page<Voie> listVoieSite = voieRepository.findBySite(codeSite,PageRequest.of(page,size));
+		List<Voie> listVoieSite = voieRepository.findBySite(site);
 		
 		return listVoieSite;
 	}

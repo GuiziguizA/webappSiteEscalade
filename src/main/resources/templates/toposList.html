@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://ultraq.net.nz/thymleaf/layout"
+	layout:decorator="template1">
+ 
+ 
+<head>
+<meta charset="utf-8"/>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+ 
+<body>
+<div layout:fragment="content">
+
+<div>
+		<a th:href="@{/consulterFormulaireTopos}"><input type="button"  style="color: green;"value="+Ajouter" /></a>
+	</div>
+		
+
+<h1>Liste des topos</h1>
+
+<div th:if = "${listTopos}">
+		<table class="table table-stripped">
+			<tr>
+				<th>Nom</th><th>Description</th><th>Date de paruption</th><th>Utilisateur</th><th>Region</th><th>Statut</th>
+			</tr>
+			<tr th:each="o:${listTopos}" >
+				<td th:text="${o.nom}" ></td>
+				<td th:text="${o.description}" ></td>
+				<td th:text="${o.dateDeParuption}" ></td>
+				<td th:text="${o.utilisateur.nom}" ></td>
+				<td th:text="${o.region.nom}" ></td>		
+				<td th:text="${o.statut}" ></td>		
+			</tr>
+		</table>
+	</div>
+
+
+</div>
+</body>
+</body>

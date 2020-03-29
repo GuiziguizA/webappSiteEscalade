@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://ultraq.net.nz/thymleaf/layout"
+	layout:decorator="template1">
+ 
+<head>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+ 
+<body>
+<div layout:fragment="content">
+
+	<div>
+		<a th:href="@{/siteForm}"><input type="button"  style="color: green;"value="+Ajouter" /></a>
+	</div>
+		
+		
+	<div >
+		<table class="table table-stripped">
+			<tr>
+				<th>Nom</th><th>adresse</th><th>Code Postal</th><th>Commentaire</th><th>Statut</th>
+			</tr>
+			<tr th:each="o:${listSite}" >
+				<td th:text="${o.nom}" ></td>
+				<td th:text="${o.adresse}" ></td>
+				<td th:text="${o.codePostal}"></td>
+				<td th:text="${o.description}"></td>
+				<td th:text="${o.statut}"></td>
+				<td><a th:href="@{/consulterSiteDetails/{id}(id=${o.codeSiteEscalade})}"><input type="button"  id="${o.codeSiteEscalade}"  style="color: green;"value="Consulter" /></a></td>
+				
+			</tr>
+		</table>
+	</div>
+						
+</div>	
+</body>

@@ -12,47 +12,24 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import sig.org.classe.Region;
 
 import sig.org.classe.Topos;
-import sig.org.classe.Utilisateur;
-import sig.org.dao.RegionRepository;
 import sig.org.dao.ToposRepository;
-import sig.org.dao.UtilisateurRepository;
+
 @Service
 @Transactional
 public class ToposMetier implements Itopos{
 
 	@Autowired
 	private ToposRepository toposRepository;
-	@Autowired
-	private RegionRepository regionRepository;
-	@Autowired
-	private UtilisateurRepository utilisateurRepository;
 	
 	
 	@Override
-	public Topos createTopos(String statut,Long codeRegion,Long codeUtilisateur, String dateDeParuption ,String description , String nom) throws Exception {
-		Optional<Region> region = regionRepository.findById(codeRegion);
-		if(!region.isPresent()) {
-			throw new Exception("Le site n'existe pas");
-		}
+	public Topos createTopos(Topos topos) {
 		
-		Optional<Utilisateur> utilisateur = utilisateurRepository.findById(codeUtilisateur);
-		if(!utilisateur.isPresent()) {
-			throw new Exception("Cet utilisateur n'existe pas");
-		}
-	
-		
-		
-			Topos  newEntity = new Topos();
-			newEntity.setDateDeParuption(dateDeParuption);
-           newEntity.setDescription(description);
-           newEntity.setNom(nom);
-           newEntity.setRegion(region.get());
-           newEntity.setStatut(statut);
-           newEntity.setUtilisateur(utilisateur.get());
-           return newEntity;
+		toposRepository.save(topos);
+         
+           return topos;
 	   
 	        
 	}

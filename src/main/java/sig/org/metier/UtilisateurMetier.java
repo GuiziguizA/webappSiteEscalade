@@ -1,6 +1,7 @@
 package sig.org.metier;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,14 @@ return utilisateurRepository.save(user);
 		
 	}
 
+	
+	public List<Utilisateur>findAllUtilisateur(){
+		List<Utilisateur>listUtilisateur = (List<Utilisateur>) utilisateurRepository.findAll();
+		
+		return listUtilisateur;	
+	}
+	
+	
 	
 
 	@Override

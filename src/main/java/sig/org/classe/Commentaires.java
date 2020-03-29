@@ -9,19 +9,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+
+
 @Entity
-
-
 public class Commentaires implements Serializable{
 	
 	@Id @GeneratedValue
 	private Long codeCommentaire;
 	@ManyToOne
-	@JoinColumn(name="CODE_UTILISATEUR")
-private Utilisateur utilisateur;
-private String description;	
+	@JoinColumn
+	private Utilisateur utilisateur;
+	private String description;	
 	@ManyToOne
-	@JoinColumn(name="ID_SITE")
+	@JoinColumn
 	private SiteEscalade site;
 	private Date date;
 
@@ -35,15 +36,28 @@ public Commentaires() {
 
 
 
-public Commentaires(Utilisateur utilisateur, Date date,String description) {
+
+
+
+public Commentaires(Utilisateur utilisateur, Date date,String description,SiteEscalade site) {
 	super();
 	this.utilisateur = utilisateur;
 	this.date = date;
-	
+	this.site=site;
+	this.description=description;
 }
 
 
 
+public SiteEscalade getSite() {
+	return site;
+}
+
+
+
+public void setSite(SiteEscalade site) {
+	this.site = site;
+}
 public Utilisateur getUtilisateur() {
 	return utilisateur;
 }

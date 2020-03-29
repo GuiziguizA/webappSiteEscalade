@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://ultraq.net.nz/thymleaf/layout"
+	layout:decorator="template1">
+ 
+ 
+<head>
+<meta charset="utf-8"/>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+ 
+<body>
+
+<div layout:fragment="content">
+<form action="#" th:action="@{/ajouterTopos}" th:object="${voie}" method="get">
+    <label for="nom">Nom</label>
+    <input type="text" th:field="*{nom}" id="nom" placeholder="Nom">
+    <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+    <label for="cotation">cotation</label>
+    <input type="text" th:field="*{cotation}" id="cotation" placeholder="cotation">
+    <span th:if="${#fields.hasErrors('cotation')}" th:errors="*{cotation}"></span>
+      <label for="longueur">longueur</label>
+    <input type="text" th:field="*{longueur}" id="longueur" placeholder="longueur">
+    <span th:if="${#fields.hasErrors('longueur')}" th:errors="*{longueur}"></span>
+   	<select >
+   		<option th:each="o:${listSiteEscalade}"  th:text="${o.nom}" th:value= "${o}">Utilisateur</option>
+   	</select>
+    <input type="submit" value="Ajouter">   
+    
+</form>
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://ultraq.net.nz/thymleaf/layout"
+	layout:decorator="template1">
+ 
+<head>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+ 
+<body>
+
+
+
+		<div layout:fragment="content">	
+		
+		<h1>Details du site</h1>
+		
+<div class="card" style="width: 18rem;">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" th:text="${siteEscalade.nom}"></li>
+    <li class="list-group-item"th:text="${siteEscalade.adresse}"></li>
+    <li class="list-group-item"th:text="${siteEscalade.codePostal}"></li>
+      <li class="list-group-item"th:text="${siteEscalade.description}"></li>
+        <li class="list-group-item"th:text="${siteEscalade.statut}"></li>
+  </ul>
+</div>
+	
+	
+	
+	
+		
+					<div th:if="${listVoie}">
+				<h2>Liste des voies du site</h2>
+			<table class="table table-stripped">
+				<tr>
+				<th>Nom</th><th>longueur</th><th>cotation</th>
+				</tr>
+				<tr th:each="o:${listVoie}" >
+				<td th:text="${o.nom}" ></td>
+				<td th:text="${o.longueur}" ></td>
+				<td th:text="${o.cotation}"></td>
+				
+				
+				</tr>
+				</table>
+	            
+	
+	</div>
+						
+		
+			<div th:if="${listCommentaires}">
+				<h2>Liste des Commentaires du site</h2>
+			<table class="table table-stripped">
+				<tr>
+				<th>Utilisateur</th><th>Date</th><th>Description</th>
+				</tr>
+				
+				<tr th:each="o:${listCommentaires}" >
+				<td th:text="${o.utilisateur.nom}" ></td>
+				<td th:text="${o.date}" ></td>
+				<td th:text="${o.description}" ></td>
+					
+				
+				
+				
+				</tr>
+				</table>
+	            
+	
+	</div>
+	
+</div>	
+</body>
+</html>

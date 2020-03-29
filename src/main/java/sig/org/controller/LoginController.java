@@ -1,4 +1,4 @@
-package sig.org.controlleur;
+package sig.org.controller;
 
 import java.util.Optional;
 
@@ -24,7 +24,7 @@ import sig.org.metier.Iutilisateur;
 
  
 @Controller
-public class LoginControlleur {
+public class LoginController {
 @Autowired
 private UtilisateurRepository userRepository;	
 @Autowired

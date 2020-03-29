@@ -15,5 +15,6 @@ public interface ISiteEscalade {
 	public SiteEscalade afficherSiteEscaladeParRegion(Long Region) throws RelationNotFoundException;
 	public SiteEscalade  afficherSiteEscalade(Long codeSite) throws RelationNotFoundException;
 	public List<SiteEscalade>getSiteEscalade();
+	public SiteEscalade createSiteEscalade(SiteEscalade site) throws Exception;
 
 }

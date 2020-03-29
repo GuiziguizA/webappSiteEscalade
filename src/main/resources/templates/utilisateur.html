@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://ultraq.net.nz/thymleaf/layout"
+	layout:decorator="template1">
+ 
+ 
+<head>
+<meta charset="utf-8"/>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+ 
+<body>
+<div layout:fragment="content">
+	<h1>Details du site</h1>
+		
+	<div >
+		<table class="table table-stripped">
+			<tr>
+				<th>Nom</th><th>Adresse e-mail</th>
+			</tr>
+			<tr th:each="o:${utilisateurList}" >
+				<td th:text="${o.nom}" ></td>
+				<td th:text="${o.mail}" ></td>
+			</tr>
+		</table>
+	</div>
+	
+</div>
+</body>
+</html>

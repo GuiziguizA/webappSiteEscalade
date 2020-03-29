@@ -1,10 +1,12 @@
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://ultraq.net.nz/thymleaf/layout"
+	layout:decorator="template1">
  
 <head>
-	<title>Login</title>
+<meta charset="utf-8"/>
+
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -12,7 +14,7 @@
  
 <body>
 	
-	<div class="container">
+	<div layout:fragment="content">
 	<br/><br/>
 		<form th:action="@{/login}" method="POST" class="form-signin"th:object="${utilisateur}"  style="width:30%;margin:auto">
 			<h3 class="form-signin-heading">Site communautaire d'escalade</h3>

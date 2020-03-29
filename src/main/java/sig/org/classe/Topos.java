@@ -9,22 +9,29 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 
 public class Topos {
 	@Id @GeneratedValue
 	private Long codeTopos;
-private String nom;
-private String description;
-private String dateDeParuption;
-@ManyToOne
-@JoinColumn(name="CODE_UTILISATEUR")
-private Utilisateur utilisateur;
-private String statut;
-@ManyToOne
-@JoinColumn(name="ID_REGION")
-private Region region;
+	@NotBlank(message = "le nom est obligatoire")
+	private String nom;
+	@NotBlank(message = "la description est obligatoire")
+	private String description;
+	@NotBlank(message = "la date de paruption  est obligatoire")
+	private String dateDeParuption;
+	
+	@ManyToOne
+	@JoinColumn(name="CODE_UTILISATEUR")
+	private Utilisateur utilisateur;
+	@NotBlank(message = "le statut est obligatoire")
+	private String statut;
+
+	@ManyToOne
+	@JoinColumn(name="ID_REGION")
+	private Region region;
 public Topos() {
 	super();
 	// TODO Auto-generated constructor stub

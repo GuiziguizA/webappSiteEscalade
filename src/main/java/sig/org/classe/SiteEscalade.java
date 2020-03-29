@@ -2,34 +2,41 @@ package sig.org.classe;
 
 import java.util.Collection;
 
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import javax.validation.constraints.NotBlank;
+
+
+
+
+
 
 @Entity
-@Table(name="site")
 public class SiteEscalade {
 
 	@ Id @GeneratedValue 
 	private Long codeSiteEscalade;
 	
-
+	 @NotBlank(message = "nom est obligatoire")
 	private String nom;
+	 @NotBlank(message = "l'adresse est obligatoire")
 	private String adresse ;
+	 @NotBlank(message = "le code postal est obligatoire")
 	private String codePostal;
-	private String commentaire;
+	 @NotBlank(message = "le commentaire est obligatoire")
+	private String description;
+	 @NotBlank(message = "le statut est obligatoire")
 	private String statut;
-	@ManyToOne
-	private Region region;
+	/*
+	 * @ManyToOne private Region region;
+	 */
 	@OneToMany(mappedBy="site",fetch=FetchType.LAZY)
 	private Collection<Voie> voies;
 	
@@ -43,13 +50,14 @@ public class SiteEscalade {
 	}
 
 
-	public SiteEscalade(String nom,String adresse, String codePostal, String commentaire, Region region,String statut) {
+	public SiteEscalade(String nom,String adresse, String codePostal, String description,String statut) {
 		super();
 		this.adresse = adresse;
 		this.codePostal = codePostal;
-		this.commentaire = commentaire;
-		this.region = region;
-		this.statut = statut;
+		this.description = description;
+		/*
+		 * this.region = region;
+		 */		this.statut = statut;
 		this.nom=nom;
 	}
 
@@ -74,25 +82,21 @@ public class SiteEscalade {
 	}
 
 
-	public String getCommentaire() {
-		return commentaire;
+	public String getDescription() {
+		return description;
 	}
 
 
-	public void setCommentaire(String commentaire) {
-		this.commentaire = commentaire;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-
-	public Region getRegion() {
-		return region;
-	}
-
-
-	public void setRegion(Region region) {
-		this.region = region;
-	}
-
+	/*
+	 * public Region getRegion() { return region; }
+	 * 
+	 * 
+	 * public void setRegion(Region region) { this.region = region; }
+	 */
 
 	public Collection<Voie> getVoies() {
 		return voies;

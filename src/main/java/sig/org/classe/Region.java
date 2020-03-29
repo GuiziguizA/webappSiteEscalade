@@ -17,11 +17,21 @@ public class Region implements Serializable {
 	private String nom;
 	@OneToMany(mappedBy="region",fetch=FetchType.LAZY)
 	private Collection<Topos> topos ;
-	@OneToMany(mappedBy="region",fetch=FetchType.LAZY)
-private Collection<SiteEscalade> siteEscalade;
+	/*
+	 * @OneToMany(mappedBy="region",fetch=FetchType.LAZY) private
+	 * Collection<SiteEscalade> siteEscalade; 
+	 * 
+	 * 
+	 * 
+	 */
+	
 	public Region() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public Long getCodeRegion() {
+		return codeRegion;
 	}
 
 	public Region(String nom) {
