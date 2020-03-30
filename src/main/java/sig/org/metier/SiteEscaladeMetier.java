@@ -19,57 +19,82 @@ import sig.org.dao.SiteEscaladeRepository;
 @Service
 @Transactional
 public class SiteEscaladeMetier implements ISiteEscalade{
-@Autowired
+	
+	
+	@Autowired
 	public SiteEscaladeRepository siteRepository;
 
+	/**
+	 * Méthode création d'un objet SiteEscalade
+	 * 
+	 * @param site1 : site d'escalade correspondant a l'id de l'objet site present dans les paramètre de la méthode
+	 * 
+	 * @return siteRepository.save(site)
+	 */
 
+	@Override
+	public SiteEscalade  createSiteEscalade(SiteEscalade site) throws RelationNotFoundException{
 
-	
+		Optional<SiteEscalade>site1=siteRepository.findByAdresse(site.getAdresse());
 
+		if(site1.isPresent()) {
+			throw new RelationNotFoundException("le site existe deja");
 
-@Override
-public SiteEscalade  createSiteEscalade(SiteEscalade site) throws RelationNotFoundException{
+		} else {
+			return  siteRepository.save(site);
+		}
+	}
 
-Optional<SiteEscalade>site1=siteRepository.findByAdresse(site.getAdresse());
+	/**
+	 * Méthode permettant d'afficher un site d'escalade en fonction d'un id de site d'escalade
+	 * 
+	 * @param site : objet SiteEscalade correspondant a l'id
+	 * 
+	 * @return site
+	 */
 
-if(site1.isPresent()) {
-	  throw new RelationNotFoundException("le site existe deja");
-
-} else {
-	 return  siteRepository.save(site);
-}
-}
-
-
-
-@Override
-public SiteEscalade  afficherSiteEscalade(Long codeSite) {
-	 SiteEscalade site = siteRepository.findByCodeSiteEscalade(codeSite);
+	@Override
+	public SiteEscalade  afficherSiteEscalade(Long codeSite) {
+		SiteEscalade site = siteRepository.findByCodeSiteEscalade(codeSite);
        
   
-	return site;
-}
+		return site;
+	}
+
+	/**
+	 * Méthode renvoyant la list de tout les sites d'escalade
+	 * 
+	 * @param listSite : liste de tous les sites
+	 * 
+	 * @return listSite
+	 */
+	@Override
+	public List<SiteEscalade>getSiteEscalade(){
 
 
-@Override
-public List<SiteEscalade>getSiteEscalade(){
-
-
-	List<SiteEscalade> listSite =siteRepository.findAll();
+		List<SiteEscalade> listSite =siteRepository.findAll();
 	
-	return listSite;
-}
+		return listSite;
+	}
 
+	/**
+	 * Methode permettant d'afficher les site d'escalade en fonction d'un id Region
+	 * 
+	 * @param site 
+	 * 
+	 * @return site
+	 */
+	
+	
+	public SiteEscalade afficherSiteEscaladeParRegion(Long Region) throws RelationNotFoundException {
 
-public SiteEscalade afficherSiteEscaladeParRegion(Long Region) throws RelationNotFoundException {
-
-			 Optional<SiteEscalade> site = siteRepository.findById(Region);
+		Optional<SiteEscalade> site = siteRepository.findById(Region);
 		        
-		        if(site.isPresent()) {
-		            return site.get();
-		        } else {
-		            throw new RelationNotFoundException("No climbing area record exist for given id");
+		if(site.isPresent()) {
+			return site.get();
+		} else {
+			throw new RelationNotFoundException("No climbing area record exist for given id");
 		
 		}
-}
+	}
 }

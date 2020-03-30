@@ -1,4 +1,4 @@
-
+<!-- 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://ultraq.net.nz/thymleaf/layout"
@@ -6,7 +6,7 @@
  
 <head>
 <meta charset="utf-8"/>
-
+  <title>Login page</title> 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -16,33 +16,28 @@
 	
 	<div layout:fragment="content">
 	<br/><br/>
-		<form th:action="@{/login}" method="POST" class="form-signin"th:object="${utilisateur}"  style="width:30%;margin:auto">
-			<h3 class="form-signin-heading">Site communautaire d'escalade</h3>
-			
-			<br/>
-			 <div align="center" th:if="${param.error}">
-				<p style="font-size: 20; color: #FF1C19;">Username or password is invalid</p>
-			</div>
-			
-			<input type="text" id="mail" name="mail"  th:placeholder="mail"
-				class="form-control" /> <br/> 
-			<input type="password"  th:placeholder="Password"
-				id="password" name="password" class="form-control" /> <br />
-				
-			
-			<button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login">Connexion</button>
-		</form>
-		
-			 <div align="center" >
-				
+
+
+<div id="container">  
+    <h2>Login page</h2>  
+    <form th:action="@{/login.html}" method="post">  
+        <label for="nom">Nom Utilisateur</label>  
+        <input type="text" id="nom" name="nom" autofocus="autofocus" />  
+        <label for="password">Mot de passe</label>  
+        <input type="password" id="password" name="password" />  
+        <input id="submit" type="submit" value="Log in" />  
+    </form>  
+    <p th:if="${loginError}" class="error">Utilisateur ou Mot de passe incorrect</p>  
+</div>  
+
 				<a href="http://localhost:8080/loginCreation">Inscription</a>
 			</div>
 			
-	</div>
-	
+
 	
 </body>
 </html>
 
 
 
+ -->

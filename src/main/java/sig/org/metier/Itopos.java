@@ -16,4 +16,7 @@ public interface Itopos {
 	public List<Topos> getAllTopos();
 
 	public Topos createTopos(Topos topos);
+
+	public Topos updateStatutTopos(Long codeTopos, String statut) throws Exception;
+	
 }

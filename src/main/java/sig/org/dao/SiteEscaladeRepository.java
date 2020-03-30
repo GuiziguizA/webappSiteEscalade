@@ -11,14 +11,13 @@ import org.springframework.stereotype.Repository;
 
 import sig.org.classe.SiteEscalade;
 @Repository
-public interface SiteEscaladeRepository 
-extends JpaRepository<SiteEscalade, Long>{
+public interface SiteEscaladeRepository extends JpaRepository<SiteEscalade, Long>{
 	
 	
 	@Query("SELECT u FROM SiteEscalade u WHERE  u.codeSiteEscalade=:x")	
-public SiteEscalade  findByCodeSiteEscalade(@Param("x")Long codeSiteEscalade);
+	public SiteEscalade  findByCodeSiteEscalade(@Param("x")Long codeSiteEscalade);
 
- public Optional<SiteEscalade>  findByAdresse(String adresse);
+	public Optional<SiteEscalade>  findByAdresse(String adresse);
 	
 	
 }

@@ -21,8 +21,7 @@ import sig.org.dao.UtilisateurRepository;
 import sig.org.dao.VoieRepository;
 import sig.org.metier.Iutilisateur;
 import sig.org.metier.UtilisateurMetier;
-
-
+import sig.org.metier.VoieMetier;
 import sig.org.classe.Commentaires;
 
 import sig.org.classe.Topos;
@@ -70,6 +69,8 @@ public class SiteEscaladeApplication implements CommandLineRunner {
 	private Itopos toposMetier;
 	@Autowired
 	private Iregion regionMetier;
+	@Autowired
+	private Ivoie voieMetier;
 	
     public static void main(String[] args) {
         SpringApplication.run(SiteEscaladeApplication.class, args);
@@ -109,15 +110,9 @@ public class SiteEscaladeApplication implements CommandLineRunner {
 		toposMetier.createTopos(new Topos("topos 3", "description 1","Date1",u3,"disponible",r2));
 		toposMetier.createTopos(new Topos("topos 4", "description 1","Date1",u4,"disponible",r3));
 		toposMetier.createTopos(new Topos("topos 5", "description 1","Date1",u4,"disponible",r4));
-		List<Region>lise;
-		try {
-			lise=regionMetier.getAllRegion();
-			System.out.println(lise);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
+		List<Voie>lv1= voieMetier.getAllVoie();
 		
-		
+		System.out.println(lv1);
 	
 		
 		

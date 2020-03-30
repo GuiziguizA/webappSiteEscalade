@@ -14,7 +14,16 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 
-
+/**
+ * codeSiteEscalade : id SiteEscalade
+ * nom : nom du Site 
+ * adresse : l'adresse du site d'escalade 
+ * codePostal : code postal du site d'escalade
+ * description : description brève du site d'escalade
+ * statut : statut du site d'escalade
+ * voies : les voies du sites
+ * commentaires : les commentaires du site d'escalade
+ */
 
 
 

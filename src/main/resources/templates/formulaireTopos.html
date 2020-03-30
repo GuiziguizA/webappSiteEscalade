@@ -15,7 +15,7 @@
 <body>
 
 <div layout:fragment="content">
-<form action="#" th:action="@{/ajouterTopos}" th:object="${topos}" method="get">
+<form action="#" th:action="@{/ajouterTopos}" th:object="${topos}" method="post">
     <label for="nom">Nom</label>
     <input type="text" th:field="*{nom}" id="nom" placeholder="Nom">
     <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
@@ -25,11 +25,15 @@
       <label for="">date de paruption</label>
     <input type="text" th:field="*{dateDeParuption}" id="dateDeParuption" placeholder="dateDeParuption">
     <span th:if="${#fields.hasErrors('dateDeParuption')}" th:errors="*{dateDeParuption}"></span>
-   	<select >
-   		<option th:each="o:${listUtilisateur}"  th:text="${o.nom}" th:value= "${o}">Utilisateur</option>
+       <label for="">Statut</label>
+     <input type="text" th:field="*{statut}" id="statut" placeholder="statut">
+    <span th:if="${#fields.hasErrors('statut')}" th:errors="*{statut}"></span>
+    
+   	<select th:field="*{utilisateur}">
+   		<option th:each="o:${listUtilisateur}"  th:text="${o.nom}" th:value= "${o.codeUtilisateur}" >Utilisateur</option>
    	</select>
-     	<select >
-   		<option th:each="o:${listRegion}"  th:text="${o.nom}" th:value= "${o}">Utilisateur</option>
+     	<select  th:field="*{region}">
+   		<option th:each="o:${listRegion}"  th:text="${o.nom}" th:value= "${o.codeRegion}"  >Region</option>
    	</select>
     <input type="submit" value="Ajouter">   
     

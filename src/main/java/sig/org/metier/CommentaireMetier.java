@@ -33,7 +33,14 @@ public class CommentaireMetier implements Icommentaire {
 	private UtilisateurRepository utilisateurRepository;
 	
 	
-	
+	/**
+	 * Méthode renvoyant une liste de commentaire en fonction d'un id de site d'escalade
+	 * 
+	 *  
+	 * @param site : site d'escalade correspandant a l'id  
+	 * @param commentaireList : liste de commentaire du site d'escalade
+	 * @return commentaireList
+	 */
 
 	@Override
     public List<Commentaires> getSiteAllCommentaire(SiteEscalade siteEscalade,Long codeSiteEscalade) throws Exception{
@@ -52,7 +59,12 @@ public class CommentaireMetier implements Icommentaire {
 	
 	
 	
-	
+	/**
+	 * Méthode renvoyant un commentaire en fonction d'un id commentaire
+	 * 
+	 * @param commentaire : commentaire correspondant a l'id
+	 * @return commentaire
+	 */
 	
 	
 	
@@ -70,7 +82,14 @@ public class CommentaireMetier implements Icommentaire {
     
     
     
-    
+    /**
+     * Méthode créanr un objet commentaire
+     * 
+     * @param site : site d'ecalade correspondant à l'id site
+     * @param utilisateur : utilisateur correspondant à l'id utilisateur
+     * @param comm : commentaire créé
+     * @return comm
+     */
     
     
 	
@@ -97,13 +116,16 @@ public class CommentaireMetier implements Icommentaire {
 	
 	
 	
+	/**
+	 * Methode supprimant un commentaire 
+	 * 
+	 * @param commentaire : commentaire correspondant a l'id 
+	 * 
+	 */
 	
 	
 	
-	
-	
-
-	@Override
+	  @Override
 	  public void deleteCommentaireById(Long codeCommentaire) throws Exception   {
 	        Optional<Commentaires>commentaire = commentaireRepository.findById(codeCommentaire);
 	         

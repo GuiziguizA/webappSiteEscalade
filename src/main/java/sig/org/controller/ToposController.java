@@ -84,7 +84,7 @@ public String AjouterUnTopos(Model model,@Valid Topos topos, BindingResult resul
 	// TODO Auto-generated catch block
 	model.addAttribute("exception",e);
 }
-	return "toposList";
+	return "home";
 	}
 }
 

@@ -15,6 +15,15 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Commentaires implements Serializable{
 	
+	
+	/**
+	 * codeCommentaire : id commentaire
+	 * Utilisateur : objet Utilisateur
+	 * descripton : contenu du commentaire
+	 * site : objet SiteEscalade
+	 * date : objet Date representant la date de l'ecriture du commentaire
+	 */
+	
 	@Id @GeneratedValue
 	private Long codeCommentaire;
 	@ManyToOne

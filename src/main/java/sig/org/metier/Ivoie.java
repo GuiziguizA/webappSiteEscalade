@@ -17,7 +17,7 @@ public interface Ivoie {
 
 	public Voie getVoieById(Long id) throws RelationNotFoundException;
 
-	public List<Voie> getAllVoie();
+	public List<Voie> getAllVoie() throws Exception;
 
 
 	

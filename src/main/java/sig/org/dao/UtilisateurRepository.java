@@ -11,10 +11,12 @@ import org.springframework.data.repository.query.Param;
 
 public interface UtilisateurRepository extends CrudRepository<Utilisateur, Long>{
 
-Utilisateur findByMailAndPasseword(String mail, String Passeword);
+	
 
-@Query("SELECT u FROM Utilisateur u WHERE  u.mail=:mail")
-Optional<Utilisateur> findByMail(@Param("mail")String mail);
+	@Query("SELECT u FROM Utilisateur u WHERE  u.mail=:mail")
+	public Optional<Utilisateur> findByMail(@Param("mail")String mail);
+
+	public Utilisateur findByMailAndPassword(String mail, String pw);
 
 
 }

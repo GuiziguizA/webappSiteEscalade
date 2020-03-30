@@ -17,34 +17,49 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Utilisateur implements Serializable{
-@Id @GeneratedValue
-private Long codeUtilisateur;
-@NotBlank
+	
+	/**
+	 * codeUtilisateur : id Utilisateur
+	 * nom : Pseudo de l'utilisateur
+	 * password : Mot de passe utilisateur
+	 * mail : Adresse e-mail de l'utilisateur
+	 * commentaires : collection de commentaire ecrit par l'utilisateur
+	 */
+	
+	
+	
+	@Id @GeneratedValue
+	private Long codeUtilisateur;
+	@NotBlank
 	private String nom;
-@NotBlank
-	private String passeword;
+	@NotBlank
+	private String password;
 	@Column(unique =true )
 	@NotBlank
 	private String mail;
-
-
-
+	@OneToMany(mappedBy="utilisateur",fetch=FetchType.LAZY)	
+	private Collection<Commentaires> commentaires;
 	
 	
-	@OneToMany(mappedBy="utilisateur",fetch=FetchType.LAZY)
-private Collection<Commentaires> commentaires;
+	
+	
 	public Utilisateur() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Utilisateur( String passeword,String nom, String mail) {
+	
+	
+	public Utilisateur( String password,String nom, String mail) {
 		super();
 		this.nom = nom;
 		this.mail = mail;
-		this.passeword=passeword;
+		this.password=password;
 	}
 
+	
+	
+	
 	public String getNom() {
 		return nom;
 	}
@@ -62,12 +77,12 @@ private Collection<Commentaires> commentaires;
 	}
 
 
-	public String getPasseword() {
-		return passeword;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPasseword(String passeword) {
-		this.passeword = passeword;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public Long getCodeUtilisateur() {
 		return codeUtilisateur;

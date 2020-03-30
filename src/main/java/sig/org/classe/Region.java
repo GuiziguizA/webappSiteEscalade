@@ -12,6 +12,16 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Region implements Serializable {
+	
+	
+	/**
+	 * codeRegion : id Region
+	 * nom : nom de la region
+	 * Collection<Topos> : Objet collection reliant la region au topos avec un lien OneToMany
+	 * topos : les topos de la region
+	 * siteEscalades : les sites d'escalades de la region
+	 */
+	
 	@Id  @GeneratedValue
 	private Long codeRegion;
 	private String nom;
@@ -19,11 +29,10 @@ public class Region implements Serializable {
 	private Collection<Topos> topos ;
 	/*
 	 * @OneToMany(mappedBy="region",fetch=FetchType.LAZY) private
-	 * Collection<SiteEscalade> siteEscalade; 
-	 * 
-	 * 
-	 * 
+	 * Collection<SiteEscalade> siteEscalades; 
 	 */
+	
+	
 	
 	public Region() {
 		super();

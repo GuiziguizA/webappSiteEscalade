@@ -24,12 +24,20 @@ import sig.org.dao.VoieRepository;
 @Service
 @Transactional
 public class VoieMetier implements Ivoie{
-@Autowired
+	@Autowired
 	private VoieRepository voieRepository;
-@Autowired
-private SiteEscaladeRepository siteRepository;
+	@Autowired
+	private SiteEscaladeRepository siteRepository;
 	
-
+	/**
+	 * Méthode de création d'une voie
+	 * 
+	 * @param site : SiteEscalade du repository correspondant a l'id du site
+	 * @param voie : Voie du repository correspondant au nom et au site
+	 * @param newEntity : objet Voie créé
+	 * 
+	 * @return newEntity 
+	 */
 
 	@Override	
 	public Voie createVoie(String nom, String cotation , String longueur,Long codeSiteEscalade) throws Exception {
@@ -55,6 +63,13 @@ private SiteEscaladeRepository siteRepository;
          
 	}
 
+	
+	/**
+	 * Méthode permettant de supprimer une voie
+	 * 
+	 * @voie : voie du repository correspondant a l'id
+	 * 
+	 */
 	@Override
 	public void deleteVoieById(Long codeVoie) throws Exception {
 		 Optional<Voie>voie = voieRepository.findById(codeVoie);
@@ -68,7 +83,13 @@ private SiteEscaladeRepository siteRepository;
 	    } 	
 	
 		
-	
+	/**
+	 * Methode affichant la Voie correspondant a l'id dans le repository
+	 * 
+	 * @param voie : voie correspondant a l'id
+	 * 
+	 * @return voie
+	 */
 
 	@Override
 	public Voie  getVoieById(Long id) throws RelationNotFoundException {
@@ -81,20 +102,37 @@ private SiteEscaladeRepository siteRepository;
         }
 
 	}
-
+	
+	/**
+	 * Methode affichant la liste de toutes les voies
+	 * 
+	 * @param voieList : liste de toute les voies du repository
+	 * 
+	 * @returnvoieList
+	 */
+	
 	@Override
-    public ArrayList<Voie> getAllVoie()
-    {
-        ArrayList<Voie> toposList = (ArrayList<Voie>) voieRepository.findAll();
+    public List<Voie> getAllVoie() throws Exception{
+       List<Voie> voieList = (ArrayList<Voie>) voieRepository.findAll();
          
-        if(toposList.size() > 0) {
-            return toposList;
-        } else {
-            return new ArrayList<Voie>();
-        }
+        if(voieList.isEmpty()) {
+        	throw new Exception("error");
+    
+        }else {
+        	 return voieList;
+             
+		}
+       
+        
     }
 
-	
+	/**
+	 * Méthode retournant une liste de voie en fonction de 3 critère pouvanrt etre null (name, cotation,longueur)
+	 * 
+	 * @param listVoieCritere : liste des voies en fonction des différents critères
+	 * 
+	 * @return listVoieCritère
+	 */
 	@Override
 	public ArrayList<Voie> getVoieCritere(String name, String cotation,String longueur) throws Exception {
 		ArrayList<Voie> listVoieCritere = voieRepository.findVoieByNomAndCotationAndLongueur(name, cotation, longueur);
@@ -109,8 +147,16 @@ private SiteEscaladeRepository siteRepository;
 		return listVoieCritere;
 	}
 	
-	
-@Override
+
+		/**
+		 *Methode retournant la liste des Voies d'un site
+		 *
+		 * @param site : site correspondant a l'id du site
+		 * @param listVoieSite : liste des voies du site 
+		 * 
+		 * @return listVoieSite
+		 */
+	@Override
 	public List<Voie> getSiteEscalade(Long codeSite)throws Exception{
 		Optional<SiteEscalade> site = siteRepository.findById(codeSite);
 		if(!site.isPresent()) {

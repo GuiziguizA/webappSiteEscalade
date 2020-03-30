@@ -12,8 +12,16 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Voie implements Serializable {
-@ Id @GeneratedValue
-private Long codeVoie;
+	
+	/**
+	 * codeVoie : id Voie
+	 * nom : Nom de la voie
+	 * longueur : Longueur de la voie 
+	 * cotation : difficulté de la voie 
+	 */
+	
+	@ Id @GeneratedValue
+	private Long codeVoie;
 	private String nom;
 	private String longueur;
 	private String cotation;
@@ -26,6 +34,9 @@ private Long codeVoie;
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
 	public Voie(String nom, String longueur, String cotation, SiteEscalade site) {
 		super();
 		this.nom = nom;
@@ -34,6 +45,10 @@ private Long codeVoie;
 		this.site = site;
 		
 	}
+	
+	
+	
+	
 	public String getNom() {
 		return nom;
 	}
