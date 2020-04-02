@@ -66,7 +66,7 @@ public class SiteControlleur {
 				// TODO Auto-generated catch block
 				model.addAttribute("exception",e);
 			}
-			return "siteList";
+			return "home";
 		}
 	}
 

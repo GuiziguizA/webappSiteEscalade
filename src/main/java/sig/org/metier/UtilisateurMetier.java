@@ -4,13 +4,16 @@ package sig.org.metier;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.management.relation.Role;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
 import sig.org.classe.Utilisateur;
+
 import sig.org.dao.UtilisateurRepository;
 
 
@@ -21,8 +24,9 @@ public class UtilisateurMetier implements Iutilisateur  {
 	
 	@Autowired
 	private UtilisateurRepository utilisateurRepository;
-	
-	
+
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	/**
 	 * Méthode créant un utilisateur
 	 * 
@@ -40,11 +44,11 @@ public class UtilisateurMetier implements Iutilisateur  {
 			System.out.println("Cette adresse e-mail est deja utilisé pour un compte Utilisateur");
 		}else {
 			
-			
 			user.setMail(mail);
-			user.setPassword(password);
+			user.setPassword(passwordEncoder.encode(password));
 			user.setNom(nom);
-			
+
+		
 		}
 	
 
@@ -104,4 +108,7 @@ public class UtilisateurMetier implements Iutilisateur  {
 		return utilisateur;
 	}
 
+	
+	
+	
 }

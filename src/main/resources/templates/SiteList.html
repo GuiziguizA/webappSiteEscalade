@@ -12,13 +12,15 @@
 </head>
  
 <body>
-<div layout:fragment="content">
-
-	<div>
-		<a th:href="@{/siteForm}"><input type="button"  style="color: green;"value="+Ajouter" /></a>
-	</div>
+	<div layout:fragment="content">
+		<h1>Liste des sites d'escalade</h1>
+	
+		<br>
+		<div>
+			<a th:href="@{/siteForm}"><input type="button"  style="color: green;"value="+Ajouter" /></a>
+		</div>
 		
-		
+		<br>
 	<div >
 		<table class="table table-stripped">
 			<tr>

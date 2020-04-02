@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Voie implements Serializable {
@@ -18,13 +19,18 @@ public class Voie implements Serializable {
 	 * nom : Nom de la voie
 	 * longueur : Longueur de la voie 
 	 * cotation : difficulté de la voie 
+	 * site : objet SiteEscalade
 	 */
 	
 	@ Id @GeneratedValue
 	private Long codeVoie;
+	@NotBlank(message = "nom est obligatoire")
 	private String nom;
+	@NotBlank(message = "La longueur est obligatoire")
 	private String longueur;
+	@NotBlank(message = "La cotation est obligatoire")
 	private String cotation;
+	
 	@ManyToOne
 	@JoinColumn(name="codeSite")
 	private SiteEscalade site;

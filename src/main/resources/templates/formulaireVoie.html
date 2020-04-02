@@ -15,7 +15,7 @@
 <body>
 
 <div layout:fragment="content">
-<form action="#" th:action="@{/ajouterTopos}" th:object="${voie}" method="post">
+<form action="#" th:action="@{/ajouterVoie}" th:object="${voie}" method="post">
     <label for="nom">Nom</label>
     <input type="text" th:field="*{nom}" id="nom" placeholder="Nom">
     <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
@@ -25,13 +25,16 @@
       <label for="longueur">longueur</label>
     <input type="text" th:field="*{longueur}" id="longueur" placeholder="longueur">
     <span th:if="${#fields.hasErrors('longueur')}" th:errors="*{longueur}"></span>
-   	<select >
-   		<option th:each="o:${listSiteEscalade}"  th:text="${o.nom}" th:value= "${o}">Utilisateur</option>
+   	<select th:field="*{site}">
+   		<option th:each="o:${listSiteEscalade}"  th:text="${o.nom}" th:value= "${o.codeSiteEscalade}">Site d'escalade</option>
    	</select>
     <input type="submit" value="Ajouter">   
     
 </form>
 	</div>
+	
+	
+
 	
 </body>
 </html>

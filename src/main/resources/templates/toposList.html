@@ -15,14 +15,16 @@
 <body>
 <div layout:fragment="content">
 
-<div>
+	<h1>Liste des topos</h1>
+	<br>
+
+	<div>
 		<a th:href="@{/consulterFormulaireTopos}"><input type="button"  style="color: green;"value="+Ajouter" /></a>
 	</div>
 		
+	<br>
 
-<h1>Liste des topos</h1>
-
-<div th:if = "${listTopos}">
+	<div th:if = "${listTopos}">
 		<table class="table table-stripped">
 			<tr>
 				<th>Nom</th><th>Description</th><th>Date de paruption</th><th>Utilisateur</th><th>Region</th><th>Statut</th>

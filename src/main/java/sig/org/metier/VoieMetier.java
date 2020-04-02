@@ -40,27 +40,20 @@ public class VoieMetier implements Ivoie{
 	 */
 
 	@Override	
-	public Voie createVoie(String nom, String cotation , String longueur,Long codeSiteEscalade) throws Exception {
-		Optional<SiteEscalade> site = siteRepository.findById(codeSiteEscalade);
+	public Voie createVoie(Voie voie) throws Exception {
+		
+		Optional<SiteEscalade> site = siteRepository.findBySite (voie.getSite());
 		if(!site.isPresent()) {
 			throw new Exception("Le site n'existe pas");
 		}
 		
 	
-		 Optional<Voie> voie =voieRepository.findVoieByNomAndSite(nom, site.get()); 
-		 if( voie.isPresent()) { 	
+		 Optional<Voie> voie1 =voieRepository.findVoieByNomAndSite(voie.getNom(), site.get()); 
+		 if( voie1.isPresent()) { 	
 			 throw new Exception("La voie  existe deja");
 			}
-		 
-		 
-			Voie  newEntity = new Voie();
-			newEntity.setCotation(cotation);
-           newEntity.setLongueur(longueur);
-           newEntity.setNom(nom);
-          newEntity.setSite(site.get());
-          
-          return voieRepository.save(newEntity);
-         
+		 voieRepository.save(voie);     
+		 return voie;
 	}
 
 	
@@ -112,18 +105,11 @@ public class VoieMetier implements Ivoie{
 	 */
 	
 	@Override
-    public List<Voie> getAllVoie() throws Exception{
-       List<Voie> voieList = (ArrayList<Voie>) voieRepository.findAll();
+    public List<Voie> getAllVoie(){
+       List<Voie> voieList =voieRepository.findAll();
          
-        if(voieList.isEmpty()) {
-        	throw new Exception("error");
     
-        }else {
-        	 return voieList;
-             
-		}
-       
-        
+        	 return voieList;   
     }
 
 	/**
@@ -159,6 +145,7 @@ public class VoieMetier implements Ivoie{
 	@Override
 	public List<Voie> getSiteEscalade(Long codeSite)throws Exception{
 		Optional<SiteEscalade> site = siteRepository.findById(codeSite);
+		
 		if(!site.isPresent()) {
 			throw new Exception("Le site n'existe pas");
 		}

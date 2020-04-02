@@ -6,40 +6,39 @@ package sig.org;
 import java.util.Date;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import sig.org.classe.Region;
+
 import sig.org.classe.SiteEscalade;
 import sig.org.classe.Utilisateur;
 import sig.org.classe.Voie;
 import sig.org.dao.RegionRepository;
+
 import sig.org.dao.SiteEscaladeRepository;
-import sig.org.dao.UtilisateurRepository;
+
 import sig.org.dao.VoieRepository;
-import sig.org.metier.Iutilisateur;
+
 import sig.org.metier.UtilisateurMetier;
-import sig.org.metier.VoieMetier;
+
 import sig.org.classe.Commentaires;
 
 import sig.org.classe.Topos;
 
 
+
 import sig.org.dao.CommentaireRepository;
-import sig.org.dao.RegionRepository;
-import sig.org.dao.SiteEscaladeRepository;
-import sig.org.dao.ToposRepository;
-import sig.org.dao.UtilisateurRepository;
-import sig.org.dao.VoieRepository;
+
 import sig.org.metier.ISiteEscalade;
-import sig.org.metier.Icommentaire;
+
 import sig.org.metier.Iregion;
 import sig.org.metier.Itopos;
-import sig.org.metier.Iutilisateur;
-import sig.org.metier.Ivoie;
 
+import sig.org.metier.Ivoie;
 
 
 
@@ -72,6 +71,7 @@ public class SiteEscaladeApplication implements CommandLineRunner {
 	@Autowired
 	private Ivoie voieMetier;
 	
+	
     public static void main(String[] args) {
         SpringApplication.run(SiteEscaladeApplication.class, args);
     }
@@ -79,7 +79,7 @@ public class SiteEscaladeApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		
+	
 		Region lyon=regionRepository.save(new Region("lyon"));
 		Region r1=regionRepository.save(new Region("r1"));
 		Region r2=regionRepository.save(new Region("r2"));
@@ -94,14 +94,14 @@ public class SiteEscaladeApplication implements CommandLineRunner {
 		Utilisateur u2=utilisateurMetier.createUtilisateur("u2", "mail2", "pw2");
 		Utilisateur u3=utilisateurMetier.createUtilisateur("u3", "mail3", "pw3");
 		Utilisateur u4=utilisateurMetier.createUtilisateur("u4", "mail4", "pw4");
-		
+		Utilisateur admin=utilisateurMetier.createUtilisateur("admin", "admin", "admin");
 		
 		siteMetier.createSiteEscalade(site);
-		voieRepository.save(new Voie("ddd","45","65",s1));
-		voieRepository.save(new Voie("ddddd","455","645",s1));
-		voieRepository.save(new Voie("dqqqdd","4dd5","6455",s1));
-		 voieRepository.save(new Voie("dgfdgdd","4d5","6hh5",s1));
-		voieRepository.save(new Voie("dgfdgdd","45ggf","6fgdg5",s1));
+		voieRepository.save(new Voie("ddd","longueur1","cotation1",s1));
+		voieRepository.save(new Voie("ddddd","longueur1","cotation1",s1));
+		voieRepository.save(new Voie("dqqqdd","longueur1","cotation1",s1));
+		 voieRepository.save(new Voie("dgfdgdd","4d5","cotation1",s1));
+		voieRepository.save(new Voie("dgfdgdd","45ggf","cotation1",s1));
 		commentaireRepository.save(new Commentaires(u1, new Date(), "description 1",s1));
 		commentaireRepository.save(new Commentaires(u1, new Date(), "description 2",s1));
 		commentaireRepository.save(new Commentaires(u1, new Date(), "description 3",s1));
@@ -111,9 +111,11 @@ public class SiteEscaladeApplication implements CommandLineRunner {
 		toposMetier.createTopos(new Topos("topos 4", "description 1","Date1",u4,"disponible",r3));
 		toposMetier.createTopos(new Topos("topos 5", "description 1","Date1",u4,"disponible",r4));
 		List<Voie>lv1= voieMetier.getAllVoie();
-		
+		Voie voie=new Voie("voi6", "longueur6", "cotation7", s3);
+		voieMetier.createVoie(voie);
+		List<Voie>listVVVVV=voieMetier.getVoieCritere(null, "cotation1","longueur1");
 		System.out.println(lv1);
-	
+		System.out.println(listVVVVV);
 		
 		
 	}

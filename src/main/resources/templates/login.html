@@ -1,43 +1,27 @@
-<!-- 
+
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://ultraq.net.nz/thymleaf/layout"
-	layout:decorator="template1">
+<html xmlns:th="http://www.thymeleaf.org">
  
 <head>
 <meta charset="utf-8"/>
-  <title>Login page</title> 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <title>Authentification</title> 
+	
 </head>
  
 <body>
 	
-	<div layout:fragment="content">
-	<br/><br/>
 
-
-<div id="container">  
-    <h2>Login page</h2>  
-    <form th:action="@{/login.html}" method="post">  
-        <label for="nom">Nom Utilisateur</label>  
-        <input type="text" id="nom" name="nom" autofocus="autofocus" />  
-        <label for="password">Mot de passe</label>  
-        <input type="password" id="password" name="password" />  
-        <input id="submit" type="submit" value="Log in" />  
-    </form>  
-    <p th:if="${loginError}" class="error">Utilisateur ou Mot de passe incorrect</p>  
-</div>  
-
-				<a href="http://localhost:8080/loginCreation">Inscription</a>
-			</div>
-			
-
+        <div>
+        <form th:action="@{/login}" method="post">
+            <div><label> mail <input type="text" name="username"/> </label></div>
+            <div><label> Password <input type="password" name="password"/> </label></div>
+            <div><input type="submit" value="login"/></div>
+        </form>
+  
+</div>
 	
 </body>
 </html>
 
 
 
- -->

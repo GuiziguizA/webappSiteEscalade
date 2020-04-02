@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import sig.org.classe.SiteEscalade;
 import sig.org.classe.Voie;
-
-public interface VoieRepository extends CrudRepository<Voie, Long> {
+@Repository
+public interface VoieRepository extends JpaRepository<Voie, Long> {
 	
 	
 	@Query("SELECT c FROM Voie c WHERE (:nom is null or c.nom = :nom)and(:site is null or c.site = :site)")

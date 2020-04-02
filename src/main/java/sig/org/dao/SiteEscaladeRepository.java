@@ -14,10 +14,11 @@ import sig.org.classe.SiteEscalade;
 public interface SiteEscaladeRepository extends JpaRepository<SiteEscalade, Long>{
 	
 	
-	@Query("SELECT u FROM SiteEscalade u WHERE  u.codeSiteEscalade=:x")	
-	public SiteEscalade  findByCodeSiteEscalade(@Param("x")Long codeSiteEscalade);
+	@Query("SELECT u FROM SiteEscalade u WHERE  u.codeSiteEscalade=:u")	
+	public SiteEscalade  findByCodeSiteEscalade(@Param("u")Long codeSiteEscalade);
 
 	public Optional<SiteEscalade>  findByAdresse(String adresse);
 	
-	
+	@Query("SELECT u FROM SiteEscalade u WHERE  u=:u")	
+	public Optional<SiteEscalade> findBySite(@Param("u")SiteEscalade site);
 }

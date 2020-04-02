@@ -11,26 +11,46 @@
 </head>
  
 <body>
-<div layout:fragment="content">
+	<div layout:fragment="content">
 
-	<div>
-		<a th:href="@{/consulterFormulaireVoie}"><input type="button"  style="color: green;"value="+Ajouter" /></a>
-	</div>
+		<h1>Listes des voies</h1>
 		
+		<br>
+		<div>
+			<a th:href="@{/consulterFormulaireVoie}"><input type="button"  style="color: green;"value="+Ajouter" /></a>
+		</div>
+		<br>
 		
-	<div >
-		<table class="table table-stripped">
-			<tr>
-				<th>Nom</th><th>longueur</th><th>Cotation</th>
-			</tr>
-			<tr th:each="o:${listVoie}" >
-				<td th:text="${o.nom}" ></td>
-				<td th:text="${o.longueur}" ></td>
-				<td th:text="${o.cotation}"></td>
-			</tr>
-		</table>
+		<div th:if=listVoie>
+			<table class="table table-stripped">
+				<tr>
+					<th>Nom</th><th>longueur</th><th>Cotation</th><th>Site</th>
+				</tr>
+				<tr th:each="o:${listVoie}" >
+					<td th:text="${o.nom}" ></td>
+					<td th:text="${o.longueur}" ></td>
+					<td th:text="${o.cotation}"></td>
+					<td th:text="${o.site.nom}"></td>
+				</tr>
+			</table>
+		</div>
+<div>	
+		<form th:action="/listCritère">
+		<select th:field="*{listVoieC.cotation}">
+   			<option th:each="o:${listVoieC}"  th:text="${o.cotation}" th:value= "${o.cotation}">Cotation</option>
+   		</select>
+   	
+   		 <select th:field="*{listVoieC.longueur}">
+   			<option th:each="o:${listVoieC}"  th:text="${o.longueur}" th:value= "${o.longueur}">longueur</option>
+  	 	</select> 
+   	
+   		<select th:field="*{listVoieC.nom}">
+   			<option th:each="o:${listVoieC}"  th:text="${o.nom}" th:value= "${o.nom}">Site d'escalade</option>
+   		</select>
+	</form>	
+	</div>	
 	</div>
-						
-</div>	
+
+	
 </body>
 </html>
