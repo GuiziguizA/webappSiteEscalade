@@ -22,6 +22,6 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long>{
 	public Optional< Utilisateur> findByMail(@Param("mail")String mail);
 
 	public Utilisateur findByMailAndPassword(String mail, String pw);
-
+	public Optional<Utilisateur> findByNom(String nom);
 	
 }

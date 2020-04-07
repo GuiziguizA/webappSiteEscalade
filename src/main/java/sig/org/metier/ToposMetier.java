@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import sig.org.classe.Topos;
+import sig.org.classe.Utilisateur;
 import sig.org.dao.ToposRepository;
 
 @Service
@@ -139,4 +140,56 @@ public class ToposMetier implements Itopos{
 	     
 	}	
 	
-}
+	
+	@Override
+    public List<Topos> getUtilisateurTopos(Utilisateur utilisateur){
+		
+        List<Topos> toposList = toposRepository.findByUtilisateur(utilisateur);
+         
+        if(toposList.size() > 0) {
+        
+        	return toposList;
+        
+        } else {
+        
+        	return new ArrayList<Topos>();
+        
+        }
+    
+	}
+	
+	@Override
+	public Topos getNomTopos (String nom) throws Exception {
+		
+		Optional<Topos> topos = toposRepository.findByNom(nom);
+		
+	    if(!topos.isPresent()) {
+        	
+        	throw new  Exception("le Topos existe pas");
+        	
+        }
+		return topos.get();
+		
+		
+	}
+	
+	@Override
+	public Topos getToposByCodeTopos (Long codeTopos) throws Exception {
+		
+		Optional<Topos> topos = toposRepository.findById(codeTopos);
+		
+	    if(!topos.isPresent()) {
+        	
+        	throw new  Exception("le Topos existe pas");
+        	
+        }
+		return topos.get();
+		
+		
+	}
+    
+	}
+	
+	
+	
+

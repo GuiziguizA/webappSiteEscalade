@@ -130,7 +130,22 @@ public class SiteControlleur {
 	  }
 	 
 		
-		
+	  @GetMapping("/deleteCommentaire/{id}") 
+	  public String deleteCommentaire(Model model, @PathVariable("id") long id ){
+		  
+		  try {
+			commentaireMetier.deleteCommentaireById(id);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	  
+			List<SiteEscalade> listSite=siteMetier.getSiteEscalade();
+			
+			model.addAttribute("listSite", listSite);  
+
+		  return "siteList";
+	  }		
 	
 	
 	

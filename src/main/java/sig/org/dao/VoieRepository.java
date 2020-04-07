@@ -20,10 +20,8 @@ public interface VoieRepository extends JpaRepository<Voie, Long> {
 	@Query("SELECT c FROM Voie c WHERE (:nom is null or c.nom = :nom)and(:site is null or c.site = :site)")
 	public Optional<Voie> findVoieByNomAndSite(@Param("nom")String nom,@Param("site")SiteEscalade site);
 	
-	@Query("SELECT c FROM Voie c WHERE (:nom is null or c.nom = :nom) and (:cotation is null"
-			  + " or c.cotation = :cotation)"+ "and (:longueur is null"
-					  + " or c.longueur = :longueur)")
-	public ArrayList<Voie> findVoieByNomAndCotationAndLongueur(@Param("nom")String nom,@Param("cotation")String cotation, @Param("longueur")String longueur );
+	@Query("SELECT c FROM Voie c WHERE  (:cotation is null"+ " or c.cotation = :cotation)"+ "and (:longueur is null"+ " or c.longueur = :longueur)")
+	public ArrayList<Voie> findVoieBySiteAndCotationAndLongueur(@Param("cotation")String cotation, @Param("longueur")String longueur );
 	
 	
 	public List<Voie> findBySite(Optional<SiteEscalade> site);

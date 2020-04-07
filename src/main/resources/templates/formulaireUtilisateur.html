@@ -14,42 +14,35 @@
  
 <body>
 
+
+
 <div layout:fragment="content">
 <div class="container pt-3">
  <div class="form-group">
  <div class="jumbotron text-center">
  
- <h2>Ajouter une Voie</h2>
+ <h2>INSCRIPTION</h2>
  </div>
  	</div>
- 	
-
-<form action="#" th:action="@{/ajouterVoie}" th:object="${voie}"method="post">
+ 	</div>
+ 	 <div class="container" >
+ 	 
+<form action="#" th:action="@{/ajouterUtilisateur}" th:object="${utilisateur}" method="post">
+   
     <input type="text" th:field="*{nom}" id="nom" class="form-control"placeholder="Nom">
     <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
-    <br>
-     <label for="nom">Cotation</label>
-   	<select  th:field="*{cotation}" >
-   		<option th:each="o:${listCotations}"  th:text="${o}" th:value= "${o}">Cotation</option>
-   	</select>
-   	<br>
-   	 <label for="nom">Longueur</label>
-   	 	<select  th:field="*{longueur}" >
-   		<option th:each="x:${listLongueurs}"  th:text="${o}" th: value= "${o}">Longueur</option>
-   	</select>
-   	<br>
-   	 <label for="nom">Site d'escalade</label>
-   	<select th:field="*{site}">
-   		<option th:each="o:${listSiteEscalade}"  th:text="${o.nom}" th:value= "${o.codeSiteEscalade}">Site d'escalade</option>
-   	</select>
-    <input type="submit" class="btn btn-primary" value="Ajouter">   
+     <br>
+    <input type="text" th:field="*{mail}" id="mail" class="form-control"placeholder="mail">
+    <span th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}"></span>
+  <br>
+    <input type="text" th:field="*{password}" id="password"class="form-control" placeholder="password">
+    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+      <br>
+    <input type="submit" class="btn btn-primary"value="Inscription">   
     
 </form>
 </div>
-
 	</div>
-	
-
 	
 </body>
 </html>

@@ -15,27 +15,41 @@
 <body>
 
 <div layout:fragment="content">
+<div class="container pt-3">
+ <div class="form-group">
+ <div class="jumbotron text-center">
+ 
+ <h2>Ajouter un site d'ecalade</h2>
+ </div>
+ 	</div>
+ 	</div>
+ 	 <div class="container" >
+  
 <form action="#" th:action="@{/ajoutSite}" th:object="${siteEscalade}" method="post">
-    <label for="nom">Nom</label>
-    <input type="text" th:field="*{nom}" id="nom" placeholder="Nom">
+    <br>
+    <input type="text" th:field="*{nom}" id="nom"class="form-control" placeholder="Nom">
     <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
-    <label for="mail">adresse </label>
-    <input type="text" th:field="*{adresse}" id="adresse" placeholder="adresse">
+   <br>
+    <input type="text" th:field="*{adresse}" id="adresse" class="form-control" placeholder="adresse">
     <span th:if="${#fields.hasErrors('adresse')}" th:errors="*{adresse}"></span>
-      <label for="">code Postal</label>
-    <input type="text" th:field="*{codePostal}" id="codePostal" placeholder="codePostal">
+      <br>
+    <input type="text" th:field="*{codePostal}" id="codePostal" class="form-control" placeholder="codePostal">
     <span th:if="${#fields.hasErrors('codePostal')}" th:errors="*{codePostal}"></span>
-      <label for="mail">description</label>
-    <input type="text" th:field="*{description}" id="description" placeholder="description">
+   <br>
+    <input type="text" th:field="*{description}" id="description" class="form-control" placeholder="description">
     <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
-     <label for="mail">Statut</label>
-    <input type="text" th:field="*{statut}" id="statut" placeholder="statut">
+  <br>
+    <input type="text" th:field="*{statut}" id="statut" class="form-control" placeholder="statut">
     <span th:if="${#fields.hasErrors('statut')}" th:errors="*{statut}"></span>
-    
-    <input type="submit" value="Add siteEscalade">   
+    <br>
+    <input type="submit" class="btn btn-primary" value="Ajouter">   
     
 </form>
-	</div>
+</div>
+</div>
+
+
+
 	
 </body>
 </html>

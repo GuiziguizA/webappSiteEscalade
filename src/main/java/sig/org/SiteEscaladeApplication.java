@@ -3,6 +3,8 @@ package sig.org;
 
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -11,9 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import sig.org.classe.Region;
-
+import sig.org.classe.Reservation;
 import sig.org.classe.SiteEscalade;
 import sig.org.classe.Utilisateur;
 import sig.org.classe.Voie;
@@ -26,13 +30,15 @@ import sig.org.dao.VoieRepository;
 import sig.org.metier.UtilisateurMetier;
 
 import sig.org.classe.Commentaires;
-
+import sig.org.classe.CotationClasse;
+import sig.org.classe.LongueurClasse;
 import sig.org.classe.Topos;
 
 
 
 import sig.org.dao.CommentaireRepository;
-
+import sig.org.metier.CustomUserDetailService;
+import sig.org.metier.IReservation;
 import sig.org.metier.ISiteEscalade;
 
 import sig.org.metier.Iregion;
@@ -70,7 +76,10 @@ public class SiteEscaladeApplication implements CommandLineRunner {
 	private Iregion regionMetier;
 	@Autowired
 	private Ivoie voieMetier;
-	
+	@Autowired
+	private IReservation reservationMetier;
+	@Autowired
+	private UserDetailsService userDetailsService;
 	
     public static void main(String[] args) {
         SpringApplication.run(SiteEscaladeApplication.class, args);
@@ -105,7 +114,7 @@ public class SiteEscaladeApplication implements CommandLineRunner {
 		commentaireRepository.save(new Commentaires(u1, new Date(), "description 1",s1));
 		commentaireRepository.save(new Commentaires(u1, new Date(), "description 2",s1));
 		commentaireRepository.save(new Commentaires(u1, new Date(), "description 3",s1));
-		toposMetier.createTopos(new Topos("topos 1", "description 1","Date1",u1,"disponible",lyon));
+		Topos t1 = toposMetier.createTopos(new Topos("topos 1", "description 1","Date1",u1,"disponible",lyon));
 		toposMetier.createTopos(new Topos("topos 2", "description 1","Date1",u2,"disponible",r1));
 		toposMetier.createTopos(new Topos("topos 3", "description 1","Date1",u3,"disponible",r2));
 		toposMetier.createTopos(new Topos("topos 4", "description 1","Date1",u4,"disponible",r3));
@@ -113,10 +122,27 @@ public class SiteEscaladeApplication implements CommandLineRunner {
 		List<Voie>lv1= voieMetier.getAllVoie();
 		Voie voie=new Voie("voi6", "longueur6", "cotation7", s3);
 		voieMetier.createVoie(voie);
-		List<Voie>listVVVVV=voieMetier.getVoieCritere(null, "cotation1","longueur1");
+		List<Voie>listVVVVV=voieMetier.getVoieCritere("cotation1","longueur1");
 		System.out.println(lv1);
 		System.out.println(listVVVVV);
 		
+		CotationClasse cotation=new CotationClasse();
+		List<String>listCotations=cotation.listCotation();
+		 LongueurClasse lg = new LongueurClasse();
+		 List<String>listLongueurs=lg.listLongueur();
+		
+		System.out.println(listCotations);
+		
+		System.out.println(listLongueurs);
+		
+		Reservation res1=reservationMetier.createReservation(new Reservation(t1 , u2, "demande",u1));
+		Reservation res2=reservationMetier.createReservation(new Reservation(t1 , u2, "demande",u1));
+		Reservation res3=reservationMetier.createReservation(new Reservation(t1 , u2, "demande",u1));
+		
+		
+		UserDetails user= userDetailsService.loadUserByUsername("mail1");
+	
+		System.out.println(user);
 		
 	}
 }

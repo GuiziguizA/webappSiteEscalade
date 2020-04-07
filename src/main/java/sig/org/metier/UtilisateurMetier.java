@@ -7,6 +7,10 @@ import java.util.Optional;
 import javax.management.relation.Role;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -108,7 +112,30 @@ public class UtilisateurMetier implements Iutilisateur  {
 		return utilisateur;
 	}
 
+	@Override
+	public String utilisateurConnecté() throws Exception {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		    String currentUserName = authentication.getName();
+		    return currentUserName;
 	
+			
 	
+		
+	}
+	
+	@Override
+	public Utilisateur getNom(String nom) throws Exception {
+		
+		Optional<Utilisateur>utilisateur=utilisateurRepository.findByNom(nom);
+		if (!utilisateur.isPresent()) {
+			throw new Exception("l'utilisateur n'existe pas");
+		}
+		
+	
+			
+	return utilisateur.get();
+		
+	}
 	
 }

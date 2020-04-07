@@ -120,8 +120,9 @@ public class VoieMetier implements Ivoie{
 	 * @return listVoieCritère
 	 */
 	@Override
-	public ArrayList<Voie> getVoieCritere(String name, String cotation,String longueur) throws Exception {
-		ArrayList<Voie> listVoieCritere = voieRepository.findVoieByNomAndCotationAndLongueur(name, cotation, longueur);
+	public List<Voie> getVoieCritere(String cotation,String longueur) throws Exception {
+		
+		List<Voie> listVoieCritere = voieRepository.findVoieBySiteAndCotationAndLongueur( cotation, longueur);
 		
 		if (listVoieCritere.isEmpty()) {
 			 throw new Exception("Saisissez au moins un critere de selection");

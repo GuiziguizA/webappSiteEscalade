@@ -13,12 +13,14 @@
  
 <body>
 
-
-
-		<div layout:fragment="content">	
-		
-		<h1>Details du site</h1>
-		
+	<div layout:fragment="content">
+	<div class="container pt-3">
+ <div class="form-group">
+ <div class="jumbotron text-center">
+		<h1> sites d'escalade</h1>
+	</div>
+		<br>
+	<h2>Detail du site</h2>	
 <div class="card" style="width: 18rem;">
   <ul class="list-group list-group-flush">
     <li class="list-group-item" th:text="${siteEscalade.nom}"></li>
@@ -28,16 +30,17 @@
         <li class="list-group-item"th:text="${siteEscalade.statut}"></li>
   </ul>
 </div>
+	</div>
 	
 	
-	
-	
+	<div class="form-group">
 		
 					<div th:if="${listVoie}">
 				<h2>Liste des voies du site</h2>
-			<table class="table table-stripped">
+				<div  class="list-group">
+			<table class="table table-striped">
 				<tr>
-				<th>Nom</th><th>longueur</th><th>cotation</th>
+				<th scope="col">Nom</th><th scope="col">longueur</th><th scope="col">cotation</th>
 				</tr>
 				<tr th:each="o:${listVoie}" >
 				<td th:text="${o.nom}" ></td>
@@ -47,32 +50,34 @@
 				
 				</tr>
 				</table>
-	            
+	            </div>
 	
 	</div>
-						
-		
+					</div>	
+		<div class="form-group">
 			<div th:if="${listCommentaires}">
 				<h2>Liste des Commentaires du site</h2>
-			<table class="table table-stripped">
+				<div  class="list-group">
+			<table class="table table-striped">
 				<tr>
-				<th>Utilisateur</th><th>Date</th><th>Description</th>
+				<th scope="col">Utilisateur</th><th scope="col">Date</th><th scope="col">Description</th><th scope="col"></th>
 				</tr>
 				
 				<tr th:each="o:${listCommentaires}" >
 				<td th:text="${o.utilisateur.nom}" ></td>
 				<td th:text="${o.date}" ></td>
 				<td th:text="${o.description}" ></td>
-					
+				<td><a th:href="@{/deleteCommentaire/{id}(id=${o.codeCommentaire})}"><input  type="button"  id="${o.codeCommentaire}"  class="btn btn-primary" value="Supprimer" /></a></td>	
 				
 				
 				
 				</tr>
 				</table>
-	            
+	            </div>
 	
 	</div>
-	
+	</div>
+	</div>
 </div>	
 </body>
 </html>

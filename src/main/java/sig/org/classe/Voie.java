@@ -26,9 +26,9 @@ public class Voie implements Serializable {
 	private Long codeVoie;
 	@NotBlank(message = "nom est obligatoire")
 	private String nom;
-	@NotBlank(message = "La longueur est obligatoire")
+
 	private String longueur;
-	@NotBlank(message = "La cotation est obligatoire")
+
 	private String cotation;
 	
 	@ManyToOne

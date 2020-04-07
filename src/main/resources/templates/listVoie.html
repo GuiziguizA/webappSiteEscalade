@@ -12,19 +12,25 @@
  
 <body>
 	<div layout:fragment="content">
+<div class="container pt-3">
+<div class="form-group">
+ 	<div class="jumbotron text-center">
 
 		<h1>Listes des voies</h1>
-		
+		</div>
 		<br>
 		<div>
-			<a th:href="@{/consulterFormulaireVoie}"><input type="button"  style="color: green;"value="+Ajouter" /></a>
+			<a th:href="@{/consulterFormulaireVoie}"><input type="button"  class="btn btn-primary" value="+Ajouter" /></a>
 		</div>
 		<br>
 		
-		<div th:if=listVoie>
-			<table class="table table-stripped">
+		<div th:if=${listVoie}>
+			<table class="table table-striped">
 				<tr>
-					<th>Nom</th><th>longueur</th><th>Cotation</th><th>Site</th>
+					<th scope="col">Nom</th>
+					<th scope="col">longueur</th>
+					<th scope="col">Cotation</th>
+					<th scope="col">Site</th>
 				</tr>
 				<tr th:each="o:${listVoie}" >
 					<td th:text="${o.nom}" ></td>
@@ -35,22 +41,39 @@
 			</table>
 		</div>
 <div>	
-		<form th:action="/listCritère">
-		<select th:field="*{listVoieC.cotation}">
-   			<option th:each="o:${listVoieC}"  th:text="${o.cotation}" th:value= "${o.cotation}">Cotation</option>
+		<form th:action="@{/consulterVoie}" >
+		<select >
+   			<option th:each="o:${listVoie}"  th:text="${o.cotation}" th:value= "${o.cotation}">Cotation</option>
    		</select>
    	
-   		 <select th:field="*{listVoieC.longueur}">
-   			<option th:each="o:${listVoieC}"  th:text="${o.longueur}" th:value= "${o.longueur}">longueur</option>
+   		 <select >
+   			<option th:each="o:${listVoie}"  th:text="${o.longueur}" th:value= "${o.longueur}">longueur</option>
   	 	</select> 
    	
-   		<select th:field="*{listVoieC.nom}">
-   			<option th:each="o:${listVoieC}"  th:text="${o.nom}" th:value= "${o.nom}">Site d'escalade</option>
-   		</select>
+   		
+   		 <input type="submit"  class="btn btn-primary" value="Rechercher">  
 	</form>	
 	</div>	
 	</div>
 
-	
+<div th:if="${listCritere}">
+	<table class="table table-stripped">
+				<tr>
+					<th scope="col">Nom</th>
+					<th scope="col">longueur</th>
+					<th scope="col">Cotation</th>
+					<th scope="col">Site</th>
+				</tr>
+				<tr th:each="o:${listCritere}" >
+					<td th:text="${o.nom}" ></td>
+					<td th:text="${o.longueur}" ></td>
+					<td th:text="${o.cotation}"></td>
+					<td th:text="${o.site.nom}"></td>
+					
+				</tr>
+			</table>
+</div>
+	</div>
+	</div>
 </body>
 </html>

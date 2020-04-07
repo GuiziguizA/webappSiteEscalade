@@ -39,6 +39,11 @@ public class Utilisateur{
 	private String mail;
 	@OneToMany(mappedBy="utilisateur",fetch=FetchType.LAZY)	
 	private Collection<Commentaires> commentaires;
+	@OneToMany(mappedBy="utilisateur",fetch=FetchType.LAZY)	
+	private Collection<Reservation>reservations;
+	
+	@OneToMany(mappedBy="utilisateur",fetch=FetchType.LAZY)	
+	private Collection<Reservation>reservationsT;
 	
 	
 	

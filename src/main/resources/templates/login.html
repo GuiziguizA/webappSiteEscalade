@@ -5,21 +5,37 @@
 <head>
 <meta charset="utf-8"/>
   <title>Authentification</title> 
-	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
  
 <body>
 	
 
-        <div>
+
+<div class="border">
+<div class="container pt-3">
+ <div class="form-group">
+ <div class="jumbotron text-center">
+ <h2>Connexion</h2>
+ 	<div class="form-group">
         <form th:action="@{/login}" method="post">
-            <div><label> mail <input type="text" name="username"/> </label></div>
-            <div><label> Password <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="login"/></div>
+            <div><input type="text" class="form-control" name="username"placeholder="Saisir email"/> </div>
+            <br>
+            <div> <input type="password" class="form-control" name="password"placeholder="Saisir Mot de passe"/> </div>
+         	 <br>
+            <div><input type="submit" value="Connexion"class="btn btn-primary"/></div>
         </form>
-  
+        <br>
+        <a  th:href ="@{/consulterFormulaireUtilisateur}">Inscription</a>
+        
+  </div>
+  </div>
+  </div>
+  </div>
 </div>
-	
+	 	
 </body>
 </html>
 

@@ -13,18 +13,22 @@
  
 <body>
 	<div layout:fragment="content">
+	<div class="container pt-3">
+ <div class="form-group">
+ <div class="jumbotron text-center">
 		<h1>Liste des sites d'escalade</h1>
-	
+	</div>
 		<br>
 		<div>
-			<a th:href="@{/siteForm}"><input type="button"  style="color: green;"value="+Ajouter" /></a>
+			<a th:href="@{/siteForm}"><input type="button" class="btn btn-primary"value="+Ajouter" /></a>
 		</div>
 		
 		<br>
-	<div >
-		<table class="table table-stripped">
+	
+	<div  class="list-group">
+		<table class="table table-striped">
 			<tr>
-				<th>Nom</th><th>adresse</th><th>Code Postal</th><th>Commentaire</th><th>Statut</th>
+				<th scope="col">Nom</th><th scope="col">adresse</th><th scope="col">Code Postal</th><th scope="col">Commentaire</th><th scope="col">Statut</th><th scope="col"></th>
 			</tr>
 			<tr th:each="o:${listSite}" >
 				<td th:text="${o.nom}" ></td>
@@ -32,11 +36,13 @@
 				<td th:text="${o.codePostal}"></td>
 				<td th:text="${o.description}"></td>
 				<td th:text="${o.statut}"></td>
-				<td><a th:href="@{/consulterSiteDetails/{id}(id=${o.codeSiteEscalade})}"><input type="button"  id="${o.codeSiteEscalade}"  style="color: green;"value="Consulter" /></a></td>
+				<td><a th:href="@{/consulterSiteDetails/{id}(id=${o.codeSiteEscalade})}"><input type="button"  id="${o.codeSiteEscalade}" class="btn btn-primary" value="Consulter" /></a></td>
 				
 			</tr>
 		</table>
 	</div>
-						
+
+				</div>
+				</div>		
 </div>	
 </body>

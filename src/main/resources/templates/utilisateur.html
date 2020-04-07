@@ -15,20 +15,26 @@
  
 <body>
 <div layout:fragment="content">
+<div class="container pt-3">
+<div class="form-group">
+ 	<div class="jumbotron text-center">
 	<h1>Liste des Utilisateurs</h1>
-		
+		</div>
+		<br>
 	<div >
-		<table class="table table-stripped">
+		<table class="table table-striped">
 			<tr>
-				<th>Nom</th><th>Adresse e-mail</th>
+				<th scope="col">Nom</th>
+				<th scope="col">Adresse e-mail</th>
 			</tr>
-			<tr th:each="o:${utilisateurList}" >
+			<tr th:each="o:${listUtilisateur}" >
 				<td th:text="${o.nom}" ></td>
 				<td th:text="${o.mail}" ></td>
 			</tr>
 		</table>
 	</div>
-	
+	</div>
+	</div>
 </div>
 </body>
 </html>

@@ -16,4 +16,6 @@ public interface Iutilisateur {
 	public Utilisateur connectionUtilisateur(String mail, String pw) throws Exception;
 	public Optional<Utilisateur> findByEmail(String mail);
 	public List<Utilisateur>findAllUtilisateur();
+	public String utilisateurConnecté() throws Exception;
+	public Utilisateur getNom(String nom) throws Exception;
 }

@@ -14,20 +14,30 @@
  
 <body>
 <div layout:fragment="content">
-
-	<h1>Liste des topos</h1>
+<div class="container pt-3">
+<div class="form-group">
+ 	<div class="jumbotron text-center">
+		<h1>Liste des topos</h1>
+	</div>
 	<br>
 
 	<div>
-		<a th:href="@{/consulterFormulaireTopos}"><input type="button"  style="color: green;"value="+Ajouter" /></a>
+		<a th:href="@{/consulterFormulaireTopos}"><input type="button" class="btn btn-primary"value="+Ajouter" /></a>
 	</div>
 		
 	<br>
 
-	<div th:if = "${listTopos}">
-		<table class="table table-stripped">
+	<div  class="list-group" th:if = "${listTopos}">
+	
+		<table class="table table-striped">
 			<tr>
-				<th>Nom</th><th>Description</th><th>Date de paruption</th><th>Utilisateur</th><th>Region</th><th>Statut</th>
+				<th scope="col">Nom</th>
+				<th scope="col">Description</th>
+				<th  scope="col">Date de paruption</th>
+				<th  scope="col">Utilisateur</th>
+				<th  scope="col">Region</th>
+				<th  scope="col">Statut</th>
+				<th  scope="col"></th>
 			</tr>
 			<tr th:each="o:${listTopos}" >
 				<td th:text="${o.nom}" ></td>
@@ -36,11 +46,65 @@
 				<td th:text="${o.utilisateur.nom}" ></td>
 				<td th:text="${o.region.nom}" ></td>		
 				<td th:text="${o.statut}" ></td>		
+				<td><a th:href="@{/creerReservation/{id}(id=${o.codeTopos})}"><input  type="button"  id="${o}"  th:if="${o.statut='disponible'}" class="btn btn-primary" value="Demande de Reservation" /></a></td>
+			</tr>
+		</table>
+	</div>
+	
+	
+<br>
+<h2>Topos possédés</h2>
+	<br>
+
+	<div class="list-group" th:if = "${listToposPossede}">
+		<table class="table table-striped">
+			<tr>
+				<th scope="col">Nom</th>
+				<th scope="col">Description</th>
+				<th scope="col">Date de paruption</th>
+				<th scope="col">Utilisateur</th>
+				<th scope="col">Region</th>
+				<th scope="col">Statut</th>
+			</tr>
+			<tr th:each="o:${listToposPossede}" >
+				<td th:text="${o.nom}" ></td>
+				<td th:text="${o.description}" ></td>
+				<td th:text="${o.dateDeParuption}" ></td>
+				<td th:text="${o.utilisateur.nom}" ></td>
+				<td th:text="${o.region.nom}" ></td>		
+				<td th:text="${o.statut}" ></td>		
+				
+				
 			</tr>
 		</table>
 	</div>
 
+<br>
+	<h2>Demande de reservation</h2>
+<br>
 
+	<div th:if = "${listReservationTopos}">
+		<table class="table table-striped">
+			<tr>
+				<th scope="col">Topos</th>
+				<th scope="col">Utilisateur Possédant le Topos</th>
+				<th scope="col">Utilisateur demande</th>
+				<th scope="col">Statut</th>
+				<th scope="col"></th>
+				<th scope="col"></th>
+			</tr>
+			<tr th:each="o:${listReservationTopos}" >
+				<td th:text="${o.topos.nom}" ></td>
+				<td th:text="${o.utilisateurP.nom}" ></td>
+				<td th:text="${o.utilisateur.nom}" ></td>
+				<td th:text="${o.statut}" ></td>
+				<td><a th:href="@{/deleteReservation/{id}(id=${o.codeReservation})}"><input  type="button"  id="${o.codeReservation}"  class="btn btn-primary"value="Supprimer" /></a></td>
+				<td><a th:href="@{/updateToposAndDeleteReservation/{id}(id=${o.codeReservation})}"><input  type="button"  id="${o.codeReservation}"  class="btn btn-primary"value="Valider" /></a></td>
+			</tr>
+		</table>
+	</div>
+	</div>
+	</div>
 </div>
 </body>
 </body>
