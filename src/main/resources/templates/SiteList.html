@@ -24,18 +24,67 @@
 		</div>
 		
 		<br>
+		
+		<div>	
+		<form th:action="@{/consulterSiteCritere}"  th:object="${siteEscalade}" method="post">
+		
 	
-	<div  class="list-group">
+   	
+   	  <label for="nom">Region</label>
+   	  
+   	<select th:field="*{region}">
+   	<option th:text="vide" th:value =null></option>
+   		<option th:each="o:${listRegion}"  th:text="${o.nom}" th:value= "${o.codeRegion}"></option>
+   	</select >
+   	
+   	 <label for="nom">Nombre de voies</label>
+   	 
+   		<select th:field="*{nombreDeVoie}">
+   			<option th:text="vide" th:value =null></option>
+   		<option th:each="o:${listnbreVoies}"  th:text="${o.nom}" th:value= "${o.nom}"></option>
+   	</select>
+ 
+   		 <label for="nom">Nombre de secteurs</label>
+   		 	
+   		<select th:field="*{nombreDeSecteur}">
+   		<option th:text="vide" th:value = null></option>
+   		<option th:each="o:${listnbreSecteur}"  th:text="${o.nom}" th:value= "${o.nom}"></option>
+   	</select>
+   	
+  <label for="nom">Longueur Max</label>
+   		<select th:field="*{longueurMax}">
+   			<option th:text="vide" th:value =null></option>
+   		<option th:each="o:${listLongueurs}"  th:text="${o.nom}" th:value= "${o.nom}"></option>
+   	</select>
+   	
+  <label for="nom">Cotation Max</label>
+   		<select th:field="*{cotationMax}">
+   		<option th:text="vide" th:value =null></option>
+   		<option th:each="o:${listCotation}"  th:text="${o.nom}" th:value= "${o.nom}"></option>
+   	</select>
+ 
+   		 <input type="submit"  class="btn btn-primary" value="Rechercher">  
+	</form>	
+	</div>
+	
+	<div  class="list-group" th:if ="${listSiteCritere}">
 		<table class="table table-striped">
 			<tr>
-				<th scope="col">Nom</th><th scope="col">adresse</th><th scope="col">Code Postal</th><th scope="col">Commentaire</th><th scope="col">Statut</th><th scope="col"></th>
+				<th scope="col">Nom</th>
+				<th scope="col">Region</th>
+				<th scope="col">Nombre de Voies</th>
+				<th scope="col">Nombre de decteurs</th>
+				<th scope="col">Longueur Max</th>
+				<th scope="col">Cotation Max</th>
+				<th scope="col"></th>
 			</tr>
-			<tr th:each="o:${listSite}" >
+			<tr th:each="o:${listSiteCritere}" >
 				<td th:text="${o.nom}" ></td>
-				<td th:text="${o.adresse}" ></td>
-				<td th:text="${o.codePostal}"></td>
-				<td th:text="${o.description}"></td>
-				<td th:text="${o.statut}"></td>
+				<td th:text="${o.region.nom}" ></td>
+				<td th:text="${o.nombreDeVoie}"></td>
+				<td th:text="${o.nombreDeSecteur}"></td>
+				<td th:text="${o.longueurMax}"></td>
+				<td th:text="${o.cotationMax}"></td>
 				<td><a th:href="@{/consulterSiteDetails/{id}(id=${o.codeSiteEscalade})}"><input type="button"  id="${o.codeSiteEscalade}" class="btn btn-primary" value="Consulter" /></a></td>
 				
 			</tr>

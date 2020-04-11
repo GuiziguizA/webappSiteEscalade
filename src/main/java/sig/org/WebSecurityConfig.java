@@ -23,13 +23,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-			.authorizeRequests().antMatchers("/css/**", "/js/**", "/webjars/**").permitAll()
+			.authorizeRequests().antMatchers("/css/**", "/js/**", "/webjars/**","/consulterFormulaireUtilisateur","/ajouterUtilisateur").permitAll()
 				.anyRequest().authenticated()
 				.and()
 				.formLogin()
 				.loginPage("/login")
-				.permitAll();
-				
+				.permitAll()
+		.defaultSuccessUrl("/consulterHome")
+		.and()
+		.logout()
+		.logoutSuccessUrl("/login");
 			
 		
 	}

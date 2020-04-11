@@ -18,7 +18,7 @@ public interface Itopos {
 
 	public Topos createTopos(Topos topos);
 
-	public Topos updateStatutTopos(Long codeTopos, String statut) throws Exception;
+	public Topos updateStatutTopos(Topos topos) throws Exception;
 
 
 
@@ -27,5 +27,7 @@ public interface Itopos {
 	public Topos getNomTopos(String nom) throws Exception;
 
 	public Topos getToposByCodeTopos(Long codeTopos) throws Exception;
+
+	
 	
 }

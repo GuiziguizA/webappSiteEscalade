@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 
 
 
@@ -29,6 +30,7 @@ public class Commentaires implements Serializable{
 	@ManyToOne
 	@JoinColumn
 	private Utilisateur utilisateur;
+	@NotBlank(message = "la description est obligatoire")
 	private String description;	
 	@ManyToOne
 	@JoinColumn

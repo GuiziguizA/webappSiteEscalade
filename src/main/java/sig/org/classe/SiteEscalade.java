@@ -43,12 +43,19 @@ public class SiteEscalade {
 	private String description;
 	 @NotBlank(message = "le statut est obligatoire")
 	private String statut;
+	 
+	 private String nombreDeVoie;
+	 private String nombreDeSecteur;
+	 private String cotationMax;
+	 private String longueurMax;
+
+	  @ManyToOne
+	  private Region region;
+	 
 	/*
-	 * @ManyToOne private Region region;
+	 * @OneToMany(mappedBy="site",fetch=FetchType.LAZY) private Collection<Voie>
+	 * voies;
 	 */
-	@OneToMany(mappedBy="site",fetch=FetchType.LAZY)
-	private Collection<Voie> voies;
-	
 	
 	@OneToMany(mappedBy="site",fetch=FetchType.LAZY)
 	private Collection<Commentaires> commentaires;
@@ -59,16 +66,32 @@ public class SiteEscalade {
 	}
 
 
-	public SiteEscalade(String nom,String adresse, String codePostal, String description,String statut) {
+	public SiteEscalade(String nom,String adresse, String codePostal, String description,String statut,String nombreDeVoie, String nombreDeSecteur,String cotationMax,Region region, String longueurMax) {
 		super();
 		this.adresse = adresse;
 		this.codePostal = codePostal;
 		this.description = description;
-		/*
-		 * this.region = region;
-		 */		this.statut = statut;
-		this.nom=nom;
+		this.nombreDeVoie=nombreDeVoie;
+		this. nombreDeSecteur= nombreDeSecteur;
+		this.cotationMax=cotationMax;
+		 this.region = region;
+		 this.statut = statut;
+		 this.nom=nom;
+		 this.longueurMax=longueurMax;
+		
 	}
+
+
+	public String getLongueurMax() {
+		return longueurMax;
+	}
+
+
+	public void setLongueurMax(String longueurMax) {
+		this.longueurMax = longueurMax;
+	}
+
+
 
 
 	public String getAdresse() {
@@ -100,24 +123,20 @@ public class SiteEscalade {
 		this.description = description;
 	}
 
-	/*
-	 * public Region getRegion() { return region; }
-	 * 
-	 * 
-	 * public void setRegion(Region region) { this.region = region; }
-	 */
-
-	public Collection<Voie> getVoies() {
-		return voies;
-	}
-
-
-	public void setVoies(Collection<Voie> voies) {
-		this.voies = voies;
-	}
-
-
 	
+	  public Region getRegion() { return region; }
+	  
+	  
+	  public void setRegion(Region region) { this.region = region; }
+	 
+	/*
+	 * public Collection<Voie> getVoies() { return voies; }
+	 * 
+	 * 
+	 * public void setVoies(Collection<Voie> voies) { this.voies = voies; }
+	 * 
+	 * 
+	 */
 
 
 	public String getStatut() {
@@ -142,6 +161,53 @@ public class SiteEscalade {
 	
 	public Long getCodeSiteEscalade() {
 		return codeSiteEscalade;
+	}
+
+
+	public String getNombreDeVoie() {
+		return nombreDeVoie;
+	}
+
+
+	public void setNombreDeVoie(String nombreDeVoie) {
+		this.nombreDeVoie = nombreDeVoie;
+	}
+
+
+	public String getNombreDeSecteur() {
+		return nombreDeSecteur;
+	}
+
+
+	public void setNombreDeSecteur(String nombreDeSecteur) {
+		this.nombreDeSecteur = nombreDeSecteur;
+	}
+
+
+
+
+	public String getCotationMax() {
+		return cotationMax;
+	}
+
+
+	public void setCotationMax(String cotationMax) {
+		this.cotationMax = cotationMax;
+	}
+
+
+	public void setCodeSiteEscalade(Long codeSiteEscalade) {
+		this.codeSiteEscalade = codeSiteEscalade;
+	}
+
+
+	public Collection<Commentaires> getCommentaires() {
+		return commentaires;
+	}
+
+
+	public void setCommentaires(Collection<Commentaires> commentaires) {
+		this.commentaires = commentaires;
 	}
 
 	

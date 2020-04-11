@@ -181,8 +181,9 @@ public String voirFormulaire(Topos topos,Model model) {
 
 
 @PostMapping("/ajouterTopos")
-public String AjouterUnTopos(Model model,@Valid Topos topos, BindingResult result) {
-	
+public String AjouterUnTopos(Model model,@Valid Topos topos, BindingResult result,Principal principal) {
+	 String name = principal.getName();
+	 Optional<Utilisateur> user = utilisateurMetier.findByEmail(name);
 	List<Utilisateur>listUtilisateur = utilisateurMetier.findAllUtilisateur();
 	model.addAttribute("listUtilisateur",listUtilisateur);
 	
@@ -196,18 +197,63 @@ public String AjouterUnTopos(Model model,@Valid Topos topos, BindingResult resul
     }else {
      
  try {
+	 String name1 = principal.getName();
+	 Optional<Utilisateur> user1 = utilisateurMetier.findByEmail(name);
+	 topos.setUtilisateur(user1.get());
 	toposMetier.createTopos(topos);
 	 model.addAttribute("topos",topos );
 	   
 } catch (Exception e) {
 	// TODO Auto-generated catch block
 	model.addAttribute("exception",e);
+	
 }
-	return "home";
+ 
+
+ 
+List<Topos>listTopos=toposMetier.getAllTopos();
+model.addAttribute("listTopos",listTopos);
+
+	
+	  List<Topos>listToposPossede=toposMetier.getUtilisateurTopos(user.get());
+	  model.addAttribute("listToposPossede",listToposPossede);
+	 
+	  
+	  List<Reservation>listReservationTopos=reservationMetier.listReservationUnUtilisateur(user.get());
+	  model.addAttribute("listReservationTopos",listReservationTopos);
+	return "toposList";
 	}
 }
 
 
+@GetMapping("/updateTopos/{id}")
+public String updateTopos(@PathVariable("id") long id,Model model,Principal principal) {
+	String name = principal.getName();
+	 
+	 Optional<Utilisateur> user = utilisateurMetier.findByEmail(name);	
+	try {
+		Topos topos=toposMetier.getToposByCodeTopos(id);
+		toposMetier.updateStatutTopos(topos);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	
+	  
+	  List<Reservation>listReservationTopos=reservationMetier.listReservationUnUtilisateur(user.get());
+	  model.addAttribute("listReservationTopos",listReservationTopos);
+	  
+	  List<Topos>listTopos=toposMetier.getAllTopos();
+		model.addAttribute("listTopos",listTopos);
+		
+			
+			  List<Topos>listToposPossede=toposMetier.getUtilisateurTopos(user.get());
+			  model.addAttribute("listToposPossede",listToposPossede);
+	  
+	return  "toposList";
+	
+}
 
 
 

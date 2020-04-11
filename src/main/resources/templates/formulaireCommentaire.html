@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://ultraq.net.nz/thymleaf/layout"
+	layout:decorator="template1">
+ 
+ 
+<head>
+<meta charset="utf-8"/>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+ 
+<body>
+
+<div layout:fragment="content">
+<div class="container pt-3">
+ <div class="form-group">
+ <div class="jumbotron text-center">
+ 
+ <h2>Ajouter un site d'ecalade</h2>
+ </div>
+ 	</div>
+ 	</div>
+	<form action="@{/ajouterCommentaire/{id}(id=${siteEscalade.codeSiteEscalade})}"  th:object="${commentaires}" method="post">
+	
+	   <input type="text" th:field="*{description}" id="description" class="form-control"placeholder="Ajouter un commentaire">
+    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+     <br>
+	<input type="submit" class="btn btn-primary" id="siteEscalade.codeSiteEscalade"value="Ajouter">
+	
+	</form>
+  
+
+</div>
+
+
+
+	
+</body>
+</html>

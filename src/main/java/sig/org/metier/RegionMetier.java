@@ -29,7 +29,7 @@ public class RegionMetier implements Iregion {
 	
 	public List<Region> getAllRegion() {
 			
-		List<Region>listRegion= (List<Region>) regionRepository.findAll();
+		List<Region>listRegion=regionRepository.findAll();
 		
 	
 		

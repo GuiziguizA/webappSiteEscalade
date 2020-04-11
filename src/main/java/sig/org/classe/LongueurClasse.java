@@ -11,16 +11,16 @@ public class LongueurClasse {
 	
 	
 	
-	public  List<String> listLongueur(){
+	public  List<Longueur> listLongueur(){
 		
-		List<String> listLongueurs = new ArrayList<>();
+		List<Longueur> listLongueurs = new ArrayList<>();
 		
-		 listLongueurs.add(Longueur.longueur1.getNom());
-		 listLongueurs.add(Longueur.longueur2.getNom());
-		 listLongueurs.add(Longueur.longueur3.getNom());
-		 listLongueurs.add(Longueur.longueur4.getNom());
-		 listLongueurs.add(Longueur.longueur5.getNom());
-		 listLongueurs.add(Longueur.longueur6.getNom());
+		 listLongueurs.add(Longueur.longueur1);
+		 listLongueurs.add(Longueur.longueur2);
+		 listLongueurs.add(Longueur.longueur3);
+		 listLongueurs.add(Longueur.longueur4);
+		 listLongueurs.add(Longueur.longueur5);
+		 listLongueurs.add(Longueur.longueur6);
 		
 		return  listLongueurs;
 		

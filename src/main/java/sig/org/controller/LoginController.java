@@ -31,7 +31,7 @@ public class LoginController {
 
 
 
-@GetMapping("/ajouterUtilisateur")
+@PostMapping("/ajouterUtilisateur")
 public String ajoutSite(@Valid Utilisateur utilisateur, BindingResult result) {
 	if (result.hasErrors()) {
 		return "formulaireUtilisateur";

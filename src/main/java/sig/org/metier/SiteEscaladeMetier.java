@@ -10,7 +10,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import sig.org.classe.Region;
 import sig.org.classe.SiteEscalade;
+
 import sig.org.dao.SiteEscaladeRepository;
 
 
@@ -34,13 +36,14 @@ public class SiteEscaladeMetier implements ISiteEscalade{
 
 	@Override
 	public SiteEscalade  createSiteEscalade(SiteEscalade site) throws RelationNotFoundException{
-
+		
 		Optional<SiteEscalade>site1=siteRepository.findByAdresse(site.getAdresse());
 
 		if(site1.isPresent()) {
 			throw new RelationNotFoundException("le site existe deja");
 
 		} else {
+			
 			return  siteRepository.save(site);
 		}
 	}
@@ -97,4 +100,25 @@ public class SiteEscaladeMetier implements ISiteEscalade{
 		
 		}
 	}
+	
+	
+	@Override
+	public List<SiteEscalade> getSiteEscaladeCritere(String cotationMax,String longueurMax,String nombreDeSecteur,String nombreDeVoie, Region region) throws Exception {
+		
+		List<SiteEscalade> listSiteCritere =siteRepository .findSiteByCritère(cotationMax, longueurMax, nombreDeVoie, nombreDeSecteur, region);
+		
+		if ( listSiteCritere.isEmpty()) {
+			 throw new Exception("Le site d'escalade n'existe pas encore avec ces critères");
+		}
+		
+		
+		
+		
+		return listSiteCritere;
+	}
+	
+	
+	
+	
+	
 }

@@ -42,7 +42,7 @@ public class Topos {
 	@ManyToOne
 	@JoinColumn(name="CODE_UTILISATEUR")
 	private Utilisateur utilisateur;
-	@NotBlank(message = "le statut est obligatoire")
+	
 	private String statut;
 
 	@ManyToOne

@@ -36,14 +36,14 @@
     <input type="text" th:field="*{dateDeParuption}" id="dateDeParuption" class="form-control"placeholder="dateDeParuption">
     <span th:if="${#fields.hasErrors('dateDeParuption')}" th:errors="*{dateDeParuption}"></span>
         <br>
-     <input type="text" th:field="*{statut}" id="statut" class="form-control" placeholder="statut">
+     <!-- <input type="text" th:field="*{statut}" id="statut" class="form-control" placeholder="statut">
     <span th:if="${#fields.hasErrors('statut')}" th:errors="*{statut}"></span>
-     <br>
-     <label for="nom">Utilisateur</label>
+     <br> -->
+     <!-- <label for="nom">Utilisateur</label>
    	<select th:field="*{utilisateur}"class="custom-select mr-sm-2">
    		<option th:each="o:${listUtilisateur}"  th:text="${o.nom}" th:value= "${o.codeUtilisateur}" >Utilisateur</option>
    	</select>
-   	 <br>
+   	 <br> -->
    	  <br>
    	  <label for="nom">Region</label>
      	<select  th:field="*{region}"class="custom-select mr-sm-2">

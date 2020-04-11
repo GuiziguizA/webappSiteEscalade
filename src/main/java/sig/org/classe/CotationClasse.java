@@ -8,15 +8,15 @@ import sig.org.enumeration.Cotation;
 public class CotationClasse {
 	
 	
-	public  List<String> listCotation(){
+	public  List<Cotation> listCotation(){
 		
-		List<String> listCotations = new ArrayList<>();
+		List<Cotation> listCotations = new ArrayList<>();
 		
-		 listCotations.add(Cotation.cotation1.getNom());
-		 listCotations.add(Cotation.cotation2.getNom());
-		 listCotations.add(Cotation.cotation3.getNom());
-		 listCotations.add(Cotation.cotation4.getNom());
-		 listCotations.add(Cotation.cotation5a.getNom());
+		 listCotations.add(Cotation.cotation1);
+		 listCotations.add(Cotation.cotation2);
+		 listCotations.add(Cotation.cotation3);
+		 listCotations.add(Cotation.cotation4);
+		 listCotations.add(Cotation.cotation5a);
 		 
 		
 		return  listCotations;

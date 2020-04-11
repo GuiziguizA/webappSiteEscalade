@@ -38,6 +38,7 @@
 				<th  scope="col">Region</th>
 				<th  scope="col">Statut</th>
 				<th  scope="col"></th>
+			
 			</tr>
 			<tr th:each="o:${listTopos}" >
 				<td th:text="${o.nom}" ></td>
@@ -46,7 +47,8 @@
 				<td th:text="${o.utilisateur.nom}" ></td>
 				<td th:text="${o.region.nom}" ></td>		
 				<td th:text="${o.statut}" ></td>		
-				<td><a th:href="@{/creerReservation/{id}(id=${o.codeTopos})}"><input  type="button"  id="${o}"  th:if="${o.statut='disponible'}" class="btn btn-primary" value="Demande de Reservation" /></a></td>
+				<td><span th:if="${o.statut == 'disponible'}"><a th:href="@{/creerReservation/{id}(id=${o.codeTopos})}"><input  type="button"  id="${o}"   class="btn btn-primary" value="Demande de Reservation" /></a></span></td>
+				
 			</tr>
 		</table>
 	</div>
@@ -65,6 +67,7 @@
 				<th scope="col">Utilisateur</th>
 				<th scope="col">Region</th>
 				<th scope="col">Statut</th>
+				<th scope="col"></th>
 			</tr>
 			<tr th:each="o:${listToposPossede}" >
 				<td th:text="${o.nom}" ></td>
@@ -73,12 +76,13 @@
 				<td th:text="${o.utilisateur.nom}" ></td>
 				<td th:text="${o.region.nom}" ></td>		
 				<td th:text="${o.statut}" ></td>		
+				<td><span th:if="${o.statut == 'reservé'}"><a th:href="@{/updateTopos/{id}(id=${o.codeTopos})}"><input  type="button"  id="${o}"  th:if="${o.statut='reservé'}" class="btn btn-primary" value="disponible" /></a></span></td>
 				
 				
 			</tr>
 		</table>
 	</div>
-
+<div th:if="${listReservationTopos}">
 <br>
 	<h2>Demande de reservation</h2>
 <br>
@@ -102,6 +106,7 @@
 				<td><a th:href="@{/updateToposAndDeleteReservation/{id}(id=${o.codeReservation})}"><input  type="button"  id="${o.codeReservation}"  class="btn btn-primary"value="Valider" /></a></td>
 			</tr>
 		</table>
+	</div>
 	</div>
 	</div>
 	</div>

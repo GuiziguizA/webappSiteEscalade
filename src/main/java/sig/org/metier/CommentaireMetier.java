@@ -109,7 +109,7 @@ public class CommentaireMetier implements Icommentaire {
 		 comm.setDate(new Date());
 		 comm.setDescription(description);
 		 comm.setUtilisateur(utilisateur.get());
-		 comm.setUtilisateur(utilisateur.get());
+		 comm.setSite(site.get());
 	  return commentaireRepository.save(comm);        
 	        }
 	

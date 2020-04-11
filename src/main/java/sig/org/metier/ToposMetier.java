@@ -31,7 +31,7 @@ public class ToposMetier implements Itopos{
 	 */
 	@Override
 	public Topos createTopos(Topos topos) {
-		
+		topos.setStatut("disponible");
 		toposRepository.save(topos);
 		return topos;        
 	}
@@ -122,18 +122,24 @@ public class ToposMetier implements Itopos{
 	 */
 	
 	@Override
-	public Topos updateStatutTopos(Long codeTopos, String statut) throws Exception {
+	public Topos updateStatutTopos(Topos topos) throws Exception {
 	
-		Optional<Topos> topos = toposRepository.findById(codeTopos);
+		Optional<Topos> topos1 = toposRepository.findById(topos.getCodeTopos());
 	        
-	        if(!topos.isPresent()) {
+	        if(!topos1.isPresent()) {
 	        	
 	        	throw new  Exception("le Topos existe pas");
 	        	
 	        }
-	        Topos  newEntity = topos.get();
+       if(topos.getStatut()=="disponible") {
+	        	
+	        	throw new  Exception("le Topos est pas reservé");
+	        	
+	        }
 	        
-	         newEntity.setStatut(statut);
+	        Topos  newEntity = topos1.get();
+	        
+	         newEntity.setStatut("disponible");
 	         toposRepository.save(newEntity);
 	        	  
 	         return newEntity;

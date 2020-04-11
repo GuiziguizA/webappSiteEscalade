@@ -20,13 +20,14 @@ import sig.org.classe.Region;
 import sig.org.classe.Reservation;
 import sig.org.classe.SiteEscalade;
 import sig.org.classe.Utilisateur;
-import sig.org.classe.Voie;
+
 import sig.org.dao.RegionRepository;
 
 import sig.org.dao.SiteEscaladeRepository;
 
-import sig.org.dao.VoieRepository;
 
+import sig.org.enumeration.Cotation;
+import sig.org.enumeration.Longueur;
 import sig.org.metier.UtilisateurMetier;
 
 import sig.org.classe.Commentaires;
@@ -44,7 +45,7 @@ import sig.org.metier.ISiteEscalade;
 import sig.org.metier.Iregion;
 import sig.org.metier.Itopos;
 
-import sig.org.metier.Ivoie;
+
 
 
 
@@ -64,8 +65,7 @@ public class SiteEscaladeApplication implements CommandLineRunner {
 	private SiteEscaladeRepository siteEscaladeRepository;
 	@Autowired
 	private RegionRepository regionRepository;
-	@Autowired
-	private VoieRepository voieRepository;
+
 	@Autowired
 	private ISiteEscalade siteMetier;
 	@Autowired
@@ -74,8 +74,7 @@ public class SiteEscaladeApplication implements CommandLineRunner {
 	private Itopos toposMetier;
 	@Autowired
 	private Iregion regionMetier;
-	@Autowired
-	private Ivoie voieMetier;
+
 	@Autowired
 	private IReservation reservationMetier;
 	@Autowired
@@ -89,28 +88,24 @@ public class SiteEscaladeApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 	
-		Region lyon=regionRepository.save(new Region("lyon"));
+		Region lyon=regionRepository.save(new Region("r0"));
 		Region r1=regionRepository.save(new Region("r1"));
 		Region r2=regionRepository.save(new Region("r2"));
 		Region r3=regionRepository.save(new Region("r3"));
 		Region r4=regionRepository.save(new Region("r4"));
-		SiteEscalade site = new SiteEscalade("nom1", "adresse", "codePostal", "commentaire", "statut");
-		SiteEscalade s1 = siteEscaladeRepository.save(new SiteEscalade("les site des trvdsuff","45 rue du facon" ,"65230","Site eclaté au sol","RAS")); 
-		SiteEscalade s2 = siteEscaladeRepository.save(new SiteEscalade("les site desvsdvs truff","45 ruevsdv du facon" ,"652vdsv30","Sitvdsve eclaté au sol","RAS")); 
-		SiteEscalade s3 = siteEscaladeRepository.save(new SiteEscalade("les sitevsv des truff","45 rue duvdsv facon" ,"652dvs30","Site evdsvclaté au sol","RAS")); 
-		SiteEscalade s4 = siteEscaladeRepository.save(new SiteEscalade("les sitvsdve des truff","45 rue du favdsvcon" ,"65vs230","Site evdvsclaté au sol","RAS")); 
+		SiteEscalade site =  siteEscaladeRepository.save(new SiteEscalade("site1","adresse1","codePostal1","description1","statut1","1 a 50","10 a 20","4",r1,"longueur1"));
+		SiteEscalade s1 = siteEscaladeRepository.save(new SiteEscalade("site2","adresse2","codePostal2","description2","statut1","50 a 100","10 a 20","4",r1,"longueur3")); 
+		SiteEscalade s2 = siteEscaladeRepository.save(new SiteEscalade("site3","adresse1","codePostal1","description1","statut1","50 a 100","10 a 20","4",r2,"longueur3"));
+		SiteEscalade s3 = siteEscaladeRepository.save(new SiteEscalade("site4","adresse1","codePostal1","description1","statut1","50 a 100","10 a 20","4",r3,"longueur3"));
+		SiteEscalade s4 = siteEscaladeRepository.save(new SiteEscalade("site5","adresse1","codePostal1","description1","statut1","1 a 50","10 a 20","4",r2,"longueur1"));
 		Utilisateur u1=utilisateurMetier.createUtilisateur("u1", "mail1", "pw1");
 		Utilisateur u2=utilisateurMetier.createUtilisateur("u2", "mail2", "pw2");
 		Utilisateur u3=utilisateurMetier.createUtilisateur("u3", "mail3", "pw3");
 		Utilisateur u4=utilisateurMetier.createUtilisateur("u4", "mail4", "pw4");
 		Utilisateur admin=utilisateurMetier.createUtilisateur("admin", "admin", "admin");
 		
-		siteMetier.createSiteEscalade(site);
-		voieRepository.save(new Voie("ddd","longueur1","cotation1",s1));
-		voieRepository.save(new Voie("ddddd","longueur1","cotation1",s1));
-		voieRepository.save(new Voie("dqqqdd","longueur1","cotation1",s1));
-		 voieRepository.save(new Voie("dgfdgdd","4d5","cotation1",s1));
-		voieRepository.save(new Voie("dgfdgdd","45ggf","cotation1",s1));
+	
+		
 		commentaireRepository.save(new Commentaires(u1, new Date(), "description 1",s1));
 		commentaireRepository.save(new Commentaires(u1, new Date(), "description 2",s1));
 		commentaireRepository.save(new Commentaires(u1, new Date(), "description 3",s1));
@@ -119,17 +114,11 @@ public class SiteEscaladeApplication implements CommandLineRunner {
 		toposMetier.createTopos(new Topos("topos 3", "description 1","Date1",u3,"disponible",r2));
 		toposMetier.createTopos(new Topos("topos 4", "description 1","Date1",u4,"disponible",r3));
 		toposMetier.createTopos(new Topos("topos 5", "description 1","Date1",u4,"disponible",r4));
-		List<Voie>lv1= voieMetier.getAllVoie();
-		Voie voie=new Voie("voi6", "longueur6", "cotation7", s3);
-		voieMetier.createVoie(voie);
-		List<Voie>listVVVVV=voieMetier.getVoieCritere("cotation1","longueur1");
-		System.out.println(lv1);
-		System.out.println(listVVVVV);
-		
+
 		CotationClasse cotation=new CotationClasse();
-		List<String>listCotations=cotation.listCotation();
+		List<Cotation>listCotations=cotation.listCotation();
 		 LongueurClasse lg = new LongueurClasse();
-		 List<String>listLongueurs=lg.listLongueur();
+		 List<Longueur>listLongueurs=lg.listLongueur();
 		
 		System.out.println(listCotations);
 		

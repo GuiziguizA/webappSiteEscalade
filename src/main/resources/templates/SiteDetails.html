@@ -1,4 +1,4 @@
-
+ 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://ultraq.net.nz/thymleaf/layout"
@@ -28,6 +28,10 @@
     <li class="list-group-item"th:text="${siteEscalade.codePostal}"></li>
       <li class="list-group-item"th:text="${siteEscalade.description}"></li>
         <li class="list-group-item"th:text="${siteEscalade.statut}"></li>
+         <li class="list-group-item"th:text="${siteEscalade.nombreDeSecteur}"></li>
+           <li class="list-group-item"th:text="${siteEscalade.nombreDeVoie}"></li>
+            <li class="list-group-item"th:text="${siteEscalade.cotationMax}"></li>
+               <li class="list-group-item"th:text="${siteEscalade.longueurMax}"></li>
   </ul>
 </div>
 	</div>
@@ -53,6 +57,20 @@
 	            </div>
 	
 	</div>
+	
+	
+	<div>
+	<form action="@{/ajouterCommentaire/{id}(id=${siteEscalade.codeSiteEscalade})}"  th:object="${commentaires}" method="get">
+	
+	   <input type="text" th:field="*{description}" id="description" class="form-control"placeholder="Ajouter un commentaire">
+    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+     <br>
+	<input type="submit" class="btn btn-primary" id="siteEscalade.codeSiteEscalade"value="Ajouter">
+	
+	</form>
+	</div>
+	
+
 					</div>	
 		<div class="form-group">
 			<div th:if="${listCommentaires}">
