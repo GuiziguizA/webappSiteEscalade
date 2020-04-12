@@ -4,20 +4,20 @@ package sig.org.metier;
 import java.util.List;
 import java.util.Optional;
 
-import javax.management.relation.Role;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import sig.org.classe.Roles;
 import sig.org.classe.Utilisateur;
-
+import sig.org.dao.RoleRepository;
 import sig.org.dao.UtilisateurRepository;
 
 
@@ -28,7 +28,8 @@ public class UtilisateurMetier implements Iutilisateur  {
 	
 	@Autowired
 	private UtilisateurRepository utilisateurRepository;
-
+	@Autowired
+	private RoleRepository roleRepository;
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	/**
@@ -40,7 +41,7 @@ public class UtilisateurMetier implements Iutilisateur  {
 	 * @return utilisateurRepository.save(user)
 	 */
 	@Override
-	public Utilisateur createUtilisateur( String nom,String mail,String password){ 
+	public Utilisateur createUtilisateur( String nom,String mail,String password,Roles role){ 
 		Optional<Utilisateur> utilisateur = utilisateurRepository.findByMail(mail);
 		Utilisateur user=new Utilisateur();
 
@@ -51,7 +52,8 @@ public class UtilisateurMetier implements Iutilisateur  {
 			user.setMail(mail);
 			user.setPassword(passwordEncoder.encode(password));
 			user.setNom(nom);
-
+			
+			user.setRole(role);
 		
 		}
 	

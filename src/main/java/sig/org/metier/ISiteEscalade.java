@@ -18,5 +18,5 @@ public interface ISiteEscalade {
 	public SiteEscalade createSiteEscalade(SiteEscalade site) throws Exception;
 	public List<SiteEscalade> getSiteEscaladeCritere(String cotationMax, String longueurMax, String nombreDeSecteur,
 			String nombreDeVoie, Region region) throws Exception;
-
+	public SiteEscalade modifierStatutSite(Long CodeSite) throws Exception ;
 }

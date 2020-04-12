@@ -43,7 +43,7 @@ public class CommentaireMetier implements Icommentaire {
 	 */
 
 	@Override
-    public List<Commentaires> getSiteAllCommentaire(SiteEscalade siteEscalade,Long codeSiteEscalade) throws Exception{
+    public List<Commentaires> getSiteAllCommentaire(Long codeSiteEscalade) throws Exception{
 		Optional<SiteEscalade> site = siteEscaladeRepository.findById(codeSiteEscalade);
 		if(!site.isPresent()) {
 			throw new Exception("Le site n'existe pas");
@@ -94,13 +94,13 @@ public class CommentaireMetier implements Icommentaire {
     
 	
 	@Override
-	public Commentaires createCommentaire( Long codeSiteEscalade,Long codeUtilisateur,String description)throws Exception { 
+	public Commentaires createCommentaire( Long codeSiteEscalade,String mail,String description)throws Exception { 
 		Optional<SiteEscalade> site = siteEscaladeRepository.findById(codeSiteEscalade);
 		if(!site.isPresent()) {
 			throw new Exception("Le site n'existe pas");
 		}
 		
-		Optional<Utilisateur> utilisateur = utilisateurRepository.findById(codeUtilisateur);
+		Optional<Utilisateur> utilisateur = utilisateurRepository.findByMail(mail);
 		if(!utilisateur.isPresent()) {
 			throw new Exception("Cet utilisateur n'existe pas");
 		}
@@ -116,15 +116,30 @@ public class CommentaireMetier implements Icommentaire {
 	
 	
 	
-	/**
-	 * Methode supprimant un commentaire 
-	 * 
-	 * @param commentaire : commentaire correspondant a l'id 
-	 * 
-	 */
+
+	  @Override
+	  public Commentaires updateCommentaireById(Long codeCommentaire,String description) throws Exception   {
+	        Optional<Commentaires>commentaire = commentaireRepository.findById(codeCommentaire);
+	         
+	        if(commentaire.isPresent()) 
+	        {
+	        	commentaire.get().setDescription(description);
+	        	
+	        } else {
+	            throw new Exception("Le commentaire n'existe pas");
+	        }
+	        return commentaireRepository.save(commentaire.get());
+	    }
 	
 	
+
 	
+		/**
+		 * Methode supprimant un commentaire 
+		 * 
+		 * @param commentaire : commentaire correspondant a l'id 
+		 * 
+		 */
 	  @Override
 	  public void deleteCommentaireById(Long codeCommentaire) throws Exception   {
 	        Optional<Commentaires>commentaire = commentaireRepository.findById(codeCommentaire);

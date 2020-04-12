@@ -19,11 +19,21 @@
  <div class="form-group">
  <div class="jumbotron text-center">
  
+ 
+ 
+ 
  <h2>Ajouter un site d'ecalade</h2>
  </div>
  	</div>
- 	</div>
-	<form action="@{/ajouterCommentaire/{id}(id=${siteEscalade.codeSiteEscalade})}"  th:object="${commentaires}" method="post">
+ 	
+ 	<div class="card" style="width: 18rem;">
+ 	 <label for="nom">Commentaire</label>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" th:text="${com.description}"></li>
+    </ul>
+    </div>
+ 	
+	<form th:action="@{/updateCommentaire/{id}(id=${com.codeCommentaire})}"  th:object="${commentaires}" method="get">
 	
 	   <input type="text" th:field="*{description}" id="description" class="form-control"placeholder="Ajouter un commentaire">
     <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
@@ -34,7 +44,7 @@
   
 
 </div>
-
+</div>
 
 
 	

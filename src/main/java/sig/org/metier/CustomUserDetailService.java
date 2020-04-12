@@ -29,8 +29,14 @@ private UtilisateurRepository utilisateurRepository;
 		}
 		
 		
-		
-		return new User(utilisateur.get().getMail(), utilisateur.get().getPassword(),emptyList());
+		/*
+		 * return new User(utilisateur.get().getMail(),
+		 * utilisateur.get().getPassword(),utilisateur.get().getRole().getNom());
+		 * 
+		 */
+		return  User.withUsername(utilisateur.get().getMail())
+        .password( utilisateur.get().getPassword())
+        .roles(utilisateur.get().getRole().getNom()).build();
 	}
 
 }

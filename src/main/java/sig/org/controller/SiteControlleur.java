@@ -1,13 +1,14 @@
 package sig.org.controller;
 
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.management.relation.RelationNotFoundException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,7 +23,8 @@ import sig.org.classe.NombreDeSecteurClasse;
 import sig.org.classe.NombreDeVoieClasse;
 import sig.org.classe.Region;
 import sig.org.classe.SiteEscalade;
-
+import sig.org.classe.Utilisateur;
+import sig.org.dao.UtilisateurRepository;
 import sig.org.enumeration.Cotation;
 import sig.org.enumeration.Longueur;
 import sig.org.enumeration.NombreSecteur;
@@ -30,6 +32,7 @@ import sig.org.enumeration.NombreVoie;
 import sig.org.metier.ISiteEscalade;
 import sig.org.metier.Icommentaire;
 import sig.org.metier.Iregion;
+import sig.org.metier.Iutilisateur;
 
 
 
@@ -44,7 +47,7 @@ public class SiteControlleur {
 	private Icommentaire commentaireMetier;
 	@Autowired
 	private Iregion regionMetier;
-	
+	private Iutilisateur utilisateurMetier;
 	/**
 	 * Controlleur Get affichant formulaireSite.html
 	 * @param siteEscalade
@@ -203,8 +206,14 @@ public class SiteControlleur {
 	
 	
 	  @GetMapping("/consulterSiteDetails/{id}") 
-	  public String consulterSiteDetails(Model model, @PathVariable("id") Long id,Commentaires commentaire){
-	  
+	  public String consulterSiteDetails(Model model, @PathVariable("id") Long id,Commentaires commentaire,Principal principal){
+	  try {
+		Utilisateur user = utilisateurMetier.getNom(principal.getName());
+		model.addAttribute("user", user);
+	} catch (Exception e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
 		  SiteEscalade siteEscalade;
 		  try { 
 			  siteEscalade = siteMetier.afficherSiteEscalade(id);
@@ -213,7 +222,7 @@ public class SiteControlleur {
 			
 	
 			  try {
-				  List<Commentaires> listCommentaires = commentaireMetier.getSiteAllCommentaire(siteEscalade, id) ;
+				  List<Commentaires> listCommentaires = commentaireMetier.getSiteAllCommentaire(id) ;
 				  model.addAttribute("listCommentaires", listCommentaires );
 		
 		
@@ -229,9 +238,44 @@ public class SiteControlleur {
 
 		  return "siteDetails";
 	  }
-	 
-	
-	
+	  @Secured(value= {"ROLE_admin","ROLE_membre"})
+	  @GetMapping("/modifierStatut/{id}") 
+	public String modifierStatutSite(Model model,@PathVariable("id") long id,Commentaires commentaire,Principal principal) {
+		  try {
+				Utilisateur user = utilisateurMetier.getNom(principal.getName());
+				model.addAttribute("user", user);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		try {
+			siteMetier.modifierStatutSite(id);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		 
+		 try {
+			SiteEscalade siteEscalade = siteMetier.afficherSiteEscalade(id);
+			model.addAttribute("siteEscalade",siteEscalade);
+			
+			  try {
+				  List<Commentaires> listCommentaires = commentaireMetier.getSiteAllCommentaire(id) ;
+				  model.addAttribute("listCommentaires", listCommentaires );
+		
+		
+			  } catch (Exception e) {
+				  model.addAttribute("error",e); 
+			  }
+	  
+		} catch (RelationNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "siteDetails";
+		
+	}
 	
 	
 }

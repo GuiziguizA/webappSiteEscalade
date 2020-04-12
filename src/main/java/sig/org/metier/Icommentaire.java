@@ -14,9 +14,17 @@ public interface Icommentaire {
 
 
 
-	public Commentaires createCommentaire(Long codeSiteEscalade, Long codeUtilisateur, String description) throws Exception;
+	public Commentaires createCommentaire(Long codeSiteEscalade, String mail, String description) throws Exception;
 
 
-	public List<Commentaires> getSiteAllCommentaire(SiteEscalade siteEscalade, Long codeSiteEscalade) throws Exception;
+
+	public List<Commentaires> getSiteAllCommentaire(Long codeSiteEscalade) throws Exception;
+
+	public Commentaires updateCommentaireById(Long codeCommentaire, String description) throws Exception;
+
+	
+
+	
+	
 
 }

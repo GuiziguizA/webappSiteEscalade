@@ -45,7 +45,10 @@ public class Utilisateur{
 	@OneToMany(mappedBy="utilisateur",fetch=FetchType.LAZY)	
 	private Collection<Reservation>reservationsT;
 	
-	
+	@ManyToOne
+	@JoinColumn(name="ID_ROLES")
+	private Roles roles;
+
 	
 	
 	
@@ -57,11 +60,12 @@ public class Utilisateur{
 
 	
 	
-	public Utilisateur( String password,String nom, String mail) {
+	public Utilisateur( String password,String nom, String mail, Roles roles) {
 		super();
 		this.nom = nom;
 		this.mail = mail;
 		this.password=password;
+		this.roles=roles;
 	
 	}
 
@@ -72,6 +76,18 @@ public class Utilisateur{
 
 	
 
+
+
+
+	public Roles getRole() {
+		return roles;
+	}
+
+
+
+	public void setRole(Roles roles) {
+		this.roles = roles;
+	}
 
 
 

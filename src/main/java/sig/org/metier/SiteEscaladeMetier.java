@@ -88,7 +88,7 @@ public class SiteEscaladeMetier implements ISiteEscalade{
 	 * @return site
 	 */
 	
-	
+	@Override
 	public SiteEscalade afficherSiteEscaladeParRegion(Long Region) throws RelationNotFoundException {
 
 		Optional<SiteEscalade> site = siteRepository.findById(Region);
@@ -117,8 +117,23 @@ public class SiteEscaladeMetier implements ISiteEscalade{
 		return listSiteCritere;
 	}
 	
+	@Override
+public SiteEscalade modifierStatutSite(Long CodeSite) throws Exception {
+	Optional<SiteEscalade> site=siteRepository.findById(CodeSite);
+	
+	if(site.get().getStatut()=="non officiel") {
+	site.get().setStatut("non officiel");
+	}else if (site.get().getStatut()=="non officiel"){
+		site.get().setStatut("officiel");
+	}else {
+		throw new Exception("probleme au niveau de la condition des statuts");
+	}
+		
 	
 	
+	return siteRepository.save(site.get());
+	
+}
 	
 	
 }

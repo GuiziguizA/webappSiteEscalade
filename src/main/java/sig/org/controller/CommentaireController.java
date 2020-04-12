@@ -1,12 +1,16 @@
 package sig.org.controller;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
 import javax.management.relation.RelationNotFoundException;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,43 +35,82 @@ public class CommentaireController {
 	private Icommentaire commentaireMetier;
 	
 	
-
+	@Secured(value= {"ROLE_admin","ROLE_membre"})
 	@GetMapping("/consulterFormulaireCommentaire/{id}")
-	public String formulaireCommentaire(Commentaires commentaires ,Model model,@PathVariable("id") long id,Principal principal) {
-		 String name = principal.getName();
-		 Optional<Utilisateur> user = utilisateurMetier.findByEmail(name);
-		 try {
-			SiteEscalade siteEscalade = siteMetier.afficherSiteEscalade(id);
-			 model.addAttribute("siteEscalade", siteEscalade);
-		} catch (RelationNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	return "formulaireCommentaire";
-	}
-	
-	
-	
-	@GetMapping("/ajouterCommentaire/{id}")
-	public String ajouterUnCommentaire(Commentaires commentaires,  BindingResult result,Model model,Principal principal,@PathVariable("id") Long id) {
-		 String name = principal.getName();
-		 Optional<Utilisateur> utilisateur = utilisateurMetier.findByEmail(name);
-		 model.addAttribute("utilisateur",utilisateur);
-		 try {
-			SiteEscalade siteEscalade = siteMetier.afficherSiteEscalade(id);
-			 model.addAttribute("siteEscalade", siteEscalade);
-			try {
-				commentaireMetier.createCommentaire(siteEscalade.getCodeSiteEscalade(), utilisateur.get().getCodeUtilisateur(), commentaires.getDescription());
-				 List<Commentaires> listCommentaires = commentaireMetier.getSiteAllCommentaire(siteEscalade,id) ;
-				  model.addAttribute("listCommentaires", listCommentaires );
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	public String formulaireCommentaire(Commentaires commentaires ,@PathVariable("id") long id,Model model) {
+		try {
+			Commentaires com = commentaireMetier.getCommentaireById(id);
+			model.addAttribute("com", com);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	
+	return "formulaireCommentaire";
+	}
+	@Secured(value= {"ROLE_admin","ROLE_membre"})
+	@GetMapping("/updateCommentaire/{id}")
+	public String updateCommentaire(Commentaires commentaires,Model model,@PathVariable("id") long id) {
+		
+		try {
+			commentaireMetier.updateCommentaireById(id, commentaires.getDescription());
+			Commentaires com = commentaireMetier.getCommentaireById(id);
+			SiteEscalade siteEscalade = com.getSite();
+			model.addAttribute("siteEscalade",siteEscalade);
+			try {
+				  List<Commentaires> listCommentaires = commentaireMetier.getSiteAllCommentaire( siteEscalade.getCodeSiteEscalade()) ;
+				  model.addAttribute("listCommentaires", listCommentaires );
+		
+		
+			  } catch (Exception e) {
+					e.printStackTrace();
+			  }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+		
+		
+		return "siteDetails";
+		
+	}
+	
+	
+	
+	
+	
+	
+	@GetMapping("/ajouterCommentaire/{id}")
+	public String ajouterUnCommentaire(Commentaires commentaires,  BindingResult result,Model model,Principal principal , @PathVariable("id") long id ) {
+		 String name = principal.getName();
+		
+		 
+		 try {
+			
+			try {
+				commentaireMetier.createCommentaire(id,name , commentaires.getDescription());
+				 List<Commentaires> listCommentaires = commentaireMetier.getSiteAllCommentaire( id) ;
+				  model.addAttribute("listCommentaires", listCommentaires );
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 
+		 
+		 try {
+			SiteEscalade siteEscalade = siteMetier.afficherSiteEscalade(id);
+			model.addAttribute("siteEscalade",siteEscalade);
+		} catch (RelationNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
 		 
 		return "siteDetails";
 	}
@@ -75,7 +118,7 @@ public class CommentaireController {
 	
 	
 	
-	
+	@Secured(value= {"ROLE_admin","ROLE_membre"})
 	  @GetMapping("/deleteCommentaire/{id}") 
 	  public String deleteCommentaire(Model model, @PathVariable("id") long id ,Commentaires commentaires){
 		  
@@ -89,7 +132,7 @@ public class CommentaireController {
 				model.addAttribute("siteEscalade",siteEscalade);
 			commentaireMetier.deleteCommentaireById(id);
 			  try {
-				  List<Commentaires> listCommentaires = commentaireMetier.getSiteAllCommentaire(siteEscalade, siteEscalade.getCodeSiteEscalade()) ;
+				  List<Commentaires> listCommentaires = commentaireMetier.getSiteAllCommentaire( siteEscalade.getCodeSiteEscalade()) ;
 				  model.addAttribute("listCommentaires", listCommentaires );
 		
 		

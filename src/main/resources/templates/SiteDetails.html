@@ -19,6 +19,7 @@
  <div class="jumbotron text-center">
 		<h1> sites d'escalade</h1>
 	</div>
+	
 		<br>
 	<h2>Detail du site</h2>	
 <div class="card" style="width: 18rem;">
@@ -35,67 +36,49 @@
   </ul>
 </div>
 	</div>
-	
-	
-	<div class="form-group">
-		
-					<div th:if="${listVoie}">
-				<h2>Liste des voies du site</h2>
-				<div  class="list-group">
-			<table class="table table-striped">
-				<tr>
-				<th scope="col">Nom</th><th scope="col">longueur</th><th scope="col">cotation</th>
-				</tr>
-				<tr th:each="o:${listVoie}" >
-				<td th:text="${o.nom}" ></td>
-				<td th:text="${o.longueur}" ></td>
-				<td th:text="${o.cotation}"></td>
-				
-				
-				</tr>
-				</table>
-	            </div>
-	
-	</div>
-	
+	<div><a th:href="@{/modifierStatut/{id}(id=${siteEscalade.codeSiteEscalade})}"><input  type="button"  id="${siteEscalade.codeSiteEscalade}"  class="btn btn-primary" value="Modifier Statut"/></a></div>
 	
 	<div>
-	<form action="@{/ajouterCommentaire/{id}(id=${siteEscalade.codeSiteEscalade})}"  th:object="${commentaires}" method="get">
+	<form th:action="@{/ajouterCommentaire/{id}(id=${siteEscalade.codeSiteEscalade})}"  th:object="${commentaires}" method="get">
 	
 	   <input type="text" th:field="*{description}" id="description" class="form-control"placeholder="Ajouter un commentaire">
     <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
-     <br>
 	<input type="submit" class="btn btn-primary" id="siteEscalade.codeSiteEscalade"value="Ajouter">
 	
 	</form>
 	</div>
 	
 
-					</div>	
 		<div class="form-group">
 			<div th:if="${listCommentaires}">
 				<h2>Liste des Commentaires du site</h2>
 				<div  class="list-group">
 			<table class="table table-striped">
 				<tr>
-				<th scope="col">Utilisateur</th><th scope="col">Date</th><th scope="col">Description</th><th scope="col"></th>
+				<th scope="col">Utilisateur</th>
+				<th scope="col">Date</th>
+				<th scope="col">Description</th>
+				<th scope="col"></th>
+				<th scope="col"></th>
 				</tr>
 				
 				<tr th:each="o:${listCommentaires}" >
 				<td th:text="${o.utilisateur.nom}" ></td>
 				<td th:text="${o.date}" ></td>
 				<td th:text="${o.description}" ></td>
-				<td><a th:href="@{/deleteCommentaire/{id}(id=${o.codeCommentaire})}"><input  type="button"  id="${o.codeCommentaire}"  class="btn btn-primary" value="Supprimer" /></a></td>	
-				
+				<td> <span th:if="${user.roles.nom != 'utilisateur' }"><a th:href="@{/deleteCommentaire/{id}(id=${o.codeCommentaire})}"><input  type="button"  id="${o.codeCommentaire}"  class="btn btn-primary" value="Supprimer" /></a></span></td>	
+				<td><span th:if="${user.roles.nom !='utilisateur'  }"><a th:href="@{/consulterFormulaireCommentaire/{id}(id=${o.codeCommentaire})}"><input  type="button"  id="${o.codeCommentaire}"  class="btn btn-primary" value="Modifier" /></a></span></td>	
 				
 				
 				</tr>
 				</table>
 	            </div>
 	
+					</div>	
 	</div>
 	</div>
 	</div>
-</div>	
+
+
 </body>
 </html>
