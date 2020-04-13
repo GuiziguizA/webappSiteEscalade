@@ -41,7 +41,12 @@ private Iregion regionMetier;
 @Autowired
 private IReservation reservationMetier;
 
-
+/**
+ * controller affichant la listes des topos , ses topos et les demande de reservations
+ * @param model
+ * @param principal
+ * @return
+ */
 @GetMapping("/consulterTopos")
 public String consulterTopos(Model model,Principal principal) {
 	 String name = principal.getName();
@@ -60,6 +65,13 @@ public String consulterTopos(Model model,Principal principal) {
 			 
     return "toposList";
 }
+/**
+ * supprime reservation
+ * @param id_reservation
+ * @param model
+ * @param principal
+ * @return
+ */
 @GetMapping("/deleteReservation/{id}")
 public String supprimerReservation(@PathVariable("id") long id,Model model,Principal principal) {
 	 String name = principal.getName();
@@ -88,14 +100,20 @@ public String supprimerReservation(@PathVariable("id") long id,Model model,Princ
 	
 	  return "toposList";
 }
-
+/**
+ * creer reservation
+ * @param id
+ * @param model
+ * @param principal
+ * @return
+ */
 @GetMapping("/creerReservation/{id}")
 public String creerReservation(@PathVariable("id") long id,Model model,Principal principal) {
 	 String name = principal.getName();
 	 Optional<Utilisateur> user = utilisateurMetier.findByEmail(name);
 	try {
 		Topos topos=toposMetier.getToposById(id);
-		Utilisateur utilisateurP = utilisateurMetier.getNom(topos.getUtilisateur().getNom());
+		Utilisateur utilisateurP = utilisateurMetier.getByNom(topos.getUtilisateur().getNom());
 		Reservation reservation=new Reservation(topos, user.get(), "demande", utilisateurP);
 		reservationMetier.createReservation(reservation);
 	} catch (Exception e) {
@@ -116,7 +134,13 @@ public String creerReservation(@PathVariable("id") long id,Model model,Principal
 	return "toposList";
 	
 }
-
+/**
+ * modifie reservation statut(validé) et topos status(reservé)
+ * @param id
+ * @param model
+ * @param principal
+ * @return
+ */
 @GetMapping("/updateToposAndDeleteReservation/{id}")
 public String updateToposAndDeleteReservation(@PathVariable("id") long id,Model model,Principal principal) {
 	 String name = principal.getName();
@@ -132,15 +156,6 @@ public String updateToposAndDeleteReservation(@PathVariable("id") long id,Model 
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-
-
-			/* reservationMetier.deleteReservation(reservation); */
-		
-		
-	
-		
 	  
 	  List<Reservation>listReservationTopos=reservationMetier.listReservationUnUtilisateur(user.get());
 	  model.addAttribute("listReservationTopos",listReservationTopos);
@@ -159,7 +174,12 @@ public String updateToposAndDeleteReservation(@PathVariable("id") long id,Model 
 }
 
 
-
+/**
+ * affiche formulaire reservation
+ * @param topos
+ * @param model
+ * @return
+ */
 
 @GetMapping("/consulterFormulaireTopos")
 public String voirFormulaire(Topos topos,Model model) {
@@ -178,7 +198,14 @@ public String voirFormulaire(Topos topos,Model model) {
  return "formulaireTopos";
 }
 
-
+/**
+ * ajoute un topos a la DB
+ * @param model
+ * @param topos
+ * @param result
+ * @param principal
+ * @return
+ */
 
 @PostMapping("/ajouterTopos")
 public String AjouterUnTopos(Model model,@Valid Topos topos, BindingResult result,Principal principal) {
@@ -225,7 +252,13 @@ model.addAttribute("listTopos",listTopos);
 	}
 }
 
-
+/**
+ * change le statut du topos pour le rendre disponible
+ * @param id
+ * @param model
+ * @param principal
+ * @return
+ */
 @GetMapping("/updateTopos/{id}")
 public String updateTopos(@PathVariable("id") long id,Model model,Principal principal) {
 	String name = principal.getName();

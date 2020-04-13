@@ -35,8 +35,9 @@ public class UtilisateurMetier implements Iutilisateur  {
 	/**
 	 * Méthode créant un utilisateur
 	 * 
-	 * @param utilisateur : utilisateur correspondant au mail dans le repository
-	 * @param user : creation d'un objet Utilisateur
+	 * @param nom
+	 * @param mail
+	 * @param role
 	 * 
 	 * @return utilisateurRepository.save(user)
 	 */
@@ -62,29 +63,10 @@ public class UtilisateurMetier implements Iutilisateur  {
 		return utilisateurRepository.save(user);
 	}
 	
-	/**
-	 * Methode 
-	 */
-	
-	@Override
-	public Utilisateur connectionUtilisateur(String mail, String pw)throws Exception{
-		
-		Utilisateur utilisateur = utilisateurRepository.findByMailAndPassword(mail, pw);
-		
-		if (!utilisateur.isPresent()) {
-			
-			
-			
-			throw new Exception("l'adresse mail ou le mot de passe est incorrect");
-		}
-			return utilisateur;	
-	}
 
 	/**
 	 * Methode renvoyant la liste de tous les utilisateurs
-	 * 
-	 * @param listUtilisateur : liste de tout les utilisateurs
-	 * 
+	*
 	 * @return listUtilisateur
 	 */
 	public List<Utilisateur>findAllUtilisateur(){
@@ -96,7 +78,7 @@ public class UtilisateurMetier implements Iutilisateur  {
 	/**
 	 * Methode retournant un utilisateur en fonction d'un mail
 	 * 
-	 * @param utilisateur : utilisateur du repository correspondant au mail
+	 * @param mail
 	 * 
 	 * @return utilisateur
 	 */
@@ -114,20 +96,16 @@ public class UtilisateurMetier implements Iutilisateur  {
 		return utilisateur;
 	}
 
-	@Override
-	public String utilisateurConnecté() throws Exception {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		
-		    String currentUserName = authentication.getName();
-		    return currentUserName;
 	
-			
+/**
+ * retourne utilisateur en fonction de son nom
+ *  @param nom
+ *  @return utilisateur.get()
+ */
 	
-		
-	}
 	
 	@Override
-	public Utilisateur getNom(String nom) throws Exception {
+	public Utilisateur getByNom(String nom) throws Exception {
 		
 		Optional<Utilisateur>utilisateur=utilisateurRepository.findByNom(nom);
 		if (!utilisateur.isPresent()) {

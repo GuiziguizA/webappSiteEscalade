@@ -85,6 +85,8 @@ private Icommentaire commentaireMetier;
 	private IRole roleMetier;
 	@Autowired
 	private UtilisateurRepository utilisateurRepository;
+	@Autowired
+	private SiteEscaladeRepository siteRepository;
 	
     public static void main(String[] args) {
         SpringApplication.run(SiteEscaladeApplication.class, args);
@@ -143,8 +145,9 @@ private Icommentaire commentaireMetier;
 		
 		
 		UserDetails user= userDetailsService.loadUserByUsername("mail1");
-	
-		System.out.println(s1.getStatut()=="non officiel");
+		List<SiteEscalade> listSiteCritere =siteRepository .findSiteByCritere(null, null, null, null, r1);
+		siteMetier.modifierStatutSite(s1.getCodeSiteEscalade());
+		System.out.println(listSiteCritere);
 		
 	}
 }

@@ -21,7 +21,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
-
+	/**
+	 * configuration de spring security
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http

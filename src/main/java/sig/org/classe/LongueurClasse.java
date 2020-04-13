@@ -9,12 +9,16 @@ import sig.org.enumeration.Longueur;
 
 public class LongueurClasse {
 	
-	
+	/**
+	 * renvoie la liste de toutes les longueurs
+	 * @return
+	 */
 	
 	public  List<Longueur> listLongueur(){
 		
 		List<Longueur> listLongueurs = new ArrayList<>();
-		
+
+		 listLongueurs.add(Longueur.longueur);
 		 listLongueurs.add(Longueur.longueur1);
 		 listLongueurs.add(Longueur.longueur2);
 		 listLongueurs.add(Longueur.longueur3);

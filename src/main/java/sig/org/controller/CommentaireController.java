@@ -1,13 +1,12 @@
 package sig.org.controller;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
+
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
+
 
 import javax.management.relation.RelationNotFoundException;
-import javax.validation.Valid;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -16,25 +15,30 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+
 
 import sig.org.classe.Commentaires;
 import sig.org.classe.SiteEscalade;
-import sig.org.classe.Utilisateur;
+
 import sig.org.metier.ISiteEscalade;
 import sig.org.metier.Icommentaire;
-import sig.org.metier.Iutilisateur;
+
 
 @Controller
 public class CommentaireController {
-	@Autowired
-	private Iutilisateur utilisateurMetier;
+	
 	@Autowired
 	private ISiteEscalade siteMetier;
 	@Autowired
 	private Icommentaire commentaireMetier;
 	
-	
+	/**
+	 * controller affichant formulaire commentaire
+	 * @param commentaires
+	 * @param id_commentaires
+	 * @param model
+	 * @return "siteDetails"
+	 */
 	@Secured(value= {"ROLE_admin","ROLE_membre"})
 	@GetMapping("/consulterFormulaireCommentaire/{id}")
 	public String formulaireCommentaire(Commentaires commentaires ,@PathVariable("id") long id,Model model) {
@@ -49,6 +53,15 @@ public class CommentaireController {
 	
 	return "formulaireCommentaire";
 	}
+	
+	
+	/**
+	 * controller modifiant le commentaire et affichant siteDetails
+	 * @param commentaires
+	 * @param model
+	 * @param id_commentaires
+	 * @return "siteDetails"
+	 */
 	@Secured(value= {"ROLE_admin","ROLE_membre"})
 	@GetMapping("/updateCommentaire/{id}")
 	public String updateCommentaire(Commentaires commentaires,Model model,@PathVariable("id") long id) {
@@ -80,7 +93,15 @@ public class CommentaireController {
 	
 	
 	
-	
+	/**
+	 * controller ajoutant un commentaire et affichant siteDetails
+	 * @param commentaires
+	 * @param result
+	 * @param model
+	 * @param principal
+	 * @param id_site
+	 * @return "siteDetails"
+	 */
 	
 	
 	@GetMapping("/ajouterCommentaire/{id}")
@@ -116,7 +137,13 @@ public class CommentaireController {
 	}
 	
 	
-	
+	/**
+	 * controller supprimant un commentaire et affichant siteDetails
+	 * @param model
+	 * @param id_commentaires
+	 * @param commentaires
+	 * @return "siteDetails"
+	 */
 	
 	@Secured(value= {"ROLE_admin","ROLE_membre"})
 	  @GetMapping("/deleteCommentaire/{id}") 

@@ -33,40 +33,40 @@
    	  <label for="nom">Region</label>
    	  
    	<select th:field="*{region}">
-   	<option th:text="vide" th:value =null></option>
+   		<option th:text="null " th:value=null></option>
    		<option th:each="o:${listRegion}"  th:text="${o.nom}" th:value= "${o.codeRegion}"></option>
    	</select >
    	
    	 <label for="nom">Nombre de voies</label>
    	 
    		<select th:field="*{nombreDeVoie}">
-   			<option th:text="vide" th:value =null></option>
+   		
    		<option th:each="o:${listnbreVoies}"  th:text="${o.nom}" th:value= "${o.nom}"></option>
    	</select>
  
    		 <label for="nom">Nombre de secteurs</label>
    		 	
    		<select th:field="*{nombreDeSecteur}">
-   		<option th:text="vide" th:value = null></option>
+   		
    		<option th:each="o:${listnbreSecteur}"  th:text="${o.nom}" th:value= "${o.nom}"></option>
    	</select>
    	
   <label for="nom">Longueur Max</label>
    		<select th:field="*{longueurMax}">
-   			<option th:text="vide" th:value =null></option>
+   			
    		<option th:each="o:${listLongueurs}"  th:text="${o.nom}" th:value= "${o.nom}"></option>
    	</select>
    	
   <label for="nom">Cotation Max</label>
    		<select th:field="*{cotationMax}">
-   		<option th:text="vide" th:value =null></option>
+   		
    		<option th:each="o:${listCotation}"  th:text="${o.nom}" th:value= "${o.nom}"></option>
    	</select>
  
    		 <input type="submit"  class="btn btn-primary" value="Rechercher">  
 	</form>	
 	</div>
-	
+	<br>
 	<div  class="list-group" th:if ="${listSiteCritere}">
 		<table class="table table-striped">
 			<tr>

@@ -51,7 +51,7 @@ public class SiteControlleur {
 	/**
 	 * Controlleur Get affichant formulaireSite.html
 	 * @param siteEscalade
-	 * @return formulaireSite.html
+	 * @return"formulaireSite"
 	 */
 	@GetMapping("/siteForm")
 	public String formulaireSite( SiteEscalade siteEscalade,Model model) {
@@ -86,7 +86,7 @@ public class SiteControlleur {
 	 * @param siteEscalade
 	 * @param result
 	 * @param model
-	 * @return SiteList.html
+	 * @return "formulaireSite"
 	 */
 	@PostMapping("/ajoutSite")
 	public String ajoutSite(@Valid SiteEscalade siteEscalade, BindingResult result, Model model) {
@@ -137,7 +137,7 @@ public class SiteControlleur {
 	/**
 	 * Controller Get permettant d'afficher SiteList.html 
 	 * @param model
-	 * @return SiteList.html
+	 * @return "siteList"
 	 */
 	@GetMapping("/consulterListSite")
 	public String consulterListSite(Model model,SiteEscalade siteEscalade){
@@ -163,6 +163,13 @@ public class SiteControlleur {
 			model.addAttribute("listSiteCritere", listSite);  
 			return "siteList";
 		}
+	
+	/**
+	 * Renvoie listSite avec la liste des sites en fonction de la selection des différent critere de la fonction getSiteEscaladeCritere
+	 * @param model
+	 * @param siteEscalade
+	 * @return "siteList"
+	 */
 	
 	@PostMapping("/consulterSiteCritere")
 	public String consulterSiteCritere(Model model , SiteEscalade siteEscalade) {
@@ -200,16 +207,17 @@ public class SiteControlleur {
 	/**
 	 * Méthode affichant SiteDetails.html
 	 * @param model
-	 * @param id
-	 * @return SiteDetails.html
+	 * @param id_site
+	 * @return "siteDetails"
 	 */
 	
 	
 	  @GetMapping("/consulterSiteDetails/{id}") 
 	  public String consulterSiteDetails(Model model, @PathVariable("id") Long id,Commentaires commentaire,Principal principal){
 	  try {
-		Utilisateur user = utilisateurMetier.getNom(principal.getName());
-		model.addAttribute("user", user);
+		Utilisateur user = utilisateurMetier.getByNom(principal.getName());
+		String role=user.getRole().getNom();
+		model.addAttribute("role",role );
 	} catch (Exception e1) {
 		// TODO Auto-generated catch block
 		e1.printStackTrace();
@@ -238,40 +246,52 @@ public class SiteControlleur {
 
 		  return "siteDetails";
 	  }
+	  
+	  
+	  
+	  /**
+	   * Modifie le statut du siteEscalade et affiche siteDetails
+	   * @param model
+	   * @param id
+	   * @param commentaire
+	   * @param principal
+	   * @return "siteDetails"
+	   */
 	  @Secured(value= {"ROLE_admin","ROLE_membre"})
 	  @GetMapping("/modifierStatut/{id}") 
 	public String modifierStatutSite(Model model,@PathVariable("id") long id,Commentaires commentaire,Principal principal) {
-		  try {
-				Utilisateur user = utilisateurMetier.getNom(principal.getName());
-				model.addAttribute("user", user);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+		  SiteEscalade siteEscalade;
+		try {
+			siteEscalade = siteMetier.afficherSiteEscalade(id);
+		
+		} catch (RelationNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		try {
 			siteMetier.modifierStatutSite(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			
+			siteEscalade = siteMetier.afficherSiteEscalade(id);
+			model.addAttribute("siteEscalade",siteEscalade);
+
+			Utilisateur user = utilisateurMetier.getByNom(principal.getName());
+			String role=user.getRole().getNom();
+			model.addAttribute("role",role);
+			
+			  List<Commentaires> listCommentaires = commentaireMetier.getSiteAllCommentaire(id) ;
+			  model.addAttribute("listCommentaires", listCommentaires );
+	
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		 
-		 try {
-			SiteEscalade siteEscalade = siteMetier.afficherSiteEscalade(id);
-			model.addAttribute("siteEscalade",siteEscalade);
-			
-			  try {
-				  List<Commentaires> listCommentaires = commentaireMetier.getSiteAllCommentaire(id) ;
-				  model.addAttribute("listCommentaires", listCommentaires );
 		
-		
-			  } catch (Exception e) {
-				  model.addAttribute("error",e); 
-			  }
-	  
-		} catch (RelationNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		return "siteDetails";
 		

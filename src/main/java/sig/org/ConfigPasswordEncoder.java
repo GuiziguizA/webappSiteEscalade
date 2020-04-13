@@ -7,7 +7,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class ConfigPasswordEncoder {
-	
+	/**
+	 * classe qui retourne un mot de passe crypté
+	 * @return
+	 */
 	  @Bean
 	  public PasswordEncoder passwordEncoder() {
 	    return new BCryptPasswordEncoder();

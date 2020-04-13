@@ -29,8 +29,7 @@ public class SiteEscaladeMetier implements ISiteEscalade{
 	/**
 	 * Méthode création d'un objet SiteEscalade
 	 * 
-	 * @param site1 : site d'escalade correspondant a l'id de l'objet site present dans les paramètre de la méthode
-	 * 
+	 * @param site
 	 * @return siteRepository.save(site)
 	 */
 
@@ -51,7 +50,7 @@ public class SiteEscaladeMetier implements ISiteEscalade{
 	/**
 	 * Méthode permettant d'afficher un site d'escalade en fonction d'un id de site d'escalade
 	 * 
-	 * @param site : objet SiteEscalade correspondant a l'id
+	 * @param codeSite
 	 * 
 	 * @return site
 	 */
@@ -66,9 +65,6 @@ public class SiteEscaladeMetier implements ISiteEscalade{
 
 	/**
 	 * Méthode renvoyant la list de tout les sites d'escalade
-	 * 
-	 * @param listSite : liste de tous les sites
-	 * 
 	 * @return listSite
 	 */
 	@Override
@@ -83,15 +79,15 @@ public class SiteEscaladeMetier implements ISiteEscalade{
 	/**
 	 * Methode permettant d'afficher les site d'escalade en fonction d'un id Region
 	 * 
-	 * @param site 
+	 * @param codeRegion
 	 * 
 	 * @return site
 	 */
 	
 	@Override
-	public SiteEscalade afficherSiteEscaladeParRegion(Long Region) throws RelationNotFoundException {
+	public SiteEscalade afficherSiteEscaladeParRegion(Long codeRegion) throws RelationNotFoundException {
 
-		Optional<SiteEscalade> site = siteRepository.findById(Region);
+		Optional<SiteEscalade> site = siteRepository.findById(codeRegion);
 		        
 		if(site.isPresent()) {
 			return site.get();
@@ -102,13 +98,35 @@ public class SiteEscaladeMetier implements ISiteEscalade{
 	}
 	
 	
+	/**
+	 * retourne une liste de sites en fonction de critères pouvant etre null
+	 * @param cotationMax
+	 *  @param  longueurMax
+	 *  @param nombreDeSecteur
+	 *  @param nombreDeVoie
+	 *  @param  region
+	 *  @return listSiteCritere
+	 */
+	
 	@Override
 	public List<SiteEscalade> getSiteEscaladeCritere(String cotationMax,String longueurMax,String nombreDeSecteur,String nombreDeVoie, Region region) throws Exception {
-		
-		List<SiteEscalade> listSiteCritere =siteRepository .findSiteByCritère(cotationMax, longueurMax, nombreDeVoie, nombreDeSecteur, region);
+		String boulette;
+ if(cotationMax.equals("null")) {
+	 cotationMax=null;
+ }
+ if(longueurMax.equals("null")) {
+	 longueurMax=null;
+ }
+ if(nombreDeSecteur.equals("null")) {
+	 nombreDeSecteur=null;
+ }
+ if(nombreDeVoie.equals("null")) {
+	 nombreDeVoie=null;
+ }
+		List<SiteEscalade> listSiteCritere =siteRepository .findSiteByCritere(cotationMax,  longueurMax, nombreDeVoie, nombreDeSecteur, region);
 		
 		if ( listSiteCritere.isEmpty()) {
-			 throw new Exception("Le site d'escalade n'existe pas encore avec ces critères");
+			 throw new Exception("Le site d'escalade n'existe pas encore avec ces critères"+longueurMax+null+cotationMax+nombreDeVoie+ nombreDeSecteur+region.getNom());
 		}
 		
 		
@@ -117,16 +135,24 @@ public class SiteEscaladeMetier implements ISiteEscalade{
 		return listSiteCritere;
 	}
 	
+	
+	/**
+	 * modifie le statut du site
+	 * @param  CodeSite
+	 * return siteRepository.save(site.get())
+	 */
 	@Override
 public SiteEscalade modifierStatutSite(Long CodeSite) throws Exception {
 	Optional<SiteEscalade> site=siteRepository.findById(CodeSite);
 	
-	if(site.get().getStatut()=="non officiel") {
-	site.get().setStatut("non officiel");
-	}else if (site.get().getStatut()=="non officiel"){
-		site.get().setStatut("officiel");
+	if(site.get().getStatut().equals("non officiel")) {
+	site.get().setStatut("officiel");
+
+	}else if (site.get().getStatut().equals("officiel")){
+		site.get().setStatut("non officiel");
+		
 	}else {
-		throw new Exception("probleme au niveau de la condition des statuts");
+		throw new Exception("probleme au niveau de la condition des statuts"+site.get().getStatut());
 	}
 		
 	

@@ -2,7 +2,7 @@ package sig.org.enumeration;
 
 public enum Longueur {
 
-	
+	longueur("null"),
 	longueur1("longueur1"),
 	longueur2("longueur2"),
 	longueur3("longueur3"),

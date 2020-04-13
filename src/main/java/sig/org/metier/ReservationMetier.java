@@ -26,6 +26,11 @@ private ToposRepository toposRepository;
 @Autowired
 private ReservationRepository reservationRepository;
 	
+/**
+ * methode creant une reservation
+ * @param reservation
+ * @return reservationRepository.save(reservation)
+ */
 @Override
 	public Reservation createReservation(Reservation reservation) throws Exception {
 		Topos topos = reservation.getTopos();
@@ -40,7 +45,11 @@ private ReservationRepository reservationRepository;
 		return reservationRepository.save(reservation);
 	}
 	
-	
+	/**
+	 * renvoie une reservation en fonction de son code
+	 * @param codeReservation
+	 * @return  reservation.get()
+	 */
 	
 @Override
 	public Reservation getReservationById(Long codeReservation) throws Exception {
@@ -59,7 +68,11 @@ public void deleteReservation(Reservation reservation) {
 	reservationRepository.deleteById(reservation.getCodeReservation());
 	
 }
-
+/**
+ * modifie le statut de la reservation et du topos
+ * @param reservation
+ * @param topos  
+ */
 	
 	@Override
 	public void updateReservationTopos(Reservation reservation,Topos topos) throws Exception{
@@ -92,6 +105,12 @@ public void deleteReservation(Reservation reservation) {
 		
 		
 }
+	
+	
+	/**
+	 * liste les reservations concernant les topos possédés d'un utilisateur
+	 * @param utilisateurP
+	 */
 	@Override
 	public List<Reservation> listReservationUnUtilisateur(Utilisateur utilisateurP) {
 		

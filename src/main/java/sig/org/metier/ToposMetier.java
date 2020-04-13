@@ -28,6 +28,7 @@ public class ToposMetier implements Itopos{
 	
 	/**
 	 * Methode creation d'un topos a partir d'un objet Topos dans le repository
+	 * @param  topos
 	 */
 	@Override
 	public Topos createTopos(Topos topos) {
@@ -39,7 +40,7 @@ public class ToposMetier implements Itopos{
 	/**
 	 * Méthode permettant de supprimer un topos du repository en fonction de l'id
 	 * 
-	 * @param topos : objet topos
+	 * @param codeTopos
 	 * 
 	 */
 	
@@ -61,7 +62,7 @@ public class ToposMetier implements Itopos{
 	/**
 	 * Méthode permettant de recupérer un topos en fonction d'un id
 	 * 
-	 * @param topos : objet topos du repository correspondanr à l'id
+	 * @param codeTopos
 	 * 
 	 * @return topos
 	 */
@@ -86,8 +87,6 @@ public class ToposMetier implements Itopos{
 
 	/**
 	 * Méthode retournant la liste de tous les topos du repository
-	 * 
-	 * @param toposList : Liste des topos
 	 * 
 	 * @return toposList
 	 */
@@ -114,10 +113,8 @@ public class ToposMetier implements Itopos{
 	/**
 	 * Methode permettant de modifier le statut du Topos
 	 * 
-	 * @param topos : topos correspondant a l'id renseigné
+	 * @param topos
 	 * 
-	 *@param newEntity : creation d'un nouveau topos
-	 *
 	 * @return newEntity
 	 */
 	
@@ -146,7 +143,11 @@ public class ToposMetier implements Itopos{
 	     
 	}	
 	
-	
+	/**
+	 * retourne la liste de topos possedés par l'utilisateur
+	 * @param utilisateur
+	 * @return toposList
+	 */
 	@Override
     public List<Topos> getUtilisateurTopos(Utilisateur utilisateur){
 		
@@ -164,6 +165,11 @@ public class ToposMetier implements Itopos{
     
 	}
 	
+	/**
+	 * retourne une topos en fonction de son nom
+	 * @param nom 
+	 * @return  topos.get()
+	 */
 	@Override
 	public Topos getNomTopos (String nom) throws Exception {
 		
@@ -179,6 +185,13 @@ public class ToposMetier implements Itopos{
 		
 	}
 	
+	
+	/**
+	 * retourne un topos en fonction de son code
+	 * @param codeTopos
+	 * @return topos.get()
+	 * 
+	 */
 	@Override
 	public Topos getToposByCodeTopos (Long codeTopos) throws Exception {
 		

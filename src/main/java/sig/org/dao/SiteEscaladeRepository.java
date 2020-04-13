@@ -29,11 +29,11 @@ public interface SiteEscaladeRepository extends JpaRepository<SiteEscalade, Long
 	
 	@Query("SELECT c FROM SiteEscalade c WHERE  (:cotationMax is null"+ " or c.cotationMax = :cotationMax)"
 	+"and (:longueurMax is null"+ " or c.longueurMax = :longueurMax)"
-	+"and (nombreDeVoie is null"+ " or c.nombreDeVoie = :nombreDeVoie)"
-	+"and (nombreDeSecteur is null"+ " or c.nombreDeSecteur = :nombreDeSecteur)"
-	+"and (region is null"+ " or c.region = :region)"
+	+"and (:nombreDeVoie is null"+ " or c.nombreDeVoie = :nombreDeVoie)"
+	+"and (:nombreDeSecteur is null"+ " or c.nombreDeSecteur = :nombreDeSecteur)"
+	+"and (:region is null"+ " or c.region = :region)"
 			)
-	public List<SiteEscalade> findSiteByCritère(
+	public List<SiteEscalade> findSiteByCritere(
 			@Param("cotationMax")String cotationMax, 
 			@Param("longueurMax")String longueurMax,
 			@Param("nombreDeVoie")String nombreDeVoie,

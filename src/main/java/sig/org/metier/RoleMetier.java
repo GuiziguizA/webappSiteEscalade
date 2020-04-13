@@ -15,6 +15,10 @@ import sig.org.dao.RoleRepository;
 public class RoleMetier implements IRole {
 @Autowired
 	private RoleRepository roleRepository;
+/**
+ * creation d'un roles
+ * @param role
+ */
 @Override
 	public Roles createRole(Roles role) {
 		
@@ -22,7 +26,10 @@ public class RoleMetier implements IRole {
 		return roleRepository.save(role);        
 	}
 	
-
+/**
+ * retourne le role en fonction de son nom
+ * @param nom
+ */
 public Optional<Roles> getbyNom(String nom) {
 	
 	

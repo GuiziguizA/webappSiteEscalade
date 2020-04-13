@@ -19,7 +19,16 @@ public class CustomUserDetailService implements UserDetailsService{
 	
 	
 	@Autowired
-private UtilisateurRepository utilisateurRepository; 
+private UtilisateurRepository utilisateurRepository;
+	
+	
+	/**
+	 * Modifie le User details de spring data security en identifiant l'utilisateur par son mail dans BD
+	 * @param mail
+	 * @return User.withUsername(utilisateur.get().getMail())
+        .password( utilisateur.get().getPassword())
+        .roles(utilisateur.get().getRole().getNom()).build();
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
 		Optional<Utilisateur> utilisateur=utilisateurRepository.findByMail(mail);

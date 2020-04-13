@@ -5,7 +5,7 @@
  
  
 <head>
-<meta charset="utf-8"/>
+	<meta charset="utf-8"/>
 	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -14,37 +14,31 @@
  
 <body>
 
-<div layout:fragment="content">
-<div class="container pt-3">
- <div class="form-group">
- <div class="jumbotron text-center">
- 
- 
- 
- 
- <h2>Ajouter un site d'ecalade</h2>
- </div>
- 	</div>
+	<div layout:fragment="content">
+		<div class="container pt-3">
+		 <div class="form-group">
+ 			<div class="jumbotron text-center">
+ 				<h2>Ajouter un site d'ecalade</h2>
+		 </div>
+ 		</div>
  	
- 	<div class="card" style="width: 18rem;">
- 	 <label for="nom">Commentaire</label>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item" th:text="${com.description}"></li>
-    </ul>
-    </div>
- 	
-	<form th:action="@{/updateCommentaire/{id}(id=${com.codeCommentaire})}"  th:object="${commentaires}" method="get">
-	
-	   <input type="text" th:field="*{description}" id="description" class="form-control"placeholder="Ajouter un commentaire">
-    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
-     <br>
-	<input type="submit" class="btn btn-primary" id="siteEscalade.codeSiteEscalade"value="Ajouter">
-	
-	</form>
+ 		<div class="card" style="width: 18rem;">
+ 			 <label for="nom">Commentaire</label>
+  			<ul class="list-group list-group-flush">
+   	 			<li class="list-group-item" th:text="${com.description}"></li>
+    		</ul>
+    	</div>
+ 			 <div class="form-group">
+				<form th:action="@{/updateCommentaire/{id}(id=${com.codeCommentaire})}"  th:object="${commentaires}" method="get">
+					<input type="text" th:field="*{description}" id="description" class="form-control"placeholder="Ajouter un commentaire">
+   					<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+    			 	<br>
+					<input type="submit" class="btn btn-primary" id="siteEscalade.codeSiteEscalade"value="Ajouter">
+			</form>
   
-
-</div>
-</div>
+			</div>
+		</div>
+	</div>
 
 
 	

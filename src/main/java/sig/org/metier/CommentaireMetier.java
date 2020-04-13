@@ -37,8 +37,7 @@ public class CommentaireMetier implements Icommentaire {
 	 * Méthode renvoyant une liste de commentaire en fonction d'un id de site d'escalade
 	 * 
 	 *  
-	 * @param site : site d'escalade correspandant a l'id  
-	 * @param commentaireList : liste de commentaire du site d'escalade
+	 * @param codeSiteEscalade
 	 * @return commentaireList
 	 */
 
@@ -62,7 +61,7 @@ public class CommentaireMetier implements Icommentaire {
 	/**
 	 * Méthode renvoyant un commentaire en fonction d'un id commentaire
 	 * 
-	 * @param commentaire : commentaire correspondant a l'id
+	 * @param codeCommentaire
 	 * @return commentaire
 	 */
 	
@@ -85,10 +84,10 @@ public class CommentaireMetier implements Icommentaire {
     /**
      * Méthode créanr un objet commentaire
      * 
-     * @param site : site d'ecalade correspondant à l'id site
-     * @param utilisateur : utilisateur correspondant à l'id utilisateur
-     * @param comm : commentaire créé
-     * @return comm
+     * @param codeSiteEscalade
+     * @param  mail
+     * @param description
+     * @return commentaireRepository.save(comm)
      */
     
     
@@ -113,10 +112,14 @@ public class CommentaireMetier implements Icommentaire {
 	  return commentaireRepository.save(comm);        
 	        }
 	
-	
-	
-	
 
+	
+	/**
+	 * Modification du commentaire
+	 * @param codeCommentaire
+	 * @param description
+	 * @return commentaireRepository.save(commentaire.get())
+	 */
 	  @Override
 	  public Commentaires updateCommentaireById(Long codeCommentaire,String description) throws Exception   {
 	        Optional<Commentaires>commentaire = commentaireRepository.findById(codeCommentaire);
@@ -137,7 +140,7 @@ public class CommentaireMetier implements Icommentaire {
 		/**
 		 * Methode supprimant un commentaire 
 		 * 
-		 * @param commentaire : commentaire correspondant a l'id 
+		 * @param codeCommentaire : commentaire correspondant a l'id 
 		 * 
 		 */
 	  @Override

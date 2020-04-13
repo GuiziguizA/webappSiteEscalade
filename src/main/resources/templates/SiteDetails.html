@@ -36,13 +36,14 @@
   </ul>
 </div>
 	</div>
-	<div><a th:href="@{/modifierStatut/{id}(id=${siteEscalade.codeSiteEscalade})}"><input  type="button"  id="${siteEscalade.codeSiteEscalade}"  class="btn btn-primary" value="Modifier Statut"/></a></div>
-	
+	<div><span th:if="${role!='utilisateur'} "> <a th:href="@{/modifierStatut/{id}(id=${siteEscalade.codeSiteEscalade})}"><input  type="button"  id="${siteEscalade.codeSiteEscalade}"  class="btn btn-primary" value="Modifier Statut"/></a></span></div>
+	<br>
 	<div>
 	<form th:action="@{/ajouterCommentaire/{id}(id=${siteEscalade.codeSiteEscalade})}"  th:object="${commentaires}" method="get">
 	
 	   <input type="text" th:field="*{description}" id="description" class="form-control"placeholder="Ajouter un commentaire">
     <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+    <br>
 	<input type="submit" class="btn btn-primary" id="siteEscalade.codeSiteEscalade"value="Ajouter">
 	
 	</form>
@@ -66,8 +67,8 @@
 				<td th:text="${o.utilisateur.nom}" ></td>
 				<td th:text="${o.date}" ></td>
 				<td th:text="${o.description}" ></td>
-				<td> <span th:if="${user.roles.nom != 'utilisateur' }"><a th:href="@{/deleteCommentaire/{id}(id=${o.codeCommentaire})}"><input  type="button"  id="${o.codeCommentaire}"  class="btn btn-primary" value="Supprimer" /></a></span></td>	
-				<td><span th:if="${user.roles.nom !='utilisateur'  }"><a th:href="@{/consulterFormulaireCommentaire/{id}(id=${o.codeCommentaire})}"><input  type="button"  id="${o.codeCommentaire}"  class="btn btn-primary" value="Modifier" /></a></span></td>	
+				<td><span th:if="${role=='admin'} "> <a th:href="@{/deleteCommentaire/{id}(id=${o.codeCommentaire})}"><input  type="button"  id="${o.codeCommentaire}"  class="btn btn-primary" value="Supprimer" /></a></span></td>	
+				<td><span th:if="${role=='admin'} "><a th:href="@{/consulterFormulaireCommentaire/{id}(id=${o.codeCommentaire})}"><input  type="button"  id="${o.codeCommentaire}"  class="btn btn-primary" value="Modifier" /></a></span></td>	
 				
 				
 				</tr>

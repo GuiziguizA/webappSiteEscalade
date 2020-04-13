@@ -20,9 +20,6 @@ public class RegionMetier implements Iregion {
 	
 	/**
 	 * Methode renvoyant une liste de toute les regions
-	 * 
-	 * @param listRegion : list de toute les region
-	 * 
 	 * @return litRegion
 	 */
 	

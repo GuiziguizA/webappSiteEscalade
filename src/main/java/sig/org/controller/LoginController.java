@@ -25,6 +25,11 @@ public class LoginController {
 @Autowired
 	private IRole roleMetier;
 	
+/**
+ * afficher le formulaire Utilisateur pour l'incription
+ * @param utilisateur
+ * @return "formulaireUtilisateur"
+ */
 	@GetMapping("/consulterFormulaireUtilisateur")
 	public String formulaireSite( Utilisateur utilisateur) {
 		
@@ -35,7 +40,12 @@ public class LoginController {
 	}
 
 
-
+/**
+ * inscription d'un utilisateur et affiche la page login pour se connecter
+ * @param utilisateur
+ * @param result
+ * @return  "login"
+ */
 @PostMapping("/ajouterUtilisateur")
 public String ajoutSite(@Valid Utilisateur utilisateur, BindingResult result) {
 	if (result.hasErrors()) {
@@ -57,7 +67,11 @@ public String ajoutSite(@Valid Utilisateur utilisateur, BindingResult result) {
 	}
 }
 
-
+/**
+ * retourne la liste des utilisateur sur la page utilisateurs
+ * @param model
+ * @return
+ */
 
 
 @GetMapping("/consulterListUtilisateur")
