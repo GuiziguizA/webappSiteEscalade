@@ -14,7 +14,7 @@ public interface Iutilisateur {
 
 	
 	public Utilisateur createUtilisateur(String nom, String mail, String password, Roles role);
-	public Optional<Utilisateur> findByEmail(String mail);
+	public Utilisateur findByEmail(String mail) throws Exception;
 	public List<Utilisateur>findAllUtilisateur();
 	
 	public Utilisateur getByNom(String nom) throws Exception;

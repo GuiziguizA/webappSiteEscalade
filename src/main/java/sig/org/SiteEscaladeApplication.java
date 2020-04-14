@@ -147,7 +147,10 @@ private Icommentaire commentaireMetier;
 		UserDetails user= userDetailsService.loadUserByUsername("mail1");
 		List<SiteEscalade> listSiteCritere =siteRepository .findSiteByCritere(null, null, null, null, r1);
 		siteMetier.modifierStatutSite(s1.getCodeSiteEscalade());
-		System.out.println(listSiteCritere);
+		System.out.println(u1.getRole().getNom());
+		System.out.println(u3.getRole().getNom());
+		System.out.println(u4.getRole().getNom());
+		
 		
 	}
 }

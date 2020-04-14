@@ -49,10 +49,11 @@
 	</form>
 	</div>
 	
-
+	
 		<div class="form-group">
 			<div th:if="${listCommentaires}">
 				<h2>Liste des Commentaires du site</h2>
+				
 				<div  class="list-group">
 			<table class="table table-striped">
 				<tr>
@@ -67,8 +68,8 @@
 				<td th:text="${o.utilisateur.nom}" ></td>
 				<td th:text="${o.date}" ></td>
 				<td th:text="${o.description}" ></td>
-				<td><span th:if="${role=='admin'} "> <a th:href="@{/deleteCommentaire/{id}(id=${o.codeCommentaire})}"><input  type="button"  id="${o.codeCommentaire}"  class="btn btn-primary" value="Supprimer" /></a></span></td>	
-				<td><span th:if="${role=='admin'} "><a th:href="@{/consulterFormulaireCommentaire/{id}(id=${o.codeCommentaire})}"><input  type="button"  id="${o.codeCommentaire}"  class="btn btn-primary" value="Modifier" /></a></span></td>	
+				<td><span th:if="${role!='utilisateur'} "> <a th:href="@{/deleteCommentaire/{id}(id=${o.codeCommentaire})}"><input  type="button"  id="${o.codeCommentaire}"  class="btn btn-primary" value="Supprimer" /></a></span></td>	
+				<td><span th:if="${role!='utilisateur'} "><a th:href="@{/consulterFormulaireCommentaire/{id}(id=${o.codeCommentaire})}"><input  type="button"  id="${o.codeCommentaire}"  class="btn btn-primary" value="Modifier" /></a></span></td>	
 				
 				
 				</tr>

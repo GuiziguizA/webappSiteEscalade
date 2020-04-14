@@ -81,19 +81,21 @@ public class UtilisateurMetier implements Iutilisateur  {
 	 * @param mail
 	 * 
 	 * @return utilisateur
+	 * @throws Exception 
 	 */
 	@Override
-	public Optional<Utilisateur> findByEmail(String mail) {
+	public Utilisateur findByEmail(String mail) throws Exception {
 		Optional<Utilisateur> utilisateur = null;
-		try {
+		
 			utilisateur = utilisateurRepository.findByMail(mail);
-		} catch (Exception e) {
-			throw e;
-		}
-
+	
+			if (!utilisateur.isPresent()) {
+				throw new Exception("l'utilisateur n'existe pas");
+			}
+			
 	
 		
-		return utilisateur;
+		return utilisateur.get();
 	}
 
 	

@@ -19,9 +19,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import sig.org.classe.Commentaires;
 import sig.org.classe.SiteEscalade;
-
+import sig.org.classe.Utilisateur;
 import sig.org.metier.ISiteEscalade;
 import sig.org.metier.Icommentaire;
+import sig.org.metier.Iutilisateur;
 
 
 @Controller
@@ -31,6 +32,8 @@ public class CommentaireController {
 	private ISiteEscalade siteMetier;
 	@Autowired
 	private Icommentaire commentaireMetier;
+	@Autowired
+	private Iutilisateur utilisateurMetier;
 	
 	/**
 	 * controller affichant formulaire commentaire
@@ -64,8 +67,21 @@ public class CommentaireController {
 	 */
 	@Secured(value= {"ROLE_admin","ROLE_membre"})
 	@GetMapping("/updateCommentaire/{id}")
-	public String updateCommentaire(Commentaires commentaires,Model model,@PathVariable("id") long id) {
+	public String updateCommentaire(Commentaires commentaires,Model model,@PathVariable("id") long id,Principal principal) {
+		  String name = principal.getName();
+		  Utilisateur user;
+	try {
+	
+		user = utilisateurMetier.findByEmail(name);
+		 String role=user.getRole().getNom();
+		 model.addAttribute("role",role	);
+		 
+	} catch (Exception e) {
+		e.printStackTrace();
+		System.out.println("probleme");
 		
+	}
+		 
 		try {
 			commentaireMetier.updateCommentaireById(id, commentaires.getDescription());
 			Commentaires com = commentaireMetier.getCommentaireById(id);
@@ -106,8 +122,19 @@ public class CommentaireController {
 	
 	@GetMapping("/ajouterCommentaire/{id}")
 	public String ajouterUnCommentaire(Commentaires commentaires,  BindingResult result,Model model,Principal principal , @PathVariable("id") long id ) {
-		 String name = principal.getName();
+		  String name = principal.getName();
+		  Utilisateur user;
+	try {
+	
+		user = utilisateurMetier.findByEmail(name);
+		 String role=user.getRole().getNom();
+		 model.addAttribute("role",role	);
+		 
+	} catch (Exception e) {
+		e.printStackTrace();
+		System.out.println("probleme");
 		
+	}
 		 
 		 try {
 			
@@ -147,10 +174,22 @@ public class CommentaireController {
 	
 	@Secured(value= {"ROLE_admin","ROLE_membre"})
 	  @GetMapping("/deleteCommentaire/{id}") 
-	  public String deleteCommentaire(Model model, @PathVariable("id") long id ,Commentaires commentaires){
+	  public String deleteCommentaire(Model model, @PathVariable("id") long id ,Commentaires commentaires,Principal principal){
 		  
 	
-		  
+		  String name = principal.getName();
+		  Utilisateur user;
+	try {
+	
+		user = utilisateurMetier.findByEmail(name);
+		 String role=user.getRole().getNom();
+		 model.addAttribute("role",role	);
+		 
+	} catch (Exception e) {
+		e.printStackTrace();
+		System.out.println("probleme");
+		
+	}
 		
 		  
 		  try {

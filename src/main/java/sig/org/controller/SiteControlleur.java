@@ -4,8 +4,10 @@ package sig.org.controller;
 import java.security.Principal;
 import java.util.List;
 
+
 import javax.management.relation.RelationNotFoundException;
 import javax.validation.Valid;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -24,7 +26,7 @@ import sig.org.classe.NombreDeVoieClasse;
 import sig.org.classe.Region;
 import sig.org.classe.SiteEscalade;
 import sig.org.classe.Utilisateur;
-import sig.org.dao.UtilisateurRepository;
+
 import sig.org.enumeration.Cotation;
 import sig.org.enumeration.Longueur;
 import sig.org.enumeration.NombreSecteur;
@@ -37,9 +39,11 @@ import sig.org.metier.Iutilisateur;
 
 
 
+
 @Controller		
 public class SiteControlleur {
 
+	
 	@Autowired
 	private ISiteEscalade siteMetier;	
 
@@ -47,6 +51,7 @@ public class SiteControlleur {
 	private Icommentaire commentaireMetier;
 	@Autowired
 	private Iregion regionMetier;
+	@Autowired
 	private Iutilisateur utilisateurMetier;
 	/**
 	 * Controlleur Get affichant formulaireSite.html
@@ -214,14 +219,21 @@ public class SiteControlleur {
 	
 	  @GetMapping("/consulterSiteDetails/{id}") 
 	  public String consulterSiteDetails(Model model, @PathVariable("id") Long id,Commentaires commentaire,Principal principal){
-	  try {
-		Utilisateur user = utilisateurMetier.getByNom(principal.getName());
-		String role=user.getRole().getNom();
-		model.addAttribute("role",role );
-	} catch (Exception e1) {
-		// TODO Auto-generated catch block
-		e1.printStackTrace();
+		  String name = principal.getName();
+		  Utilisateur user;
+	try {
+	
+		user = utilisateurMetier.findByEmail(name);
+		 String role=user.getRole().getNom();
+		 model.addAttribute("role",role	);
+		 
+	} catch (Exception e) {
+		e.printStackTrace();
+		System.out.println("probleme");
+		
 	}
+		 
+	
 		  SiteEscalade siteEscalade;
 		  try { 
 			  siteEscalade = siteMetier.afficherSiteEscalade(id);
@@ -260,6 +272,8 @@ public class SiteControlleur {
 	  @Secured(value= {"ROLE_admin","ROLE_membre"})
 	  @GetMapping("/modifierStatut/{id}") 
 	public String modifierStatutSite(Model model,@PathVariable("id") long id,Commentaires commentaire,Principal principal) {
+		  
+		  
 		  SiteEscalade siteEscalade;
 		try {
 			siteEscalade = siteMetier.afficherSiteEscalade(id);
