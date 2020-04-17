@@ -15,3 +15,9 @@ buildNumber.properties
 .flattened-pom.xml
 
 # End of https://www.gitignore.io/api/maven
+
+.classpath
+.factorypath
+.settings
+.sts4-cache
+.project
