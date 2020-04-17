@@ -117,23 +117,27 @@ public class SiteControlleur {
 		
 		if (result.hasErrors()) {
 			return "formulaireSite";
+			
 		}else {
      
 			try {
 				siteMetier.createSiteEscalade(siteEscalade);
 				model.addAttribute("sites", siteMetier.getSiteEscalade());
+				List<SiteEscalade> listSite1=siteMetier.getSiteEscalade();
+				
+				model.addAttribute("listSiteCritere", listSite1);  
+				
+			
+			
+				return "siteList";
 	   
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
+				model.addAttribute("error",e);
 				e.printStackTrace();
+				return "formulaireSite";
 			}
-			List<SiteEscalade> listSite1=siteMetier.getSiteEscalade();
 			
-			model.addAttribute("listSiteCritere", listSite1);  
-			
-		
-		
-			return "siteList";
 		}
 	}
 
@@ -224,7 +228,7 @@ public class SiteControlleur {
 	try {
 	
 		user = utilisateurMetier.findByEmail(name);
-		 String role=user.getRole().getNom();
+		 String role=user.getRoles().getNom();
 		 model.addAttribute("role",role	);
 		 
 	} catch (Exception e) {
@@ -294,7 +298,7 @@ public class SiteControlleur {
 			model.addAttribute("siteEscalade",siteEscalade);
 
 			Utilisateur user = utilisateurMetier.getByNom(principal.getName());
-			String role=user.getRole().getNom();
+			String role=user.getRoles().getNom();
 			model.addAttribute("role",role);
 			
 			  List<Commentaires> listCommentaires = commentaireMetier.getSiteAllCommentaire(id) ;

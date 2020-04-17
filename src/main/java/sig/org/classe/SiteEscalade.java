@@ -41,7 +41,7 @@ public class SiteEscalade {
 	private String codePostal;
 	 @NotBlank(message = "le commentaire est obligatoire")
 	private String description;
-	 @NotBlank(message = "le statut est obligatoire")
+	
 	private String statut;
 	 
 	 private String nombreDeVoie;

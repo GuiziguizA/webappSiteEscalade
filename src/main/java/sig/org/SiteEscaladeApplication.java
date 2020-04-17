@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -59,7 +60,8 @@ import sig.org.metier.Itopos;
 
 @SpringBootApplication
 public class SiteEscaladeApplication implements CommandLineRunner {
-	
+
+    private static final Logger LOGGER = LogManager.getLogger(SiteEscaladeApplication.class);
 	@Autowired
 	private UtilisateurMetier utilisateurMetier;
 	@Autowired
@@ -101,6 +103,11 @@ private Icommentaire commentaireMetier;
 		roleMetier.createRole(membre);
 		roleMetier.createRole(admin);
 	
+		
+		  
+        LOGGER.info("Info level log message");
+        LOGGER.debug("Debug level log message");
+        LOGGER.error("Error level log message");
 		Region lyon=regionRepository.save(new Region("r0"));
 		Region r1=regionRepository.save(new Region("r1"));
 		Region r2=regionRepository.save(new Region("r2"));
@@ -147,11 +154,11 @@ private Icommentaire commentaireMetier;
 		UserDetails user= userDetailsService.loadUserByUsername("mail1");
 		List<SiteEscalade> listSiteCritere =siteRepository .findSiteByCritere(null, null, null, null, r1);
 		siteMetier.modifierStatutSite(s1.getCodeSiteEscalade());
-		System.out.println(u1.getRole().getNom());
-		System.out.println(u3.getRole().getNom());
-		System.out.println(u4.getRole().getNom());
-		
-		
+		System.out.println(u1.getRoles().getNom());
+		System.out.println(u3.getRoles().getNom());
+		System.out.println(u4.getRoles().getNom());
+		List<Utilisateur>listUtilisateur = utilisateurMetier.findAllUtilisateur();
+		System.out.println(listUtilisateur.get(1).getRoles().getNom());
 	}
 }
 

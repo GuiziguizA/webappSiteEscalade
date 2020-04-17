@@ -37,15 +37,10 @@ private UtilisateurRepository utilisateurRepository;
 			throw new UsernameNotFoundException("l'utilisateurn'existe pas ");
 		}
 		
-		
-		/*
-		 * return new User(utilisateur.get().getMail(),
-		 * utilisateur.get().getPassword(),utilisateur.get().getRole().getNom());
-		 * 
-		 */
+
 		return  User.withUsername(utilisateur.get().getMail())
         .password( utilisateur.get().getPassword())
-        .roles(utilisateur.get().getRole().getNom()).build();
+        .roles(utilisateur.get().getRoles().getNom()).build();
 	}
 
 }

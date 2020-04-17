@@ -28,16 +28,16 @@
 <form action="#" th:action="@{/ajoutSite}" th:object="${siteEscalade}" method="post">
     <br>
     <input type="text" th:field="*{nom}" id="nom"class="form-control" placeholder="Nom">
-    <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+     <div  th:if="${#fields.hasErrors('nom')}" class="alert alert-danger" role="alert"><span class="alert alert-primary" th:errors="*{nom}"></span></div>
    <br>
     <input type="text" th:field="*{adresse}" id="adresse" class="form-control" placeholder="adresse">
-    <span th:if="${#fields.hasErrors('adresse')}" th:errors="*{adresse}"></span>
+     <div  th:if="${#fields.hasErrors('adresse')}" class="alert alert-danger" role="alert"><span class="alert alert-primary" th:errors="*{adresse}"></span></div>
       <br>
     <input type="text" th:field="*{codePostal}" id="codePostal" class="form-control" placeholder="codePostal">
-    <span th:if="${#fields.hasErrors('codePostal')}" th:errors="*{codePostal}"></span>
+     <div  th:if="${#fields.hasErrors('codePostal')}" class="alert alert-danger" role="alert"><span class="alert alert-primary"  th:errors="*{codePostal}"></span></div>
    <br>
     <input type="text" th:field="*{description}" id="description" class="form-control" placeholder="description">
-    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+   <div  th:if="${#fields.hasErrors('description')}" class="alert alert-danger" role="alert"> <span class="alert alert-primary" th:errors="*{description}"></span></div>
   <br>
     	 <label for="nom">Nombre de voies</label>
    		<select th:field="*{nombreDeVoie}">
@@ -60,13 +60,6 @@
    	</select>
  
   
-  
-    <label for="nom">Statut</label>
-   		<select th:field="*{statut}">
-   			<option value="officiel">officel</option>
-    <option value="non officiel">non Officiel</option>
-   	</select>
-   	
    	  <label for="nom">Region</label>
    	<select th:field="*{region}">
    		<option th:each="o:${listRegion}"  th:text="${o.nom}" th:value= "${o.codeRegion}"></option>
@@ -76,6 +69,10 @@
     <input type="submit" class="btn btn-primary" value="Ajouter">   
     
 </form>
+<div class="alert alert-danger"th:if="${error}" role="alert">
+  Cette adresse est déjà utilisée
+</div>
+
 </div>
 </div>
 

@@ -42,7 +42,7 @@ public class SiteEscaladeMetier implements ISiteEscalade{
 			throw new RelationNotFoundException("le site existe deja");
 
 		} else {
-			
+			site.setStatut("non officiel");
 			return  siteRepository.save(site);
 		}
 	}
@@ -92,7 +92,7 @@ public class SiteEscaladeMetier implements ISiteEscalade{
 		if(site.isPresent()) {
 			return site.get();
 		} else {
-			throw new RelationNotFoundException("No climbing area record exist for given id");
+			throw new RelationNotFoundException("Il n'y a pas de site dans cette region");
 		
 		}
 	}
@@ -110,7 +110,7 @@ public class SiteEscaladeMetier implements ISiteEscalade{
 	
 	@Override
 	public List<SiteEscalade> getSiteEscaladeCritere(String cotationMax,String longueurMax,String nombreDeSecteur,String nombreDeVoie, Region region) throws Exception {
-		String boulette;
+	
  if(cotationMax.equals("null")) {
 	 cotationMax=null;
  }
@@ -146,9 +146,9 @@ public SiteEscalade modifierStatutSite(Long CodeSite) throws Exception {
 	Optional<SiteEscalade> site=siteRepository.findById(CodeSite);
 	
 	if(site.get().getStatut().equals("non officiel")) {
-	site.get().setStatut("officiel");
+	site.get().setStatut("Officiel Les amis de l’escalade");
 
-	}else if (site.get().getStatut().equals("officiel")){
+	}else if (site.get().getStatut().equals("Officiel Les amis de l’escalade")){
 		site.get().setStatut("non officiel");
 		
 	}else {

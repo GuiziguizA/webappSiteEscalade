@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
- 	xmlns:layout="http://ultraq.net.nz/thymleaf/layout">
+ 	xmlns:layout="http://ultraq.net.nz/thymleaf/layout"
+ 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="utf-8"/>		
 <title>Site Escalade</title>
@@ -18,11 +19,14 @@
 <li ><a th:href="@{/consulterHome}">Home</a></li>     
 <li ><a th:href="@{/consulterListSite}" >Site d'escalade</a></li>
 <li ><a th:href="@{/consulterTopos}"  >Topos</a></li>
-
+<li sec:authorize="hasRole('ROLE_admin')"><a th:href="@{/consulterListeUtilisateur}"  >La liste des Utilisateurs</a></li>
 </ul>
 
 <form th:action="@{/logout}" method="post">
 <div class=pull-right>
+
+<div sec:authorize="isAuthenticated()" class="text-primary">
+    login : <span class="text-primary" sec:authentication="name"></span></div>
 
     <input type="submit"class="btn btn-primary" value = "se déconnecter"></input>
     </div>

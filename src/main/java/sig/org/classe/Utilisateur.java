@@ -3,6 +3,7 @@ package sig.org.classe;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import javax.validation.constraints.NotBlank;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Entity
@@ -79,13 +83,13 @@ public class Utilisateur{
 
 
 
-	public Roles getRole() {
+	public Roles getRoles() {
 		return roles;
 	}
 
 
 
-	public void setRole(Roles roles) {
+	public void setRoles(Roles roles) {
 		this.roles = roles;
 	}
 

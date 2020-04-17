@@ -34,7 +34,6 @@ private ReservationRepository reservationRepository;
 @Override
 	public Reservation createReservation(Reservation reservation) throws Exception {
 		Topos topos = reservation.getTopos();
-		Optional<Topos> topos1=toposRepository.findById(topos.getCodeTopos());
 		
 		if(topos.getStatut()=="reservé") {
 			

@@ -79,7 +79,7 @@ public class ToposMetier implements Itopos{
             
         } else {
         	
-            throw new RelationNotFoundException("No commentaire record exist for given id");
+            throw new RelationNotFoundException("le topos n'existe pas");
         
         }
 
@@ -130,7 +130,7 @@ public class ToposMetier implements Itopos{
 	        }
        if(topos.getStatut()=="disponible") {
 	        	
-	        	throw new  Exception("le Topos est pas reservé");
+	        	throw new  Exception("le Topos n'est pas reservé");
 	        	
 	        }
 	        

@@ -7,7 +7,8 @@ import java.util.List;
 
 import javax.management.relation.RelationNotFoundException;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,8 @@ public class CommentaireController {
 	@Autowired
 	private Iutilisateur utilisateurMetier;
 	
+	
+	private static Logger LOG = LoggerFactory.getLogger(CommentaireController.class);
 	/**
 	 * controller affichant formulaire commentaire
 	 * @param commentaires
@@ -70,10 +73,11 @@ public class CommentaireController {
 	public String updateCommentaire(Commentaires commentaires,Model model,@PathVariable("id") long id,Principal principal) {
 		  String name = principal.getName();
 		  Utilisateur user;
+		  LOG.info("update Commentaire ");
 	try {
 	
 		user = utilisateurMetier.findByEmail(name);
-		 String role=user.getRole().getNom();
+		 String role=user.getRoles().getNom();
 		 model.addAttribute("role",role	);
 		 
 	} catch (Exception e) {
@@ -124,10 +128,11 @@ public class CommentaireController {
 	public String ajouterUnCommentaire(Commentaires commentaires,  BindingResult result,Model model,Principal principal , @PathVariable("id") long id ) {
 		  String name = principal.getName();
 		  Utilisateur user;
+		  LOG.info("create Commentaire ");
 	try {
 	
 		user = utilisateurMetier.findByEmail(name);
-		 String role=user.getRole().getNom();
+		 String role=user.getRoles().getNom();
 		 model.addAttribute("role",role	);
 		 
 	} catch (Exception e) {
@@ -176,13 +181,13 @@ public class CommentaireController {
 	  @GetMapping("/deleteCommentaire/{id}") 
 	  public String deleteCommentaire(Model model, @PathVariable("id") long id ,Commentaires commentaires,Principal principal){
 		  
-	
+		  LOG.info("delete Commentaire ");
 		  String name = principal.getName();
 		  Utilisateur user;
 	try {
 	
 		user = utilisateurMetier.findByEmail(name);
-		 String role=user.getRole().getNom();
+		 String role=user.getRoles().getNom();
 		 model.addAttribute("role",role	);
 		 
 	} catch (Exception e) {

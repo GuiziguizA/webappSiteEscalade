@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,8 @@ import sig.org.metier.Iutilisateur;
 
 @Controller
 public class ToposController {
+	private static Logger LOG = LoggerFactory.getLogger(LoginController.class);
+
 @Autowired
 private Itopos toposMetier;	
 @Autowired
@@ -49,6 +53,7 @@ private IReservation reservationMetier;
 public String consulterTopos(Model model,Principal principal) {
 	 String name = principal.getName();
 Utilisateur user;
+
 try {
 	user = utilisateurMetier.findByEmail(name);
 
@@ -78,6 +83,7 @@ try {
  */
 @GetMapping("/deleteReservation/{id}")
 public String supprimerReservation(@PathVariable("id") long id,Model model,Principal principal) {
+	  LOG.info("delete Reservation ");
 	try {
 	 String name = principal.getName();
 	 Utilisateur user = utilisateurMetier.findByEmail(name);
@@ -114,6 +120,7 @@ public String supprimerReservation(@PathVariable("id") long id,Model model,Princ
  */
 @GetMapping("/creerReservation/{id}")
 public String creerReservation(@PathVariable("id") long id,Model model,Principal principal) {
+	  LOG.info("create Reservation ");
 	try {
 	 String name = principal.getName();
 	 Utilisateur  user = utilisateurMetier.findByEmail(name);
@@ -150,10 +157,10 @@ public String creerReservation(@PathVariable("id") long id,Model model,Principal
  * @param principal
  * @return
  */
-@GetMapping("/updateToposAndDeleteReservation/{id}")
-public String updateToposAndDeleteReservation(@PathVariable("id") long id,Model model,Principal principal) {
+@GetMapping("/updateToposAndReservation/{id}")
+public String updateToposAndReservation(@PathVariable("id") long id,Model model,Principal principal) {
 	
-	
+	  LOG.info("update Reservation and Topos ");
 		try {
 			
 			 String name = principal.getName();
@@ -223,6 +230,7 @@ public String voirFormulaire(Topos topos,Model model) {
 
 @PostMapping("/ajouterTopos")
 public String AjouterUnTopos(Model model,@Valid Topos topos, BindingResult result,Principal principal) {
+	  LOG.info("create Topos");
 	try {
 		
 	} catch (Exception e) {
@@ -281,7 +289,7 @@ public String AjouterUnTopos(Model model,@Valid Topos topos, BindingResult resul
  */
 @GetMapping("/updateTopos/{id}")
 public String updateTopos(@PathVariable("id") long id,Model model,Principal principal) {
-	
+	  LOG.info("Topos est disponible ");
 	try {
 		String name = principal.getName();
 		 

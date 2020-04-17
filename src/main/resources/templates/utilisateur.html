@@ -1,7 +1,9 @@
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	>
+		xmlns:layout="http://ultraq.net.nz/thymleaf/layout"
+	layout:decorator="template1">
+ 
  
  
 <head>
@@ -13,7 +15,7 @@
 </head>
  
 <body>
-
+	<div layout:fragment="content">
 <div class="container pt-3">
 <div class="form-group">
  	<div class="jumbotron text-center">
@@ -24,16 +26,20 @@
 		<table class="table table-striped">
 			<tr>
 				<th scope="col">Nom</th>
-				<th scope="col">Adresse e-mail</th>
+				<th scope="col">Adresse e-mail</th>	
+				<th scope="col">Role de l'utilisateur</th>
+					<th scope="col"></th>
 			</tr>
 			<tr th:each="o:${listUtilisateur}" >
 				<td th:text="${o.nom}" ></td>
 				<td th:text="${o.mail}" ></td>
+				<td th:text="${o.roles.nom}" ></td>
+				<td ><a th:if="${o.roles.nom!='admin'}" th:href="@{/modifierStatutUtilisateur/{id}(id=${o.codeUtilisateur})}"><input type="button" class="btn btn-primary" id="${o.codeUtilisateur}" value="Modifier Statut" /></a></td>
 			</tr>
 		</table>
 	</div>
 	</div>
 	</div>
-
+</div>
 </body>
 </html>

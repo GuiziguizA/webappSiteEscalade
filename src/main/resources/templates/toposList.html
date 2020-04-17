@@ -103,7 +103,7 @@
 				<td th:text="${o.utilisateur.nom}" ></td>
 				<td th:text="${o.statut}" ></td>
 				<td><a th:href="@{/deleteReservation/{id}(id=${o.codeReservation})}"><input  type="button"  id="${o.codeReservation}"  class="btn btn-primary"value="Supprimer" /></a></td>
-				<td><a th:href="@{/updateToposAndDeleteReservation/{id}(id=${o.codeReservation})}"><input  type="button"  id="${o.codeReservation}"  class="btn btn-primary"value="Valider" /></a></td>
+				<td><a th:href="@{/updateToposAndReservation/{id}(id=${o.codeReservation})}"><input  type="button"  id="${o.codeReservation}"  class="btn btn-primary"value="Valider" /></a></td>
 			</tr>
 		</table>
 	</div>

@@ -13,11 +13,11 @@ import sig.org.classe.Utilisateur;
 public interface Iutilisateur {
 
 	
-	public Utilisateur createUtilisateur(String nom, String mail, String password, Roles role);
+	public Utilisateur createUtilisateur(String nom, String mail, String password, Roles role) throws Exception;
 	public Utilisateur findByEmail(String mail) throws Exception;
 	public List<Utilisateur>findAllUtilisateur();
-	
 	public Utilisateur getByNom(String nom) throws Exception;
+	public Utilisateur ModifierStatut(Long id) throws Exception;
 	
 	
 }
