@@ -108,57 +108,34 @@ private Icommentaire commentaireMetier;
         LOGGER.info("Info level log message");
         LOGGER.debug("Debug level log message");
         LOGGER.error("Error level log message");
-		Region lyon=regionRepository.save(new Region("r0"));
-		Region r1=regionRepository.save(new Region("r1"));
-		Region r2=regionRepository.save(new Region("r2"));
-		Region r3=regionRepository.save(new Region("r3"));
-		Region r4=regionRepository.save(new Region("r4"));
-		SiteEscalade site =  siteEscaladeRepository.save(new SiteEscalade("site1","adresse1","codePostal1","description1","non officiel","1 a 50","10 a 20","4",r1,"longueur1"));
-		SiteEscalade s1 = siteEscaladeRepository.save(new SiteEscalade("site2","adresse2","codePostal2","description2","non officiel","50 a 100","10 a 20","4",r1,"longueur3")); 
-		SiteEscalade s2 = siteEscaladeRepository.save(new SiteEscalade("site3","adresse1","codePostal1","description1","non officiel","50 a 100","10 a 20","4",r2,"longueur3"));
-		SiteEscalade s3 = siteEscaladeRepository.save(new SiteEscalade("site4","adresse1","codePostal1","description1","non officiel","50 a 100","10 a 20","4",r3,"longueur3"));
-		SiteEscalade s4 = siteEscaladeRepository.save(new SiteEscalade("site5","adresse1","codePostal1","description1","non officiel","1 a 50","10 a 20","4",r2,"longueur1"));
-		Utilisateur u1=utilisateurMetier.createUtilisateur("u1", "mail1", "pw1",role);
-		Utilisateur u2=utilisateurMetier.createUtilisateur("u2", "mail2", "pw2",role);
-		Utilisateur u3=utilisateurMetier.createUtilisateur("u3", "mail3", "pw3",membre);
-		Utilisateur u4=utilisateurMetier.createUtilisateur("u4", "mail4", "pw4",admin);
-		commentaireMetier.createCommentaire(s1.getCodeSiteEscalade(), u1.getMail(), "des1");
-		commentaireMetier.createCommentaire(s1.getCodeSiteEscalade(), u2.getMail(), "des2");
-		commentaireMetier.createCommentaire(s1.getCodeSiteEscalade(), u3.getMail(), "des3");
-		commentaireMetier.createCommentaire(s1.getCodeSiteEscalade(), u4.getMail(), "des4");
+		
+		Region r1=regionRepository.save(new Region("Bourgogne"));
+		Region r2=regionRepository.save(new Region("Poitou-Charentes"));
+		Region r3=regionRepository.save(new Region("Limousin"));
+		Region r4=regionRepository.save(new Region("Auvergne"));
+		SiteEscalade site =  siteEscaladeRepository.save(new SiteEscalade("Le site des Balbuzard","3 avenue du buisson","74556","Site agréable  situé justé en dessous des nids de balbuzards","non officiel","1 a 50","10 a 20","4",r1,"longueur1"));
+		SiteEscalade s1 = siteEscaladeRepository.save(new SiteEscalade("Le site des bouleaux","5 rue des noisetiers","65231","Situé dans une forêts de bouleaux ce site est accueillant","non officiel","50 a 100","10 a 20","4",r1,"longueur3")); 
+		SiteEscalade s2 = siteEscaladeRepository.save(new SiteEscalade("Le site des lacs","25 rue de Jeanne d'Arc","56231","Situé a côté de deux lacs, idéal pour ce baigner après une session ","non officiel","50 a 100","10 a 20","4",r2,"longueur3"));
+		SiteEscalade s3 = siteEscaladeRepository.save(new SiteEscalade("Le site du granite","56 avenue de la feuille","98541","Site entièrement constitué de granite","non officiel","50 a 100","10 a 20","4",r3,"longueur3"));
+		SiteEscalade s4 = siteEscaladeRepository.save(new SiteEscalade("Le site de Charente","90 rue de Mercure","56984","Site artificiel d'extérieure","non officiel","1 a 50","10 a 20","4",r2,"longueur1"));
+		Utilisateur u1=utilisateurMetier.createUtilisateur("Gregoire", "Bob", "pw1",role);
+		Utilisateur u2=utilisateurMetier.createUtilisateur("Arnold", "arnold", "pw2",role);
+		Utilisateur u3=utilisateurMetier.createUtilisateur("JeanMichel", "JM", "pw3",membre);
+		Utilisateur u4=utilisateurMetier.createUtilisateur("admin", "admin", "admin",admin);
+		commentaireMetier.createCommentaire(s1.getCodeSiteEscalade(), u1.getMail(), "Site magnifique");
+		commentaireMetier.createCommentaire(s1.getCodeSiteEscalade(), u2.getMail(), "je n'ai pas aimé l'ambiance");
+		commentaireMetier.createCommentaire(s1.getCodeSiteEscalade(), u3.getMail(), "Les voies sont difficiles mais environnement agréable");
+		commentaireMetier.createCommentaire(s1.getCodeSiteEscalade(), u4.getMail(), "J'ai trop aimé voir les rappaces chassés je conseille");
 		
 		
-		commentaireRepository.save(new Commentaires(u1, new Date(), "description 1",s1));
-		commentaireRepository.save(new Commentaires(u1, new Date(), "description 2",s1));
-		commentaireRepository.save(new Commentaires(u1, new Date(), "description 3",s1));
-		Topos t1 = toposMetier.createTopos(new Topos("topos 1", "description 1","Date1",u1,"disponible",lyon));
-		toposMetier.createTopos(new Topos("topos 2", "description 1","Date1",u2,"disponible",r1));
-		toposMetier.createTopos(new Topos("topos 3", "description 1","Date1",u3,"disponible",r2));
-		toposMetier.createTopos(new Topos("topos 4", "description 1","Date1",u4,"disponible",r3));
-		toposMetier.createTopos(new Topos("topos 5", "description 1","Date1",u4,"disponible",r4));
+		
+		Topos t1 = toposMetier.createTopos(new Topos("Topos B", "Topos de la Bourgogne","20/02/2020",u1,"disponible",r1));
+		toposMetier.createTopos(new Topos("topos B", "Topos de la Bourgogne","Date1",u2,"disponible",r1));
+		toposMetier.createTopos(new Topos("topos PC", "Topos du Poitou-Charentes","Date1",u3,"disponible",r2));
+		toposMetier.createTopos(new Topos("topos L", "Topos du Limousin","Date1",u4,"disponible",r3));
+		toposMetier.createTopos(new Topos("topos A", "Topos De l'Auvergne","Date1",u4,"disponible",r4));
 
-		CotationClasse cotation=new CotationClasse();
-		List<Cotation>listCotations=cotation.listCotation();
-		 LongueurClasse lg = new LongueurClasse();
-		 List<Longueur>listLongueurs=lg.listLongueur();
-		
-		System.out.println(listCotations);
-		
-		System.out.println(listLongueurs);
-		
-		Reservation res1=reservationMetier.createReservation(new Reservation(t1 , u2, "demande",u1));
-		Reservation res2=reservationMetier.createReservation(new Reservation(t1 , u2, "demande",u1));
-		Reservation res3=reservationMetier.createReservation(new Reservation(t1 , u2, "demande",u1));
-		
-		
-		UserDetails user= userDetailsService.loadUserByUsername("mail1");
-		List<SiteEscalade> listSiteCritere =siteRepository .findSiteByCritere(null, null, null, null, r1);
-		siteMetier.modifierStatutSite(s1.getCodeSiteEscalade());
-		System.out.println(u1.getRoles().getNom());
-		System.out.println(u3.getRoles().getNom());
-		System.out.println(u4.getRoles().getNom());
-		List<Utilisateur>listUtilisateur = utilisateurMetier.findAllUtilisateur();
-		System.out.println(listUtilisateur.get(1).getRoles().getNom());
+	
 	}
 }
 

@@ -22,7 +22,37 @@
 	
 		<br>
 	<h2>Detail du site</h2>	
-<div class="card" style="width: 18rem;">
+	<div>
+	<table  class="table table-striped">
+		<tr>
+				<th scope="col">Nom</th>
+				<th scope="col">Adresse</th>
+				<th scope="col">Code postal</th>
+				<th scope="col">Description</th>
+				<th scope="col">Statut</th>
+				<th scope="col">Nombre de secteur</th>
+				<th scope="col">Nombre de voies</th>
+				<th scope="col">Cotation Maximale</th>
+				<th scope="col">Longueur maximale</th>
+		</tr>
+				
+		<tr >
+				<td th:text="${siteEscalade.nom}"></td>
+				<td th:text="${siteEscalade.adresse}"></td>
+				<td th:text="${siteEscalade.codePostal}" ></td>
+				<td th:text="${siteEscalade.description}"></td>	
+				<td th:text="${siteEscalade.statut}"></td>	
+				<td th:text="${siteEscalade.nombreDeSecteur}"></td>	
+				<td th:text="${siteEscalade.nombreDeVoie}"></td>	
+				<td th:text="${siteEscalade.cotationMax}"></td>	
+				<td th:text="${siteEscalade.longueurMax}"></td>	
+		</tr>
+	
+	</table>
+				
+	</div>
+	
+<!-- <div class="card" style="width: 18rem;">
   <ul class="list-group list-group-flush">
     <li class="list-group-item" th:text="${siteEscalade.nom}"></li>
     <li class="list-group-item"th:text="${siteEscalade.adresse}"></li>
@@ -34,7 +64,7 @@
             <li class="list-group-item"th:text="${siteEscalade.cotationMax}"></li>
                <li class="list-group-item"th:text="${siteEscalade.longueurMax}"></li>
   </ul>
-</div>
+</div> -->
 	</div>
 	<div><span th:if="${role!='utilisateur'} "> <a th:href="@{/modifierStatut/{id}(id=${siteEscalade.codeSiteEscalade})}"><input  type="button"  id="${siteEscalade.codeSiteEscalade}"  class="btn btn-primary" value="Modifier Statut"/></a></span></div>
 	<br>
