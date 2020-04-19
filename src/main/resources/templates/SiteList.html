@@ -41,14 +41,14 @@
    	 <label for="nom">Nombre de voies</label>
    	 
    		<select th:field="*{nombreDeVoie}">
-   		
+   			
    		<option th:each="o:${listnbreVoies}"  th:text="${o.nom}" th:value= "${o.nom}"></option>
    	</select>
  
    		 <label for="nom">Nombre de secteurs</label>
-   		 	
+   		 		
    		<select th:field="*{nombreDeSecteur}">
-   		
+   	
    		<option th:each="o:${listnbreSecteur}"  th:text="${o.nom}" th:value= "${o.nom}"></option>
    	</select>
    	

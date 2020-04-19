@@ -118,19 +118,13 @@ private Icommentaire commentaireMetier;
 		SiteEscalade s2 = siteEscaladeRepository.save(new SiteEscalade("Le site des lacs","25 rue de Jeanne d'Arc","56231","Situé a côté de deux lacs, idéal pour ce baigner après une session ","non officiel","50 a 100","10 a 20","4",r2,"longueur3"));
 		SiteEscalade s3 = siteEscaladeRepository.save(new SiteEscalade("Le site du granite","56 avenue de la feuille","98541","Site entièrement constitué de granite","non officiel","50 a 100","10 a 20","4",r3,"longueur3"));
 		SiteEscalade s4 = siteEscaladeRepository.save(new SiteEscalade("Le site de Charente","90 rue de Mercure","56984","Site artificiel d'extérieure","non officiel","1 a 50","10 a 20","4",r2,"longueur1"));
-		Utilisateur u1=utilisateurMetier.createUtilisateur("Gregoire", "Bob", "pw1",role);
-		Utilisateur u2=utilisateurMetier.createUtilisateur("Arnold", "arnold", "pw2",role);
+	
 		Utilisateur u3=utilisateurMetier.createUtilisateur("JeanMichel", "JM", "pw3",membre);
 		Utilisateur u4=utilisateurMetier.createUtilisateur("admin", "admin", "admin",admin);
-		commentaireMetier.createCommentaire(s1.getCodeSiteEscalade(), u1.getMail(), "Site magnifique");
-		commentaireMetier.createCommentaire(s1.getCodeSiteEscalade(), u2.getMail(), "je n'ai pas aimé l'ambiance");
-		commentaireMetier.createCommentaire(s1.getCodeSiteEscalade(), u3.getMail(), "Les voies sont difficiles mais environnement agréable");
-		commentaireMetier.createCommentaire(s1.getCodeSiteEscalade(), u4.getMail(), "J'ai trop aimé voir les rappaces chassés je conseille");
 		
 		
 		
-		Topos t1 = toposMetier.createTopos(new Topos("Topos B", "Topos de la Bourgogne","20/02/2020",u1,"disponible",r1));
-		toposMetier.createTopos(new Topos("topos B", "Topos de la Bourgogne","Date1",u2,"disponible",r1));
+	
 		toposMetier.createTopos(new Topos("topos PC", "Topos du Poitou-Charentes","Date1",u3,"disponible",r2));
 		toposMetier.createTopos(new Topos("topos L", "Topos du Limousin","Date1",u4,"disponible",r3));
 		toposMetier.createTopos(new Topos("topos A", "Topos De l'Auvergne","Date1",u4,"disponible",r4));

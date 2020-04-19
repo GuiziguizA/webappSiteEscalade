@@ -130,7 +130,7 @@ public class ToposMetier implements Itopos{
 	        }
        if(topos.getStatut()=="disponible") {
 	        	
-	        	throw new  Exception("le Topos n'est pas reservé");
+	        	throw new  Exception("le Topos n'est pas reserve");
 	        	
 	        }
 	        

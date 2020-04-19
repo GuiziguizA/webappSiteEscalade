@@ -56,7 +56,8 @@ Utilisateur user;
 
 try {
 	user = utilisateurMetier.findByEmail(name);
-
+	String nom=user.getNom();
+	  model.addAttribute("nom",nom);
 	 
 	List<Topos>listTopos=toposMetier.getAllTopos();
 	model.addAttribute("listTopos",listTopos);
@@ -87,6 +88,8 @@ public String supprimerReservation(@PathVariable("id") long id,Model model,Princ
 	try {
 	 String name = principal.getName();
 	 Utilisateur user = utilisateurMetier.findByEmail(name);
+	 String nom=user.getNom();
+	  model.addAttribute("nom",nom);
 	Reservation reservation;
 	
 		reservation = reservationMetier.getReservationById(id);
@@ -124,6 +127,8 @@ public String creerReservation(@PathVariable("id") long id,Model model,Principal
 	try {
 	 String name = principal.getName();
 	 Utilisateur  user = utilisateurMetier.findByEmail(name);
+	 String nom=user.getNom();
+	  model.addAttribute("nom",nom);
 	
 		Topos topos=toposMetier.getToposById(id);
 		Utilisateur utilisateurP = utilisateurMetier.getByNom(topos.getUtilisateur().getNom());
@@ -166,6 +171,8 @@ public String updateToposAndReservation(@PathVariable("id") long id,Model model,
 			 String name = principal.getName();
 			 
 			 Utilisateur user = utilisateurMetier.findByEmail(name);
+			 String nom=user.getNom();
+			  model.addAttribute("nom",nom);
 			Reservation reservation;
 			reservation = reservationMetier.getReservationById(id);
 			  Topos topos=toposMetier.getNomTopos(reservation.getTopos().getNom());
@@ -252,6 +259,8 @@ public String AjouterUnTopos(Model model,@Valid Topos topos, BindingResult resul
  try {
 	 String name1 = principal.getName();
 	 Utilisateur user1 = utilisateurMetier.findByEmail(name1);
+	 String nom=user1.getNom();
+	  model.addAttribute("nom",nom);
 	 topos.setUtilisateur(user1);
 	toposMetier.createTopos(topos);
 	 model.addAttribute("topos",topos );
@@ -294,6 +303,8 @@ public String updateTopos(@PathVariable("id") long id,Model model,Principal prin
 		String name = principal.getName();
 		 
 		 Utilisateur user = utilisateurMetier.findByEmail(name);	
+		 String nom=user.getNom();
+		  model.addAttribute("nom",nom);
 		Topos topos=toposMetier.getToposByCodeTopos(id);
 		toposMetier.updateStatutTopos(topos);
 		

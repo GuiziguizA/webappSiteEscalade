@@ -1,7 +1,7 @@
 package sig.org.enumeration;
 
 public enum NombreSecteur {
-	nombreSecteur("null"),
+	nombreSecteur(""),
 	nombreSecteur1("1 a 10"),
 	nombreSecteur2("10 a 20"),
 	nombreSecteur3("20 a 30"),

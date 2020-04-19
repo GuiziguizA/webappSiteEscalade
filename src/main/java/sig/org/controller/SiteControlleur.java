@@ -26,7 +26,7 @@ import sig.org.classe.NombreDeVoieClasse;
 import sig.org.classe.Region;
 import sig.org.classe.SiteEscalade;
 import sig.org.classe.Utilisateur;
-
+import sig.org.dao.UtilisateurRepository;
 import sig.org.enumeration.Cotation;
 import sig.org.enumeration.Longueur;
 import sig.org.enumeration.NombreSecteur;
@@ -59,8 +59,9 @@ public class SiteControlleur {
 	 * @return"formulaireSite"
 	 */
 	@GetMapping("/siteForm")
-	public String formulaireSite( SiteEscalade siteEscalade,Model model) {
+	public String formulaireSite( SiteEscalade siteEscalade,Model model,Principal principal) {
 		
+	
 		List<SiteEscalade> listSite=siteMetier.getSiteEscalade();
 		
 		LongueurClasse lg = new LongueurClasse();

@@ -3,7 +3,7 @@ package sig.org.enumeration;
 public enum NombreVoie {
 	
 	
-	nombreVoies("null"),
+	nombreVoies(""),
 	nombreVoies1("1 a 50"),
 	nombreVoies2("50 a 100"),
 	nombreVoies3("100 a 200"),

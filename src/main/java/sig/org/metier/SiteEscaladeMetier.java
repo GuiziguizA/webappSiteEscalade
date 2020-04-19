@@ -1,6 +1,7 @@
 package sig.org.metier;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -99,7 +100,7 @@ public class SiteEscaladeMetier implements ISiteEscalade{
 	
 	
 	/**
-	 * retourne une liste de sites en fonction de critères pouvant etre null
+	 * retourne une liste de sites en fonction de criteres pouvant etre null
 	 * @param cotationMax
 	 *  @param  longueurMax
 	 *  @param nombreDeSecteur
@@ -111,23 +112,19 @@ public class SiteEscaladeMetier implements ISiteEscalade{
 	@Override
 	public List<SiteEscalade> getSiteEscaladeCritere(String cotationMax,String longueurMax,String nombreDeSecteur,String nombreDeVoie, Region region) throws Exception {
 	
- if(cotationMax.equals("null")) {
+ if(cotationMax.equals("")) {
 	 cotationMax=null;
  }
- if(longueurMax.equals("null")) {
+ if(longueurMax.equals("")) {
 	 longueurMax=null;
  }
- if(nombreDeSecteur.equals("null")) {
+ if(nombreDeSecteur.equals("")) {
 	 nombreDeSecteur=null;
  }
- if(nombreDeVoie.equals("null")) {
+ if(nombreDeVoie.equals("")) {
 	 nombreDeVoie=null;
  }
 		List<SiteEscalade> listSiteCritere =siteRepository .findSiteByCritere(cotationMax,  longueurMax, nombreDeVoie, nombreDeSecteur, region);
-		
-		if ( listSiteCritere.isEmpty()) {
-			 throw new Exception("Le site d'escalade n'existe pas encore avec ces critères"+longueurMax+null+cotationMax+nombreDeVoie+ nombreDeSecteur+region.getNom());
-		}
 		
 		
 		

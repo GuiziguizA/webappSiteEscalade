@@ -40,7 +40,6 @@ private static Logger LOG = LoggerFactory.getLogger(LoginController.class);
  */	
 
 	@GetMapping("/consulterFormulaireUtilisateur")
-	  @Secured(value= {"ROLE_admin"})
 	public String formulaireSite( Utilisateur utilisateur) {
 		
 		
@@ -57,7 +56,6 @@ private static Logger LOG = LoggerFactory.getLogger(LoginController.class);
  * @return  "login"
  */
 @PostMapping("/ajouterUtilisateur")
-@Secured(value= {"ROLE_admin"})
 public String ajoutSite(@Valid Utilisateur utilisateur, BindingResult result,Model model) {
 	if (result.hasErrors()) {
 		 LOG.info("create user failed");
@@ -90,6 +88,7 @@ public String ajoutSite(@Valid Utilisateur utilisateur, BindingResult result,Mod
 
 
 @GetMapping("/consulterListeUtilisateur")
+@Secured(value= {"ROLE_admin"})
 public String consulterListUtilisateur( Model model) {
 	
 	List<Utilisateur>listUtilisateur=utilisateurMetier.findAllUtilisateur();
@@ -102,6 +101,7 @@ public String consulterListUtilisateur( Model model) {
 
 
 @GetMapping("/modifierStatutUtilisateur/{id}")
+@Secured(value= {"ROLE_admin"})
 public String  modifierStatutUtilisateur (@PathVariable("id")Long id,String mail,Model model) {
 	
 	try {

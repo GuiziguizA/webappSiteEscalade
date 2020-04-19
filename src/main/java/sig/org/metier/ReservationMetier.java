@@ -1,12 +1,12 @@
 package sig.org.metier;
 
 
-import java.sql.Array;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.management.relation.RelationNotFoundException;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ private ReservationRepository reservationRepository;
 	public Reservation createReservation(Reservation reservation) throws Exception {
 		Topos topos = reservation.getTopos();
 		
-		if(topos.getStatut()=="reservé") {
+		if(topos.getStatut()=="reserve") {
 			
 			throw new Exception("le topos est indisponible");
 			
@@ -74,27 +74,28 @@ public void deleteReservation(Reservation reservation) {
  */
 	
 	@Override
+	@Transactional
 	public void updateReservationTopos(Reservation reservation,Topos topos) throws Exception{
 	
 		
 		Optional<Topos> topos1=toposRepository.findById(topos.getCodeTopos());
 		Optional<Reservation> reservation1=reservationRepository.findById(reservation.getCodeReservation());
 		
-		if(topos.getStatut()=="reservé") {
+		if(topos.getStatut()=="reserve") {
 			
 			throw new Exception("le topos est indisponible");
 			
 		}
 		if(!reservation1.isPresent()) {
-			throw new Exception("la réservation n'existe pas");
+			throw new Exception("la reservation n'existe pas");
 		}
 
 		
 		
 		Topos topos2 = topos1.get();
-		topos2.setStatut("reservé");
+		topos2.setStatut("reserve");
 		Reservation reservation2 = reservation1.get();
-		reservation2.setStatut("validé");
+		reservation2.setStatut("valide");
 		
 	
 		reservationRepository.save(reservation2);

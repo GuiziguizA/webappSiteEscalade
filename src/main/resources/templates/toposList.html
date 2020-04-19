@@ -47,7 +47,7 @@
 				<td th:text="${o.utilisateur.nom}" ></td>
 				<td th:text="${o.region.nom}" ></td>		
 				<td th:text="${o.statut}" ></td>		
-				<td><span th:if="${o.statut == 'disponible'}"><a th:href="@{/creerReservation/{id}(id=${o.codeTopos})}"><input  type="button"  id="${o}"   class="btn btn-primary" value="Demande de Reservation" /></a></span></td>
+				<td><span  th:if="${o.utilisateur.nom!=nom}"><span th:if="${o.statut == 'disponible'}"><a th:href="@{/creerReservation/{id}(id=${o.codeTopos})}"><input  type="button"  id="${o}"   class="btn btn-primary" value="Demande de Reservation" /></a></span></span></td>
 				
 			</tr>
 		</table>
@@ -76,7 +76,7 @@
 				<td th:text="${o.utilisateur.nom}" ></td>
 				<td th:text="${o.region.nom}" ></td>		
 				<td th:text="${o.statut}" ></td>		
-				<td><span th:if="${o.statut == 'reservé'}"><a th:href="@{/updateTopos/{id}(id=${o.codeTopos})}"><input  type="button"  id="${o}"  th:if="${o.statut='reservé'}" class="btn btn-primary" value="disponible" /></a></span></td>
+				<td><span th:if="${o.statut == 'reserve'}"><a th:href="@{/updateTopos/{id}(id=${o.codeTopos})}"><input  type="button"  id="${o}"  class="btn btn-primary" value="disponible" /></a></span></td>
 				
 				
 			</tr>
@@ -103,7 +103,7 @@
 				<td th:text="${o.utilisateur.nom}" ></td>
 				<td th:text="${o.statut}" ></td>
 				<td><a th:href="@{/deleteReservation/{id}(id=${o.codeReservation})}"><input  type="button"  id="${o.codeReservation}"  class="btn btn-primary"value="Supprimer" /></a></td>
-				<td><a th:href="@{/updateToposAndReservation/{id}(id=${o.codeReservation})}"><input  type="button"  id="${o.codeReservation}"  class="btn btn-primary"value="Valider" /></a></td>
+				<td><span th:if="${o.statut != 'valide'}"><a th:href="@{/updateToposAndReservation/{id}(id=${o.codeReservation})}"><input  type="button"  id="${o.codeReservation}"  class="btn btn-primary"value="Valider" /></a></span></td>
 			</tr>
 		</table>
 	</div>
