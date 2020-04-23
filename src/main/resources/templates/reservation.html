@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://ultraq.net.nz/thymleaf/layout"
+	layout:decorator="template1">
+ 
+ 
+<head>
+<meta charset="utf-8"/>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+ 
+<body>
+<div layout:fragment="content">
+<div class="container pt-3">
+<div class="form-group">
+ 	<div class="jumbotron text-center">
+		<h1>Liste des topos</h1>
+	</div>
+	<br>
+
+
+<br>
+	<h2>Demande de reservation</h2>
+<br>
+
+	<div th:if = "${listReservationTopos}">
+		<table class="table table-striped">
+			<tr>
+				<th scope="col">Topos</th>
+				<th scope="col">Utilisateur Possédant le Topos</th>
+				<th scope="col">Utilisateur demande</th>
+				<th scope="col">Statut</th>
+				<th scope="col"></th>
+				<th scope="col"></th>
+			</tr>
+			<tr th:each="o:${listReservationTopos}" >
+				<td th:text="${o.topos.nom}" ></td>
+				<td th:text="${o.utilisateurP.nom}" ></td>
+				<td th:text="${o.utilisateur.nom}" ></td>
+				<td th:text="${o.statut}" ></td>
+				<td><a th:href="@{/deleteReservation1/{id}(id=${o.codeReservation})}"><input  type="button"  id="${o.codeReservation}"  class="btn btn-primary"value="Supprimer" /></a></td>
+				<td><span th:if="${o.statut != 'valide'}"><a th:href="@{/updateToposAndReservation1/{id}(id=${o.codeReservation})}"><input  type="button"  id="${o.codeReservation}"  class="btn btn-primary"value="Valider" /></a></span></td>
+			</tr>
+		</table>
+	</div>
+	
+	<br>
+	<h2>Mes demandes</h2>
+<br>
+		<div th:if = "${listReservationDeUtilisateur}">
+		<table class="table table-striped">
+			<tr>
+				<th scope="col">Topos</th>
+				<th scope="col">Utilisateur Possédant le Topos</th>
+				<th scope="col">Utilisateur demande</th>
+				<th scope="col">Statut</th>
+				<th scope="col"></th>
+				<th scope="col"></th>
+			</tr>
+			<tr th:each="o:${listReservationDeUtilisateur}" >
+				<td th:text="${o.topos.nom}" ></td>
+				<td th:text="${o.utilisateurP.nom}" ></td>
+				<td th:text="${o.utilisateur.nom}" ></td>
+				<td th:text="${o.statut}" ></td>
+				
+			</tr>
+		</table>
+	</div>
+	
+	
+</div>
+</div>
+</div>
+</body>
+

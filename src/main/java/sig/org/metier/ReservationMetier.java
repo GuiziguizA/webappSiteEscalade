@@ -32,9 +32,14 @@ private ReservationRepository reservationRepository;
  * @return reservationRepository.save(reservation)
  */
 @Override
-	public Reservation createReservation(Reservation reservation) throws Exception {
+	public Reservation createReservation(Reservation reservation,Utilisateur utilisateur) throws Exception {
 		Topos topos = reservation.getTopos();
+	Optional<Reservation> reservation1 = reservationRepository.findByCodeUtilisateurAndStatut(utilisateur, "demande",reservation.getTopos());
+	if (reservation1.isPresent()) {
+		throw new Exception("La demande de reservation existe deja");
 		
+	}
+	
 		if(topos.getStatut()=="reserve") {
 			
 			throw new Exception("le topos est indisponible");
@@ -123,9 +128,21 @@ public void deleteReservation(Reservation reservation) {
 
 			return listReservation;
 		}
+	}
 		
-		
-		
+		@Override
+		public List<Reservation> listReservationUtilisateurTopos(Utilisateur utilisateur) {
+			
+			List<Reservation>listReservation1=reservationRepository.findByUtilisateur(utilisateur);
+			
+			if (listReservation1.isEmpty()) {
+				 List newList = new ArrayList<Reservation>();
+				return newList;
+			}else {
+
+				return listReservation1;
+			}
+				
 		
 	}
 	

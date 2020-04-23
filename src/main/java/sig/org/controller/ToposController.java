@@ -133,7 +133,7 @@ public String creerReservation(@PathVariable("id") long id,Model model,Principal
 		Topos topos=toposMetier.getToposById(id);
 		Utilisateur utilisateurP = utilisateurMetier.getByNom(topos.getUtilisateur().getNom());
 		Reservation reservation=new Reservation(topos, user, "demande", utilisateurP);
-		reservationMetier.createReservation(reservation);
+		reservationMetier.createReservation(reservation,user);
 		
 		
 		 List<Reservation>listReservationTopos=reservationMetier.listReservationUnUtilisateur(user);
@@ -149,6 +149,31 @@ public String creerReservation(@PathVariable("id") long id,Model model,Principal
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
+		model.addAttribute("error",e);
+		
+		
+		 String name = principal.getName();
+		 Utilisateur user;
+
+		 try {
+		 	user = utilisateurMetier.findByEmail(name);
+		 	String nom=user.getNom();
+		 	  model.addAttribute("nom",nom);
+		 	 
+		 	List<Topos>listTopos=toposMetier.getAllTopos();
+		 	model.addAttribute("listTopos",listTopos);
+		 	
+		 		
+		 		  List<Topos>listToposPossede=toposMetier.getUtilisateurTopos(user);
+		 		  model.addAttribute("listToposPossede",listToposPossede);
+		 		 
+		 		  
+		 		  List<Reservation>listReservationTopos=reservationMetier.listReservationUnUtilisateur(user);
+		 		  model.addAttribute("listReservationTopos",listReservationTopos);
+		 } catch (Exception e1) {
+		 	// TODO Auto-generated catch block
+		 	e1.printStackTrace();
+		 }
 	}
 	
 	

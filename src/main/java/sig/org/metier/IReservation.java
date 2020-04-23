@@ -11,12 +11,20 @@ public interface IReservation {
 
 	public void updateReservationTopos(Reservation reservation, Topos topos) throws Exception;
 
-	public Reservation createReservation(Reservation reservation) throws Exception;
+	public Reservation createReservation(Reservation reservation, Utilisateur utilisateur) throws Exception;
 
 	public	List<Reservation> listReservationUnUtilisateur(Utilisateur utilisateurP);
 
 	public void deleteReservation(Reservation reservation);
 	
 	public Reservation getReservationById(Long codeReservation) throws Exception ;
+
+	public List<Reservation> listReservationUtilisateurTopos(Utilisateur utilisateur);
+
+
+
+	
+
+	
 
 }

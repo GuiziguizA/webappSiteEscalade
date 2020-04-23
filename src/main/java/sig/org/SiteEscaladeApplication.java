@@ -50,14 +50,6 @@ import sig.org.metier.Itopos;
 
 
 
-
-
-
-
-
-
-
-
 @SpringBootApplication
 public class SiteEscaladeApplication implements CommandLineRunner {
 
